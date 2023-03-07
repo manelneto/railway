@@ -1,0 +1,3 @@
+C:/Users/manue/CLionProjects/DA/railway/cmake-build-debug/CMakeFiles/railway.dir
+C:/Users/manue/CLionProjects/DA/railway/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/manue/CLionProjects/DA/railway/cmake-build-debug/CMakeFiles/rebuild_cache.dir
