@@ -73,6 +73,12 @@ build CMakeFiles/railway.dir/Graph.cpp.obj: CXX_COMPILER__railway_Debug C$:/User
   OBJECT_DIR = CMakeFiles\railway.dir
   OBJECT_FILE_DIR = CMakeFiles\railway.dir
 
+build CMakeFiles/railway.dir/Management.cpp.obj: CXX_COMPILER__railway_Debug C$:/Users/manue/CLionProjects/DA/railway/Management.cpp || cmake_object_order_depends_target_railway
+  DEP_FILE = CMakeFiles\railway.dir\Management.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\railway.dir
+  OBJECT_FILE_DIR = CMakeFiles\railway.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target railway
@@ -81,7 +87,7 @@ build CMakeFiles/railway.dir/Graph.cpp.obj: CXX_COMPILER__railway_Debug C$:/User
 #############################################
 # Link the executable railway.exe
 
-build railway.exe: CXX_EXECUTABLE_LINKER__railway_Debug CMakeFiles/railway.dir/main.cpp.obj CMakeFiles/railway.dir/Station.cpp.obj CMakeFiles/railway.dir/Segment.cpp.obj CMakeFiles/railway.dir/Graph.cpp.obj
+build railway.exe: CXX_EXECUTABLE_LINKER__railway_Debug CMakeFiles/railway.dir/main.cpp.obj CMakeFiles/railway.dir/Station.cpp.obj CMakeFiles/railway.dir/Segment.cpp.obj CMakeFiles/railway.dir/Graph.cpp.obj CMakeFiles/railway.dir/Management.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\railway.dir
