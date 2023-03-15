@@ -7,7 +7,8 @@
 
 
 class Management {
-
+private:
+    void readStationsFile();
 };
 
 
