@@ -21,7 +21,7 @@ public:
 
     unsigned int getCapacity() const;
 
-    Services getService() const;
+    std::string getService() const;
 
 private:
     Station StationA;

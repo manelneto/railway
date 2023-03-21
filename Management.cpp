@@ -11,34 +11,6 @@
 #include "Segment.h"
 
 using namespace std;
-void Management::readNetwork() {
-    ifstream in("../files/network.csv");
-    int i=0;
-    string line;
-    getline(in,line);
-
-    while (getline(in,line)){
-        string Station_A,Station_B,Capacity,Service;
-
-        istringstream iss(line);
-        while(iss.good()){
-            string substr;
-            getline(iss, substr, ',');
-            if (i == 0)
-                Station_A = substr;
-            if (i == 1)
-                Station_B = substr;
-            if (i == 2)
-                Capacity = substr;
-            if (i == 3)
-                Service= substr;
-            i++;
-        }
-        Segment segment= new Station(Station_A,Station_B,Capacity,Service);
-        i=0;
-
-    }
-}
 
 void Management::readStationsFile() {
     ifstream in("../files/stations.csv");
@@ -63,6 +35,38 @@ void Management::readStationsFile() {
         string township = fields[3];
         string line = fields[4];
         Station station = Station(name, district, municipality, township, line);
+        stationsbyName.insert({station.getName(),station});
     }
     cout << "Leitura de ficheiro stations.csv bem-sucedida." << endl;
 }
+void Management::readNetwork() {
+    ifstream in("../files/network.csv");
+    int i=0;
+    string line;
+    getline(in,line);
+
+    while (getline(in,line)){
+        string Station_A,Station_B,Capacity,Service;
+
+        istringstream iss(line);
+        while(iss.good()){
+            string substr;
+            getline(iss, substr, ',');
+            if (i == 0)
+                Station_A = substr;
+            if (i == 1)
+                Station_B = substr;
+            if (i == 2)
+                Capacity = substr;
+            if (i == 3)
+                Service= substr;
+            i++;
+        }
+        unsigned int capacity= stoi(Capacity);
+        Segment* segment= new Segment(stationsbyName[Station_A] ,stationsbyName[Station_B],capacity,Service);
+        i=0;
+
+    }
+}
+
+

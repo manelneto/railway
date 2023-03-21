@@ -20,7 +20,7 @@ public:
 private:
     void readNetwork();
     void readStationsFile();
-    unordered_map <string, Station > stationsbyName;
+    unordered_map<string, Station> stationsbyName;
     unordered_map<string, int> stationIDs;
     unordered_map<string, unordered_map<string, unordered_map<string, Station>>> stationsByDistrict;
 };
