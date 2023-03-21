@@ -10,8 +10,10 @@
 
 class Segment {
 public:
-    enum Service {STANDARD, ALFA};
-    Segment(const Station &stationA, const Station &stationB, unsigned int capacity, Service service);
+    enum Services {STANDARD, ALFA};
+
+    Segment(const Station &stationA, const Station &stationB, unsigned int capacity, std::string service);
+
 
     const Station &getStationA() const;
 
@@ -19,13 +21,16 @@ public:
 
     unsigned int getCapacity() const;
 
-    Service getService() const;
+    Services getService() const;
 
 private:
     Station StationA;
     Station StationB;
     unsigned int capacity;
-    enum Service service;
+    enum Services services;
+    bool selected=false;
+    Segment * reverse= nullptr;
+    std::string service;
 };
 
 

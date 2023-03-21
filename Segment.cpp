@@ -4,7 +4,7 @@
 
 #include "Segment.h"
 
-Segment::Segment(const Station &stationA, const Station &stationB, unsigned int capacity, Segment::Service service)
+Segment::Segment(const Station &stationA, const Station &stationB, unsigned int capacity, Segment::Services service)
         : StationA(stationA), StationB(stationB), capacity(capacity), service(service) {}
 
 const Station &Segment::getStationA() const {
@@ -19,6 +19,6 @@ unsigned int Segment::getCapacity() const {
     return capacity;
 }
 
-Segment::Service Segment::getService() const {
+Segment::Services Segment::getService() const {
     return service;
 }

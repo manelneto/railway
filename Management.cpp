@@ -8,14 +8,18 @@
 #include <iostream>
 #include <vector>//???
 #include "Station.h"
+#include "Segment.h"
+
 using namespace std;
 void Management::readNetwork() {
     ifstream in("../files/network.csv");
     int i=0;
     string line;
     getline(in,line);
+
     while (getline(in,line)){
         string Station_A,Station_B,Capacity,Service;
+
         istringstream iss(line);
         while(iss.good()){
             string substr;
@@ -27,9 +31,10 @@ void Management::readNetwork() {
             if (i == 2)
                 Capacity = substr;
             if (i == 3)
-                Service = substr;
+                Service= substr;
             i++;
         }
+        Segment segment= new Station(Station_A,Station_B,Capacity,Service);
         i=0;
 
     }
