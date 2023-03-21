@@ -66,7 +66,7 @@ void Management::readNetwork() {
         }
         unsigned int capacity= stoi(Capacity);
         i=0;
-
+        Segment new_segment=Segment(stationsbyName.at(Station_A), stationsbyName.at(Station_B), capacity, Service);
     }
 }
 
