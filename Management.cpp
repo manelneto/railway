@@ -11,7 +11,8 @@
 #include "Segment.h"
 
 using namespace std;
-
+Management::Management() {readStationsFile();
+readNetwork();}
 void Management::readStationsFile() {
     ifstream in("../files/stations.csv");
     if (!in.is_open()) {
@@ -40,6 +41,7 @@ void Management::readStationsFile() {
     cout << "Leitura de ficheiro stations.csv bem-sucedida." << endl;
 }
 void Management::readNetwork() {
+    readStationsFile();
     ifstream in("../files/network.csv");
     int i=0;
     string line;
@@ -63,7 +65,6 @@ void Management::readNetwork() {
             i++;
         }
         unsigned int capacity= stoi(Capacity);
-        Segment* segment= new Segment(stationsbyName[Station_A] ,stationsbyName[Station_B],capacity,Service);
         i=0;
 
     }

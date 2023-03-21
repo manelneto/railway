@@ -23,6 +23,7 @@ public:
 
     const std::string &getLine() const;
 
+    bool operator==(Station &s1);
 private:
     std::string name;
     std::string district;
