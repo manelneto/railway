@@ -6,8 +6,13 @@
 #define RAILWAY_MANAGEMENT_H
 
 
-class Management {
 
+class Management {
+public:
+    
+private:
+    void readNetwork();
+    void readStationsFile();   
 };
 
 
