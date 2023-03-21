@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 C:/Users/jtoma/Desktop/prog/Projeto_DA/cmake-build-debug/CMakeFiles/railway.dir
 C:/Users/jtoma/Desktop/prog/Projeto_DA/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/jtoma/Desktop/prog/Projeto_DA/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+=======
+/home/andre/Desktop/DA_Project/cmake-build-debug/CMakeFiles/railway.dir
+/home/andre/Desktop/DA_Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/andre/Desktop/DA_Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+>>>>>>> 85b70396a915a456fe332c1674d99226733f6eed

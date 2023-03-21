@@ -29,6 +29,9 @@ public:
 
     Segment* addSegment(Station *dest, double w,Segment::Service service);
 
+
+    bool operator==(Station &s1);
+
 private:
     std::string name;
     std::string district;
