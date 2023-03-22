@@ -6,7 +6,7 @@
 #define RAILWAY_GRAPH_H
 
 
-#include "VertexEdge.h"
+#include "EdgeVertex.h"
 
 class Graph {
 public:
