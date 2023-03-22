@@ -30,8 +30,19 @@ void Management::readStationsFile() {
         string field;
         vector<string> fields(6);
         unsigned f = 0;
-        while (getline(iss, field, ','))
-            fields[f++] = field;
+        bool escape = false;
+        while (getline(iss, field, ',')) {
+            if (field[0] == '"') {
+                fields[f] = field;
+                escape = true;
+                continue;
+            } else if (field[field.length() - 1] == '"')
+                escape = false;
+            if (escape)
+                fields[f] += field;
+            else
+                fields[f++] = field;
+        }
         string name = fields[0];
         string district = fields[1];
         string municipality = fields[2];

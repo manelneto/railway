@@ -3,4 +3,4 @@ project(railway)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(railway main.cpp Station.cpp Station.h Graph.cpp Graph.h Management.cpp Management.h EdgeVertex.h EdgeVertex.cpp)
+add_executable(railway main.cpp EdgeVertex.h EdgeVertex.cpp Graph.h Graph.cpp Management.h Management.cpp Station.h Station.cpp)
