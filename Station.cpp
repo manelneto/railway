@@ -42,6 +42,6 @@ bool Station::operator==(const Station &rhs) const {
 void Station::print() const {
     cout << "Estação " << name;
     if (!district.empty())
-         cout << " (" << district << "; " << municipality << "; " << township << ") ";
-    cout << "- " << line << endl;
+         cout << " (" << district << "; " << municipality << "; " << township << ")";
+    cout << " - " << line << endl;
 }

@@ -12,14 +12,26 @@
 
 class Management {
 public:
-    Management();
-    int menu();
+    bool menu();
 
 private:
     std::unordered_set<Station, stationHash, stationHash> stations;
     Graph network;
     void readStationsFile();
     void readNetworkFile();
+    static bool isInt(const std::string &str);
+    static std::string readInput();
+    static int readInt();
+    static int validateInt(int n, int min, int max);
+    Station readStation() const;
+    void lerFicheirosDados();
+    void fluxoMaximoEspecifico();
+    void fluxoMaximoGeral();
+    void topNecessidades();
+    void fluxoMaximoChegada();
+    void custoMinimo();
+    void conetividadeReduzida();
+    void topAfetadas();
 };
 
 
