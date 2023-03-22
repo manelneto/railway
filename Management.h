@@ -6,23 +6,20 @@
 #define RAILWAY_MANAGEMENT_H
 
 
-#include <unordered_map>
-#include "unordered_map"
-
+#include <unordered_set>
 #include "Station.h"
-
-using namespace std;
+#include "Graph.h"
 
 class Management {
 public:
     Management();
+    int menu();
 
 private:
-    void readNetwork();
+    std::unordered_set<Station, stationHash, stationHash> stations;
+    Graph network;
     void readStationsFile();
-    unordered_map<string, Station> stationsbyName;
-    unordered_map<string, int> stationIDs;
-    unordered_map<string, unordered_map<string, unordered_map<string, Station>>> stationsByDistrict;
+    void readNetworkFile();
 };
 
 
