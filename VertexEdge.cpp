@@ -119,30 +119,34 @@ void Vertex::deleteEdge(Edge *edge) {
 
 /********************** Edge  ****************************/
 
-Edge::Edge(Vertex *orig, Vertex *dest, double w): orig(orig), dest(dest), weight(w) {}
-
-Vertex * Edge::getDest() const {
-    return this->dest;
-}
-
-double Edge::getWeight() const {
-    return this->weight;
-}
+Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : orig(orig), dest(dest), capacity(capacity), service(service) {}
 
 Vertex * Edge::getOrig() const {
     return this->orig;
 }
 
-Edge *Edge::getReverse() const {
-    return this->reverse;
+Vertex * Edge::getDest() const {
+    return this->dest;
+}
+
+unsigned Edge::getCapacity() const {
+    return this->capacity;
+}
+
+unsigned Edge::getFlow() const {
+    return flow;
 }
 
 bool Edge::isSelected() const {
     return this->selected;
 }
 
-double Edge::getFlow() const {
-    return flow;
+Edge * Edge::getReverse() const {
+    return this->reverse;
+}
+
+void Edge::setFlow(unsigned flow) {
+    this->flow = flow;
 }
 
 void Edge::setSelected(bool selected) {
@@ -151,8 +155,4 @@ void Edge::setSelected(bool selected) {
 
 void Edge::setReverse(Edge *reverse) {
     this->reverse = reverse;
-}
-
-void Edge::setFlow(double flow) {
-    this->flow = flow;
 }

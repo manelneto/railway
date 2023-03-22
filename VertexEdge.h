@@ -55,23 +55,28 @@ private:
 
 class Edge {
 public:
-    Edge(Vertex *orig, Vertex *dest, double w);
-    Vertex * getDest() const;
-    double getWeight() const;
-    bool isSelected() const;
+    enum Service {STANDARD, ALFA};
+    Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service);
     Vertex * getOrig() const;
-    Edge *getReverse() const;
-    double getFlow() const;
+    Vertex * getDest() const;
+    unsigned getCapacity() const;
+    Service getService() const;
+    unsigned getFlow() const;
+    bool isSelected() const;
+    Edge * getReverse() const;
+    void setFlow(unsigned flow);
     void setSelected(bool selected);
-    void setReverse(Edge *reverse);
-    void setFlow(double flow);
-protected:
+    void setReverse(Edge * reverse);
+
+private:
+    Vertex * orig;
     Vertex * dest;
-    double weight;
+    unsigned capacity;
+    Service service;
+
+    unsigned flow;
     bool selected = false;
-    Vertex *orig;
-    Edge *reverse = nullptr;
-    double flow;
+    Edge * reverse = nullptr;
 };
 
 #endif //RAILWAY_VERTEX_EDGE_H
