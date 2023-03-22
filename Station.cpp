@@ -3,6 +3,9 @@
 //
 
 #include "Station.h"
+#include <iostream>
+
+using namespace std;
 
 Station::Station(const std::string &name) : name(name) {}
 
@@ -34,4 +37,11 @@ int Station::getId() const {
 
 bool Station::operator==(const Station &rhs) const {
     return name == rhs.name;
+}
+
+void Station::print() const {
+    cout << "Estação " << name;
+    if (!district.empty())
+         cout << " (" << district << "; " << municipality << "; " << township << ") ";
+    cout << "- " << line << endl;
 }

@@ -19,6 +19,7 @@ public:
     const std::string &getLine() const;
     int getId() const;
     bool operator==(const Station &rhs) const;
+    void print() const;
 
 private:
     std::string name;

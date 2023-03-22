@@ -25,6 +25,7 @@ void Management::readStationsFile() {
     string fileLine;
     getline(in, fileLine);
     int id = 1;
+    unsigned ignored = 0;
     while (getline(in, fileLine)) {
         istringstream iss(fileLine);
         string field;
@@ -32,16 +33,21 @@ void Management::readStationsFile() {
         unsigned f = 0;
         bool escape = false;
         while (getline(iss, field, ',')) {
-            if (field[0] == '"') {
-                fields[f] = field;
+            if (field[0] == '"' && field[field.length() - 1] != '"') {
+                fields[f] = field.substr(1, field.length() - 1);
+                fields[f] += ",";
                 escape = true;
                 continue;
-            } else if (field[field.length() - 1] == '"')
+            } else if (field[field.length() - 1] == '"' && field[0] != '"') {
+                field = field.substr(0, field.length() - 1);
                 escape = false;
-            if (escape)
+            }
+            if (escape) {
                 fields[f] += field;
+                fields[f] += ",";
+            }
             else
-                fields[f++] = field;
+                fields[f++] += field;
         }
         string name = fields[0];
         string district = fields[1];
@@ -49,10 +55,14 @@ void Management::readStationsFile() {
         string township = fields[3];
         string line = fields[4];
         Station station = Station(name, district, municipality, township, line, id);
-        stations.insert(station);
+        if (!stations.insert(station).second)
+            ignored++;
         network.addVertex(id++);
+        //station.print(); DEBUG ONLY
     }
     cout << "Leitura de ficheiro stations.csv bem-sucedida." << endl;
+    cout << "Foram lidas " << stations.size() << " estações." << endl;
+    cout << "Foram ignoradas " << ignored << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
 }
 
 void Management::readNetworkFile() {
