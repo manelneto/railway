@@ -31,7 +31,11 @@ private:
 
 struct stationHash {
     int operator()(const Station &station) const {
-        return station.getId();
+        const std::string& str = station.getName();
+        int v = 0;
+        for (const char &ch : str)
+            v = 37*v + ch;
+        return v;
     }
 
     bool operator()(const Station &station1, const Station &station2) const {
