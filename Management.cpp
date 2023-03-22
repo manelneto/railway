@@ -65,7 +65,7 @@ void Management::readNetworkFile() {
         unsigned capacity = stoi(fields[2]);
         Edge::Service service = fields[3] == "STANDARD" ? Edge::STANDARD : Edge::ALFA;
         if (stationA != stations.end() && stationB != stations.end())
-            network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity);
+            network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
     }
     cout << "Leitura de ficheiro network.csv bem-sucedida." << endl;
 }
