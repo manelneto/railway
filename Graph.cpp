@@ -1,44 +1,92 @@
 //
-// Created by manue on 15/03/2023.
+// Created by manue on 22/03/2023.
 //
 
 #include "Graph.h"
 
-int Graph::getNumstation() const {
-    return stationSet.size();
+int Graph::getNumVertex() const {
+    return vertexSet.size();
 }
-std::vector<Station*> Graph::getStationSet() const {
-    return stationSet;
+
+std::vector<Vertex *> Graph::getVertexSet() const {
+    return vertexSet;
 }
-Station* Graph::findStation(const int &id) const {
-    for (auto station : stationSet)
-        if (station->getId() == id)
-            return station;
+
+/*
+ * Auxiliary function to find a vertex with a given content.
+ */
+Vertex * Graph::findVertex(const int &id) const {
+    for (auto v : vertexSet)
+        if (v->getId() == id)
+            return v;
     return nullptr;
 }
-bool Graph::addStation(const int &id) {
-    if (findStation(id) != nullptr)
-        return false;
-    stationSet.push_back(new Station(id));
-    return true;
+
+/*
+ * Finds the index of the vertex with a given content.
+ */
+int Graph::findVertexIdx(const int &id) const {
+    for (unsigned i = 0; i < vertexSet.size(); i++)
+        if (vertexSet[i]->getId() == id)
+            return i;
+    return -1;
 }
-bool Graph::addSegment(const int &sourc, const int &dest, unsigned int w, Segment::Service service) {
-    auto s1 = findStation(sourc);
-    auto s2 = findStation(dest);
-    if (s1 == nullptr || s2 == nullptr)
+/*
+ *  Adds a vertex with a given content or info (in) to a graph (this).
+ *  Returns true if successful, and false if a vertex with that content already exists.
+ */
+bool Graph::addVertex(const int &id) {
+    if (findVertex(id) != nullptr)
         return false;
-    s1->addSegment(s2, w, service);
+    vertexSet.push_back(new Vertex(id));
     return true;
 }
 
-bool Graph::addBidirectionalSegment(const int &sourc, const int &dest, unsigned int w, Segment::Service service) {
-    auto v1 = findStation(sourc);
-    auto v2 = findStation(dest);
+/*
+ * Adds an edge to a graph (this), given the contents of the source and
+ * destination vertices and the edge weight (w).
+ * Returns true if successful, and false if the source or destination vertex does not exist.
+ */
+bool Graph::addEdge(const int &sourc, const int &dest, double w) {
+    auto v1 = findVertex(sourc);
+    auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
-    auto e1 = v1->addSegment(v2, w,service);
-    auto e2 = v2->addSegment(v1, w, service);
+    v1->addEdge(v2, w);
+    return true;
+}
+
+bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, double w) {
+    auto v1 = findVertex(sourc);
+    auto v2 = findVertex(dest);
+    if (v1 == nullptr || v2 == nullptr)
+        return false;
+    auto e1 = v1->addEdge(v2, w);
+    auto e2 = v2->addEdge(v1, w);
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;
+}
+
+void deleteMatrix(int **m, int n) {
+    if (m != nullptr) {
+        for (int i = 0; i < n; i++)
+            if (m[i] != nullptr)
+                delete [] m[i];
+        delete [] m;
+    }
+}
+
+void deleteMatrix(double **m, int n) {
+    if (m != nullptr) {
+        for (int i = 0; i < n; i++)
+            if (m[i] != nullptr)
+                delete [] m[i];
+        delete [] m;
+    }
+}
+
+Graph::~Graph() {
+    deleteMatrix(distMatrix, vertexSet.size());
+    deleteMatrix(pathMatrix, vertexSet.size());
 }
