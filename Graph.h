@@ -13,8 +13,8 @@ public:
     ~Graph();
     Vertex *findVertex(const int &id) const;
     bool addVertex(const int &id);
-    bool addEdge(const int &sourc, const int &dest, double w);
-    bool addBidirectionalEdge(const int &sourc, const int &dest, double w);
+    bool addEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service);
+    bool addBidirectionalEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service);
     int getNumVertex() const;
     std::vector<Vertex *> getVertexSet() const;
 private:

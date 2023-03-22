@@ -37,9 +37,9 @@ void Management::readStationsFile() {
         string municipality = fields[2];
         string township = fields[3];
         string line = fields[4];
-        Station station = Station(name, district, municipality, township, line, id++);
+        Station station = Station(name, district, municipality, township, line, id);
         stations.insert(station);
-
+        network.addVertex(id++);
     }
     cout << "Leitura de ficheiro stations.csv bem-sucedida." << endl;
 }
@@ -64,6 +64,8 @@ void Management::readNetworkFile() {
         auto stationB = stations.find(Station(fields[1]));
         unsigned capacity = stoi(fields[2]);
         Edge::Service service = fields[3] == "STANDARD" ? Edge::STANDARD : Edge::ALFA;
+        if (stationA != stations.end() && stationB != stations.end())
+            network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity);
     }
     cout << "Leitura de ficheiro network.csv bem-sucedida." << endl;
 }
