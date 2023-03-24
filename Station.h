@@ -27,7 +27,7 @@ public:
 
     const int &getId() const;
 
-    Segment* addSegment(Station *dest, double w,Segment::Service service);
+    Segment* addSegment(Station *dest, double w,std::string service);
 
 
     bool operator==(Station &s1);

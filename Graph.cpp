@@ -22,7 +22,7 @@ bool Graph::addStation(const int &id) {
     stationSet.push_back(new Station(id));
     return true;
 }
-bool Graph::addSegment(const int &sourc, const int &dest, unsigned int w, Segment::Service service) {
+bool Graph::addSegment(const int &sourc, const int &dest, unsigned int w, std::string service) {
     auto s1 = findStation(sourc);
     auto s2 = findStation(dest);
     if (s1 == nullptr || s2 == nullptr)
@@ -31,7 +31,7 @@ bool Graph::addSegment(const int &sourc, const int &dest, unsigned int w, Segmen
     return true;
 }
 
-bool Graph::addBidirectionalSegment(const int &sourc, const int &dest, unsigned int w, Segment::Service service) {
+bool Graph::addBidirectionalSegment(const int &sourc, const int &dest, unsigned int w, std::string service) {
     auto v1 = findStation(sourc);
     auto v2 = findStation(dest);
     if (v1 == nullptr || v2 == nullptr)

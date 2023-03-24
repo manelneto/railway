@@ -33,8 +33,8 @@ public:
 
     Station *findStation(const int &id) const;
     bool addStation(const int &id);
-    bool addSegment(const int &sourc, const int &dest, unsigned int w, Segment::Service service);
-    bool addBidirectionalSegment(const int &sourc, const int &dest, unsigned int w, Segment::Service service);
+    bool addSegment(const int &sourc, const int &dest, unsigned int w, std::string service);
+    bool addBidirectionalSegment(const int &sourc, const int &dest, unsigned int w, std::string service);
     int getNumstation() const;
     std::vector<Station *> getStationSet() const;
 
