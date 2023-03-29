@@ -3,11 +3,13 @@
 //
 
 #include "Station.h"
+#include <iostream>
 
-Station::Station(const std::string &name, const std::string &district, const std::string &municipality, const std::string &township, const std::string &line, const int &id) : name(name), district(district), municipality(municipality), township(township), line(line), id(id) {}
+using namespace std;
 
+Station::Station(const std::string &name) : name(name) {}
 
-Station::Station(const int &id) : id(id) {}
+Station::Station(const std::string &name, const std::string &district, const std::string &municipality, const std::string &township, const std::string &line, int id) : name(name), district(district), municipality(municipality), township(township), line(line), id(id) {}
 
 const std::string &Station::getName() const {
     return name;
@@ -29,8 +31,17 @@ const std::string &Station::getLine() const {
     return line;
 }
 
-const int &Station::getId() const {
+int Station::getId() const {
     return id;
 }
 
+bool Station::operator==(const Station &rhs) const {
+    return name == rhs.name;
+}
 
+void Station::print() const {
+    cout << "Estação " << name;
+    if (!district.empty())
+         cout << " (" << district << "; " << municipality << "; " << township << ")";
+    cout << " - " << line << endl;
+}
