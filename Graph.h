@@ -5,7 +5,8 @@
 #ifndef RAILWAY_GRAPH_H
 #define RAILWAY_GRAPH_H
 
-
+#include <list>
+#include <queue>
 #include "EdgeVertex.h"
 
 class Graph {
@@ -19,7 +20,7 @@ public:
      *  Adds a vertex with a given content or info (in) to a graph (this).
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
-    bool addVertex(const int &id);
+    bool addVertex(const int &id, const std::string &label);
     bool addEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const;
     bool addBidirectionalEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const;;
     int getNumVertex() const;
@@ -27,6 +28,8 @@ public:
     void edmondsKarp(int source, int target);
     void clear();
     unsigned getFlow(const int &id) const;
+    unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs);
+
 private:
     std::vector<Vertex *> vertexSet;
     double **distMatrix = nullptr;
