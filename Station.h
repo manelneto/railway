@@ -23,7 +23,6 @@ public:
     bool operator==(const Station &rhs) const;
     void print() const;
 
-
 private:
     std::string sanitizedName;
     std::string name;
@@ -32,7 +31,7 @@ private:
     std::string township;
     std::string line;
     int id;
-    std::string sanitize(const std::string &str);
+    static std::string sanitize(const std::string &str);
 };
 
 struct stationHash {
