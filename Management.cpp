@@ -6,8 +6,6 @@
 #include <sstream>
 #include <fstream>
 #include <iostream>
-#include <vector>
-#include <list>
 
 using namespace std;
 
@@ -151,16 +149,22 @@ void Management::readStationsFile(const string &filename) {
         string line = fields[4];
         Station station = Station(name, district, municipality, township, line, id);
         if (stations.insert(station).second) {
-            network.addVertex(id++);
             // station.print(); // DEBUG ONLY
-        } else
+            network.addVertex(id, name);
+            if (!district.empty())
+                districts[district].addVertex(id, name);
+            if (!municipality.empty())
+                municipalities[municipality].addVertex(id, name);
+            id++;
+        }
+        else
             ignored++;
     }
     cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
     cout << "Foram lidas " << stations.size() << " estações e foram ignoradas " << ignored << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
 }
 
-void Management::readNetworkFile(const std::string &filename) {
+void Management::readNetworkFile(const string &filename) {
     ifstream in("../files/" + filename);
     if (!in.is_open()) {
         cout << "Erro ao abrir o ficheiro " << filename << "." << endl;
@@ -181,10 +185,14 @@ void Management::readNetworkFile(const std::string &filename) {
             fields[f++] = field;
         auto stationA = stations.find(Station(fields[0]));
         auto stationB = stations.find(Station(fields[1]));
-        unsigned capacity = stoi(fields[2]); // <--! SERÁ QUE AS CAPACIDADES DEVEM SER METADE EM CADA SENTIDO ?????
+        unsigned capacity = stoi(fields[2]); // <--! SERÁ QUE AS CAPACIDADES DEVEM SER METADE EM CADA SENTIDO?
         Edge::Service service = fields[3] == "STANDARD" ? Edge::STANDARD : Edge::ALFA;
         if (stationA != stations.end() && stationB != stations.end()) {
             network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
+            if (stationA->getDistrict() == stationB->getDistrict())
+                districts[stationA->getDistrict()].addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
+            if (stationA->getMunicipality() == stationB -> getMunicipality())
+                municipalities[stationA->getMunicipality()].addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
             counter++;
         } else
             error++;
@@ -197,9 +205,9 @@ void Management::lerFicheirosDados() {
     stations.clear();
     network.clear();
     cout << endl;
-    readStationsFile("stations-lisbon.csv");
+    readStationsFile("stations.csv");
     cout << endl;
-    readNetworkFile("network-lisbon.csv");
+    readNetworkFile("network.csv");
     cout << endl;
     cout << "O grafo da rede tem " << network.getNumVertex() << " nós/vértices (estações)." << endl; // DEBUG ONLY
     cout << endl;
@@ -220,40 +228,70 @@ void Management::fluxoMaximoEspecifico() {
     Station target = readStation();
     network.edmondsKarp(source.getId(), target.getId());
     unsigned flow = network.getFlow(target.getId());
-    cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow << endl;
+    if (flow == 0)
+        cout << "Não é possível viajar entre " << source.getName() << " e " << target.getName() << endl;
+    else
+        cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow << endl;
 }
 
 void Management::fluxoMaximoGeral() {
     // ESTE CÓDIDO PODE NÃO SER O MAIS EFICIENTE, TALVEMOS DEVAMOS PENSAR NUM MAIS INTELIGENTE
     verificarFicheirosDados();
-    unsigned max = 0;
-    list<pair<Station, Station>> pares;
     cout << "A calcular..." << endl;
-    for (const auto &u : stations)
-        for (const auto &v : stations) {
-            if (v.getId() <= u.getId()) // APROVEITAR O FACTO DE O GRAFO SER BIDIRECIONAL E SIMÉTRICO
-                continue;
-            network.edmondsKarp(u.getId(), v.getId());
-            unsigned flow = network.getFlow(v.getId());
-            // cout << "O fluxo máximo entre " << u.getName() << " e " << v.getName() << " é " << flow << endl; // DEBUG ONLY
-            if (flow > max) {
-                max = flow;
-                pares.clear();
-                pares.emplace_back(u, v);
-            } else if (flow == max)
-                pares.emplace_back(u, v);
-        }
+    list<pair<string, string>> pares;
+    unsigned max = network.maxFlow(pares);
     cout << "Os pares de estações que requerem o maior número de comboios (" << max << ") são:" << endl;
     for (const auto &par : pares) {
-        par.first.print();
+        auto stationA = stations.find(Station(par.first));
+        if (stationA != stations.end())
+            stationA->print();
         cout << " & ";
-        par.second.print();
+        auto stationB = stations.find(Station(par.second));
+        if (stationB != stations.end())
+            stationB->print();
         cout << endl;
     }
 }
 
 void Management::topNecessidades() {
-    // TODO
+    verificarFicheirosDados();
+    cout << "Introduza o valor de K (0 para um top completo, com todos os municípios e distritos): ";
+    unsigned k = readInt();
+    priority_queue<pair<unsigned, string>> topDistritos;
+    priority_queue<pair<unsigned, string>> topMunicipios;
+    list<pair<string, string>> pairs; // STUB/STUPID, pode valer a pena implementar uma função que não precisa de list ou (se possível) atribuir a lista vazia como parâmetro por defeito
+    for (const auto &district : districts)
+        topDistritos.push(make_pair(district.second.maxFlow(pairs), district.first));
+    for (const auto &municipality : municipalities)
+        topMunicipios.push(make_pair(municipality.second.maxFlow(pairs), municipality.first));
+    unsigned i = 1;
+    unsigned j = 1;
+    if (k == 0) {
+        cout << "Top de municípios tendo em conta as suas necessidades de transportes:" << endl;
+        while (!topMunicipios.empty()) {
+            cout << i++ << ". " << topMunicipios.top().second << " (" << topMunicipios.top().first << " comboios em simultâneo)" << endl;
+            topMunicipios.pop();
+        }
+        cout << endl;
+        cout << "Top de distritos tendo em conta as suas necessidades de transportes:" << endl;
+        while (!topDistritos.empty()) {
+            cout << j++ << ". " << topDistritos.top().second << " (" << topDistritos.top().first << " comboios em simultâneo)" << endl;
+            topDistritos.pop();
+        }
+    } else {
+        cout << "Top " << k << " de municípios tendo em conta as suas necessidades de transportes:" << endl;
+        for (unsigned m = 0; m < k; m++) {
+            cout << i++ << ". " << topMunicipios.top().second << " (" << topMunicipios.top().first << " comboios em simultâneo)" << endl;
+            topMunicipios.pop();
+        }
+        cout << endl;
+        cout << "Top " << k << " de distritos tendo em conta as suas necessidades de transportes:" << endl;
+        for (unsigned m = 0; m < k; m++) {
+            cout << j++ << ". " << topDistritos.top().second << " (" << topDistritos.top().first << " comboios em simultâneo)" << endl;
+            topDistritos.pop();
+        }
+    }
+    cout << endl;
 }
 
 void Management::fluxoMaximoChegada() {

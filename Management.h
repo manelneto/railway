@@ -7,6 +7,7 @@
 
 
 #include <unordered_set>
+#include <unordered_map>
 #include "Station.h"
 #include "Graph.h"
 
@@ -17,6 +18,8 @@ public:
 private:
     std::unordered_set<Station, stationHash, stationHash> stations;
     Graph network;
+    std::unordered_map<std::string, Graph> districts;
+    std::unordered_map<std::string, Graph> municipalities;
     void readStationsFile(const std::string &filename);
     void readNetworkFile(const std::string &filename);
     static bool isInt(const std::string &str);

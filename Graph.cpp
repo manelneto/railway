@@ -55,7 +55,7 @@ vector<Vertex *> Graph::getVertexSet() const {
     return vertexSet;
 }
 
-void Graph::edmondsKarp(int source, int target) {
+void Graph::edmondsKarp(int source, int target) const {
     Vertex* s = findVertex(source);
     Vertex* t = findVertex(target);
     if (s == nullptr || t == nullptr || s == t)
@@ -87,7 +87,7 @@ unsigned Graph::getFlow(const int &id) const {
     return flow;
 }
 
-unsigned Graph::maxFlow(list<pair<string, string>> &pairs) {
+unsigned Graph::maxFlow(list<pair<string, string>> &pairs) const {
     unsigned max = 0;
     for (const auto &u : vertexSet)
         for (const auto &v : vertexSet) {
@@ -95,7 +95,7 @@ unsigned Graph::maxFlow(list<pair<string, string>> &pairs) {
                 continue;
             edmondsKarp(u->getId(), v->getId());
             unsigned flow = getFlow(v->getId());
-            // cout << "O fluxo máximo entre " << u.getLabel() << " e " << v.getLabel() << " é " << flow << endl; // DEBUG ONLY
+            // #include <iostream> std::cout << "O fluxo máximo entre " << u->getLabel() << " e " << v->getLabel() << " é " << flow << endl; // DEBUG ONLY
             if (flow > max) {
                 max = flow;
                 pairs.clear();
@@ -113,7 +113,7 @@ int Graph::findVertexIdx(const int &id) const {
     return -1;
 }
 
-bool Graph::findAugmentingPath(Vertex *s, Vertex *t) {
+bool Graph::findAugmentingPath(Vertex *s, Vertex *t) const {
     for (auto v : vertexSet)
         v->setVisited(false);
     s->setVisited(true);

@@ -25,10 +25,10 @@ public:
     bool addBidirectionalEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const;;
     int getNumVertex() const;
     std::vector<Vertex *> getVertexSet() const;
-    void edmondsKarp(int source, int target);
+    void edmondsKarp(int source, int target) const;
     void clear();
     unsigned getFlow(const int &id) const;
-    unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs);
+    unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs) const;
 
 private:
     std::vector<Vertex *> vertexSet;
@@ -36,7 +36,7 @@ private:
     int **pathMatrix = nullptr;
     int findVertexIdx(const int &id) const;
     static void testAndVisit(std::queue< Vertex*> &q, Edge *e, Vertex *w, double residual);
-    bool findAugmentingPath(Vertex *s, Vertex *t);
+    bool findAugmentingPath(Vertex *s, Vertex *t) const;
     static unsigned findMinResidualAlongPath(Vertex *s, Vertex *t);
     static void augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f);
 };
