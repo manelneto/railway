@@ -1,0 +1,15 @@
+Station_A,Station_B,Capacity,Service
+Lisboa Oriente,Lisboa Santa Apolónia,8,ALFA PENDULAR
+Chelas,Marvila,2,STANDARD
+Marvila,Braço de Prata,10,STANDARD
+Cais do Sodré,Alcântara-Mar,10,STANDARD
+Entrecampos,Roma - Areeiro,10,STANDARD
+Roma - Areeiro,Chelas,2,STANDARD
+Sete Rios,Entrecampos - Poente,8,STANDARD
+Entrecampos - Poente,Entrecampos,10,STANDARD
+Alcântara-Terra,Sete Rios,8,STANDARD
+Sete Rios,Benfica,10,STANDARD
+Alcântara-Terra,Alcântara-Mar,10,STANDARD
+Alcântara-Mar,Belém,2,STANDARD
+Lisboa Santa Apolónia,Braço de Prata,10,STANDARD
+Lisboa Rossio,Benfica,10,STANDARD
