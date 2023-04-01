@@ -4,6 +4,8 @@
 
 #include "EdgeVertex.h"
 
+using namespace std;
+
 /********************** Edge  ****************************/
 
 Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : orig(orig), dest(dest), capacity(capacity), service(service) {}
@@ -50,10 +52,14 @@ void Edge::setReverse(Edge *reverse) {
 
 /************************* Vertex  **************************/
 
-Vertex::Vertex(int id): id(id) {}
+Vertex::Vertex(int id, const string &label): id(id), label(label) {}
 
 int Vertex::getId() const {
     return this->id;
+}
+
+const std::string &Vertex::getLabel() const {
+    return this->label;
 }
 
 std::vector<Edge *> Vertex::getAdj() const {
@@ -142,17 +148,15 @@ void Vertex::removeOutgoingEdges() {
     }
 }
 
-void Vertex::deleteEdge(Edge *edge) {
+void Vertex::deleteEdge(Edge *edge) const {
     Vertex *dest = edge->getDest();
     // Remove the corresponding edge from the incoming list
     auto it = dest->incoming.begin();
     while (it != dest->incoming.end()) {
-        if ((*it)->getOrig()->getId() == id) {
+        if ((*it)->getOrig()->getId() == id)
             it = dest->incoming.erase(it);
-        }
-        else {
+        else
             it++;
-        }
     }
     delete edge;
 }

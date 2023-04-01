@@ -6,11 +6,8 @@
 #define RAILWAY_VERTEX_EDGE_H
 
 
-#include <iostream>
+#include <string>
 #include <vector>
-#include <queue>
-#include <limits>
-#include <algorithm>
 
 class Vertex;
 
@@ -36,7 +33,7 @@ private:
     Vertex * dest;
     unsigned capacity;
     Service service;
-    unsigned flow;
+    unsigned flow = 0;
     bool selected = false;
     Edge * reverse = nullptr;
 };
@@ -45,8 +42,9 @@ private:
 
 class Vertex {
 public:
-    Vertex(int id);
+    Vertex(int id, const std::string &label);
     int getId() const;
+    const std::string &getLabel() const;
     std::vector<Edge *> getAdj() const;
     bool isVisited() const;
     bool isProcessing() const;
@@ -66,6 +64,7 @@ public:
 
 private:
     int id;
+    std::string label;
     std::vector<Edge *> adj;
     bool visited = false;
     bool processing = false;
@@ -73,7 +72,7 @@ private:
     unsigned dist = 0;
     Edge * path = nullptr;
     std::vector<Edge *> incoming;
-    void deleteEdge(Edge *edge);
+    void deleteEdge(Edge *edge) const;
 };
 
 #endif //RAILWAY_VERTEX_EDGE_H
