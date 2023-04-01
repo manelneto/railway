@@ -25,6 +25,7 @@ private:
     static int validateInt(int n, int min, int max);
     Station readStation() const;
     void lerFicheirosDados();
+    void verificarFicheirosDados();
     void fluxoMaximoEspecifico();
     void fluxoMaximoGeral();
     void topNecessidades();
@@ -32,6 +33,7 @@ private:
     void custoMinimo();
     void conetividadeReduzida();
     void topAfetadas();
+
 };
 
 

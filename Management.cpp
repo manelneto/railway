@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <list>
 
 using namespace std;
 
@@ -177,7 +178,7 @@ void Management::readNetworkFile() {
             fields[f++] = field;
         auto stationA = stations.find(Station(fields[0]));
         auto stationB = stations.find(Station(fields[1]));
-        unsigned capacity = stoi(fields[2]);
+        unsigned capacity = stoi(fields[2]); // <--! SERÁ QUE AS CAPACIDADES DEVEM SER METADE EM CADA SENTIDO ?????
         Edge::Service service = fields[3] == "STANDARD" ? Edge::STANDARD : Edge::ALFA;
         if (stationA != stations.end() && stationB != stations.end()) {
             network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
@@ -190,17 +191,64 @@ void Management::readNetworkFile() {
 
 void Management::lerFicheirosDados() {
     stations.clear();
+    network.clear();
     readStationsFile();
     readNetworkFile();
     cout << "\nO grafo da rede tem " << network.getNumVertex() << " nós/vértices (estações)." << endl; // DEBUG ONLY
 }
 
+void Management::verificarFicheirosDados() {
+    if (network.getNumVertex() == 0) {
+        cout << "\nAinda não leu os ficheiros de dados, pelo que não existe nenhum grafo para analisar.\nA ler os ficheiros de dados..." << endl;
+        lerFicheirosDados();
+    }
+}
+
 void Management::fluxoMaximoEspecifico() {
-    // TODO
+    verificarFicheirosDados();
+    cout << "Estação de Origem" << endl;
+    Station source = readStation();
+    cout << "Estação de Destino" << endl;
+    Station target = readStation();
+    network.edmondsKarp(source.getId(), target.getId());
+    unsigned flow = 0;
+    for (const auto v : network.getVertexSet())
+        for (const auto e : v->getAdj())
+            flow += e->getFlow(); // !<-- ESTE CÓDIGO TALVEZ DEVA PERTENCER A GRAPH
+    cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow << endl;
 }
 
 void Management::fluxoMaximoGeral() {
-    // TODO
+    // ESTE CÓDIDO PODE NÃO SER O MAIS EFICIENTE, TALVEMOS DEVAMOS PENSAR NUM MAIS INTELIGENTE
+    verificarFicheirosDados();
+    unsigned max = 0;
+    list<pair<Station, Station>> pares;
+    Station target;
+    cout << "\nA calcular..." << endl;
+    for (const auto &u : stations)
+        for (const auto &v : stations) {
+            if (v.getId() <= u.getId()) // APROVEITAR O FACTO DE O GRAFO SER BIDIRECIONAL E SIMÉTRICO
+                continue;
+            network.edmondsKarp(u.getId(), v.getId());
+            unsigned flow = 0;
+            for (const auto w : network.getVertexSet())
+                for (const auto e : w->getAdj())
+                    flow += e->getFlow();
+            // cout << "O fluxo máximo entre " << u.getName() << " e " << v.getName() << " é " << flow << endl;
+            if (flow > max) {
+                max = flow;
+                pares.clear();
+                pares.emplace_back(u, v);
+            } else if (flow == max)
+                pares.emplace_back(u, v);
+        }
+    cout << "\nOs pares de estações que requerem o maior número de comboios (" << max << ") são:" << endl;
+    for (const auto &par : pares) {
+        par.first.print();
+        cout << " & ";
+        par.second.print();
+        cout << '\n';
+    }
 }
 
 void Management::topNecessidades() {

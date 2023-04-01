@@ -19,25 +19,25 @@ public:
      *  Adds a vertex with a given content or info (in) to a graph (this).
      *  Returns true if successful, and false if a vertex with that content already exists.
      */
-
-
     bool addVertex(const int &idStation);
-    bool addEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service);
-    bool addBidirectionalEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service);;
+    bool addEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const;
+    bool addBidirectionalEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const;;
     int getNumVertex() const;
     std::vector<Vertex *> getVertexSet() const;
-
-    ;
-
+    void edmondsKarp(int source, int target);
+    void clear();
 private:
     std::vector<Vertex *> vertexSet;
-    double ** distMatrix = nullptr;
+    double **distMatrix = nullptr;
     int **pathMatrix = nullptr;
     int findVertexIdx(const int &id) const;
+    static void testAndVisit(std::queue< Vertex*> &q, Edge *e, Vertex *w, double residual);
+    bool findAugmentingPath(Vertex *s, Vertex *t);
+    static unsigned findMinResidualAlongPath(Vertex *s, Vertex *t);
+    static void augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f);
 };
 
 void deleteMatrix(int **m, int n);
 void deleteMatrix(double **m, int n);
-
 
 #endif //RAILWAY_GRAPH_H

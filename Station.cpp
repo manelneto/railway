@@ -7,9 +7,23 @@
 
 using namespace std;
 
-Station::Station(const std::string &name) : name(name) {}
+string Station::sanitize(const string &str) {
+    string sanitized;
+    for (const char &ch : str)
+        if (isalpha(ch) || isdigit(ch) || isspace(ch) || ispunct(ch))
+            sanitized += (char) toupper(ch);
+    return sanitized;
+}
 
-Station::Station(const std::string &name, const std::string &district, const std::string &municipality, const std::string &township, const std::string &line, int id) : name(name), district(district), municipality(municipality), township(township), line(line), id(id) {}
+Station::Station() {}
+
+Station::Station(const std::string &name) : sanitizedName(sanitize(name)) {}
+
+Station::Station(const std::string &name, const std::string &district, const std::string &municipality, const std::string &township, const std::string &line, int id) : sanitizedName(sanitize(name)), name(name), district(district), municipality(municipality), township(township), line(line), id(id) {}
+
+const std::string &Station::getSanitizedName() const {
+    return sanitizedName;
+}
 
 const std::string &Station::getName() const {
     return name;
@@ -36,12 +50,12 @@ int Station::getId() const {
 }
 
 bool Station::operator==(const Station &rhs) const {
-    return name == rhs.name;
+    return sanitizedName == rhs.sanitizedName;
 }
 
 void Station::print() const {
     cout << "Estação " << name;
     if (!district.empty())
          cout << " (" << district << "; " << municipality << "; " << township << ")";
-    cout << " - " << line << endl;
+    cout << " - " << line;
 }
