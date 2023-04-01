@@ -36,7 +36,6 @@ private:
     Vertex * dest;
     unsigned capacity;
     Service service;
-
     unsigned flow;
     bool selected = false;
     Edge * reverse = nullptr;

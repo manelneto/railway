@@ -109,13 +109,14 @@ bool Management::menu() {
     return true;
 }
 
-void Management::readStationsFile() {
-    ifstream in("../files/stations.csv");
+void Management::readStationsFile(const string &filename) {
+    ifstream in("../files/" + filename);
     if (!in.is_open()) {
-        cout << "\nErro ao abrir o ficheiro stations.csv." << endl;
+        cout << "Erro ao abrir o ficheiro " << filename << "." << endl;
         cout << "Verifique se o ficheiro se encontra dentro do diretório files." << endl;
         return;
     }
+    cout << "A ler ficheiro " << filename << "..." << endl;
     string fileLine;
     getline(in, fileLine);
     int id = 1;
@@ -155,20 +156,22 @@ void Management::readStationsFile() {
         } else
             ignored++;
     }
-    cout << "\nLeitura do ficheiro stations.csv bem-sucedida." << endl;
+    cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
     cout << "Foram lidas " << stations.size() << " estações e foram ignoradas " << ignored << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
 }
 
-void Management::readNetworkFile() {
-    ifstream in("../files/network.csv");
+void Management::readNetworkFile(const std::string &filename) {
+    ifstream in("../files/" + filename);
     if (!in.is_open()) {
-        cout << "\nErro ao abrir o ficheiro network.csv." << endl;
+        cout << "Erro ao abrir o ficheiro " << filename << "." << endl;
         cout << "Verifique se o ficheiro se encontra dentro do diretório files." << endl;
         return;
     }
+    cout << "A ler ficheiro " << filename << "..." << endl;
     string line;
     getline(in, line);
     unsigned counter = 0;
+    unsigned error = 0;
     while (getline(in, line)) {
         istringstream iss(line);
         string field;
@@ -183,38 +186,40 @@ void Management::readNetworkFile() {
         if (stationA != stations.end() && stationB != stations.end()) {
             network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
             counter++;
-        }
+        } else
+            error++;
     }
-    cout << "\nLeitura do ficheiro network.csv bem-sucedida." << endl;
-    cout << "Foram lidos " << counter << " segmentos." << endl;
+    cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
+    cout << "Foram lidos " << counter << " segmentos e ocorreram " << error << " erros (estações de origem/destino não encontradas)." << endl;
 }
 
 void Management::lerFicheirosDados() {
     stations.clear();
     network.clear();
-    readStationsFile();
-    readNetworkFile();
-    cout << "\nO grafo da rede tem " << network.getNumVertex() << " nós/vértices (estações)." << endl; // DEBUG ONLY
+    cout << endl;
+    readStationsFile("stations-lisbon.csv");
+    cout << endl;
+    readNetworkFile("network-lisbon.csv");
+    cout << endl;
+    cout << "O grafo da rede tem " << network.getNumVertex() << " nós/vértices (estações)." << endl; // DEBUG ONLY
+    cout << endl;
 }
 
 void Management::verificarFicheirosDados() {
     if (network.getNumVertex() == 0) {
-        cout << "\nAinda não leu os ficheiros de dados, pelo que não existe nenhum grafo para analisar.\nA ler os ficheiros de dados..." << endl;
+        cout << "Ainda não leu os ficheiros de dados, pelo que não existe nenhum grafo para analisar." << endl;
         lerFicheirosDados();
     }
 }
 
 void Management::fluxoMaximoEspecifico() {
     verificarFicheirosDados();
-    cout << "Estação de Origem" << endl;
+    cout << "Estação A" << endl;
     Station source = readStation();
-    cout << "Estação de Destino" << endl;
+    cout << "Estação B" << endl;
     Station target = readStation();
     network.edmondsKarp(source.getId(), target.getId());
-    unsigned flow = 0;
-    for (const auto v : network.getVertexSet())
-        for (const auto e : v->getAdj())
-            flow += e->getFlow(); // !<-- ESTE CÓDIGO TALVEZ DEVA PERTENCER A GRAPH
+    unsigned flow = network.getFlow(target.getId());
     cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow << endl;
 }
 
@@ -223,18 +228,14 @@ void Management::fluxoMaximoGeral() {
     verificarFicheirosDados();
     unsigned max = 0;
     list<pair<Station, Station>> pares;
-    Station target;
-    cout << "\nA calcular..." << endl;
+    cout << "A calcular..." << endl;
     for (const auto &u : stations)
         for (const auto &v : stations) {
             if (v.getId() <= u.getId()) // APROVEITAR O FACTO DE O GRAFO SER BIDIRECIONAL E SIMÉTRICO
                 continue;
             network.edmondsKarp(u.getId(), v.getId());
-            unsigned flow = 0;
-            for (const auto w : network.getVertexSet())
-                for (const auto e : w->getAdj())
-                    flow += e->getFlow();
-            // cout << "O fluxo máximo entre " << u.getName() << " e " << v.getName() << " é " << flow << endl;
+            unsigned flow = network.getFlow(v.getId());
+            // cout << "O fluxo máximo entre " << u.getName() << " e " << v.getName() << " é " << flow << endl; // DEBUG ONLY
             if (flow > max) {
                 max = flow;
                 pares.clear();
@@ -242,12 +243,12 @@ void Management::fluxoMaximoGeral() {
             } else if (flow == max)
                 pares.emplace_back(u, v);
         }
-    cout << "\nOs pares de estações que requerem o maior número de comboios (" << max << ") são:" << endl;
+    cout << "Os pares de estações que requerem o maior número de comboios (" << max << ") são:" << endl;
     for (const auto &par : pares) {
         par.first.print();
         cout << " & ";
         par.second.print();
-        cout << '\n';
+        cout << endl;
     }
 }
 

@@ -28,7 +28,6 @@ int Graph::findVertexIdx(const int &id) const {
 
 bool Graph::addVertex(const int &id) {
     if (findVertex(id) != nullptr)
-
         return false;
     vertexSet.push_back(new Vertex(id));
     return true;
@@ -79,7 +78,7 @@ Graph::~Graph() {
 }
 
 void Graph::testAndVisit(std::queue< Vertex*> &q, Edge *e, Vertex *w, double residual) {
-    if (! w->isVisited() && residual > 0) {
+    if (!w->isVisited() && residual > 0) {
         w->setVisited(true);
         w->setPath(e);
         q.push(w);
@@ -156,4 +155,12 @@ void Graph::clear() {
     for (auto v : vertexSet)
         v->removeOutgoingEdges();
     vertexSet.clear();
+}
+
+unsigned Graph::getFlow(const int &id) const {
+    unsigned flow = 0;
+    const auto u = findVertex(id);
+    for (const auto e : u->getIncoming())
+        flow += e->getFlow();
+    return flow;
 }

@@ -17,8 +17,8 @@ public:
 private:
     std::unordered_set<Station, stationHash, stationHash> stations;
     Graph network;
-    void readStationsFile();
-    void readNetworkFile();
+    void readStationsFile(const std::string &filename);
+    void readNetworkFile(const std::string &filename);
     static bool isInt(const std::string &str);
     static std::string readInput();
     static int readInt();
@@ -33,7 +33,6 @@ private:
     void custoMinimo();
     void conetividadeReduzida();
     void topAfetadas();
-
 };
 
 
