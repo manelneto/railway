@@ -93,7 +93,7 @@ bool Management::menu() {
     else if (option == 3)
         fluxoMaximoGeral();
     else if (option == 4)
-        topNecessidades();
+        topNecessidades({});
     else if (option == 5)
         fluxoMaximoChegada();
     else if (option == 6)
@@ -254,13 +254,12 @@ void Management::fluxoMaximoGeral() {
     }
 }
 
-void Management::topNecessidades() {
+void Management::topNecessidades(std::list<std::pair<std::string, std::string>> pairs) {
     verificarFicheirosDados();
     cout << "Introduza o valor de K (0 para um top completo, com todos os municípios e distritos): ";
     unsigned k = readInt();
     priority_queue<pair<unsigned, string>> topDistritos;
     priority_queue<pair<unsigned, string>> topMunicipios;
-    list<pair<string, string>> pairs; // STUB/STUPID, pode valer a pena implementar uma função que não precisa de list ou (se possível) atribuir a lista vazia como parâmetro por defeito
     for (const auto &district : districts)
         topDistritos.push(make_pair(district.second.maxFlow(pairs), district.first));
     for (const auto &municipality : municipalities)

@@ -23,6 +23,7 @@ public:
     bool operator==(const Station &rhs) const;
     void print() const;
 
+
 private:
     std::string sanitizedName;
     std::string name;
