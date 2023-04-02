@@ -1,0 +1,31 @@
+Station_A,Station_B,Capacity,Service
+Albufeira - Ferreiras,Faro,8,STANDARD
+Loulé,Faro,10,ALFA PENDULAR
+Tunes,Albufeira - Ferreiras,6,ALFA PENDULAR
+Mexilhoeira Grande,Meia Praia,2,STANDARD
+Meia Praia,Lagos,4,STANDARD
+Bom João,Olhão,6,STANDARD
+Olhão,Fuseta-A,2,STANDARD
+Luz,Tavira,4,STANDARD
+Tavira,Porta Nova,2,STANDARD
+Livramento,Luz,2,STANDARD
+Algoz,Alcantarilha,4,STANDARD
+Albufeira - Ferreiras,Boliqueime,6,STANDARD
+Boliqueime,Loulé,4,STANDARD
+Estômbar-Lagoa,Ferragudo,2,STANDARD
+Ferragudo,Portimão,6,STANDARD
+Fuseta-A,Fuseta,4,STANDARD
+Fuseta,Livramento,2,STANDARD
+Alcantarilha,Poço Barreto,2,STANDARD
+Poço Barreto,Estômbar-Lagoa,4,STANDARD
+Parque das Cidades,Bom João,2,STANDARD
+Loulé,Almancil,2,STANDARD
+Almancil,Parque das Cidades,6,STANDARD
+Conceição,Cacela,4,STANDARD
+Cacela,Castro Marim,2,STANDARD
+Portimão,Mexilhoeira Grande,4,STANDARD
+São Marcos,Messines-Alte,4,STANDARD
+Castro Marim,Monte Gordo,2,STANDARD
+Albufeira - Ferreiras,Loulé,4,ALFA PENDULAR
+Porta Nova,Conceição,2,STANDARD
+Monte Gordo,Vila Real de Stº António,4,STANDARD
