@@ -106,6 +106,21 @@ unsigned Graph::maxFlow(list<pair<string, string>> &pairs) const {
     return max;
 }
 
+void Graph::addSuperSource(const int &id) {
+    addVertex(0, "Super Source");
+    for (const auto &v : vertexSet)
+        if (v->getIndegree() <= 1 && v->getId() != id)
+            addEdge(0, v->getId(), UINT_MAX, Edge::OTHER);
+}
+
+void Graph::removeSuperSource() const {
+    Vertex *superSource = findVertex(0);
+    for (const auto it : superSource->getAdj())
+        it->getDest()->setIndegree(it->getDest()->getIndegree() - 1);
+    superSource->removeOutgoingEdges();
+    // delete superSource;
+}
+
 int Graph::findVertexIdx(const int &id) const {
     for (unsigned i = 0; i < vertexSet.size(); i++)
         if (vertexSet[i]->getId() == id)

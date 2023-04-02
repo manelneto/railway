@@ -29,6 +29,8 @@ public:
     void clear();
     unsigned getFlow(const int &id) const;
     unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs) const;
+    void addSuperSource(const int &id);
+    void removeSuperSource() const;
 
 private:
     std::vector<Vertex *> vertexSet;

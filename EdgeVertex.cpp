@@ -118,6 +118,7 @@ Edge * Vertex::addEdge(Vertex *d, unsigned capacity, Edge::Service service) {
     auto newEdge = new Edge(this, d, capacity, service);
     adj.push_back(newEdge);
     d->incoming.push_back(newEdge);
+    d->setIndegree(d->getIndegree() + 1);
     return newEdge;
 }
 

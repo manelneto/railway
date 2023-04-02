@@ -295,7 +295,14 @@ void Management::topNecessidades() {
 }
 
 void Management::fluxoMaximoChegada() {
-    // TODO
+    verificarFicheirosDados();
+    cout << "Estação de Chegada" << endl;
+    Station station = readStation();
+    network.addSuperSource(station.getId());
+    network.edmondsKarp(0, station.getId());
+    unsigned flow = network.getFlow(station.getId());
+    cout << "O número máximo de comboios que podem chegar simultaneamente a " << station.getName() << " é " << flow << endl;
+    network.removeSuperSource();
 }
 
 void Management::custoMinimo() {

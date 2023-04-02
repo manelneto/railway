@@ -15,7 +15,7 @@ class Vertex;
 
 class Edge {
 public:
-    enum Service {STANDARD, ALFA};
+    enum Service {STANDARD, ALFA, OTHER};
     Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service);
     Vertex * getOrig() const;
     Vertex * getDest() const;
@@ -68,7 +68,7 @@ private:
     std::vector<Edge *> adj;
     bool visited = false;
     bool processing = false;
-    unsigned indegree;
+    unsigned indegree = 0;
     unsigned dist = 0;
     Edge * path = nullptr;
     std::vector<Edge *> incoming;
