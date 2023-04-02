@@ -40,6 +40,9 @@ bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, unsigned cap
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
+    for (const auto edge : v1->getAdj())
+        if (edge->getDest()->getId() == dest && edge->getCapacity() == capacity && edge->getService() == service)
+            return false;
     auto e1 = v1->addEdge(v2, capacity, service);
     auto e2 = v2->addEdge(v1, capacity, service);
     e1->setReverse(e2);

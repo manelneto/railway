@@ -31,6 +31,7 @@ public:
     unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs) const;
     void addSuperSource(const int &id);
     void removeSuperSource() const;
+    void dijsktra(int source, int target) const;
 
 private:
     std::vector<Vertex *> vertexSet;

@@ -188,7 +188,8 @@ void Management::readNetworkFile(const string &filename) {
         unsigned capacity = stoi(fields[2]); // <--! SERÁ QUE AS CAPACIDADES DEVEM SER METADE EM CADA SENTIDO?
         Edge::Service service = fields[3] == "STANDARD" ? Edge::STANDARD : Edge::ALFA;
         if (stationA != stations.end() && stationB != stations.end()) {
-            network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
+            if (!network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service))
+                error++;
             if (stationA->getDistrict() == stationB->getDistrict())
                 districts[stationA->getDistrict()].addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
             if (stationA->getMunicipality() == stationB -> getMunicipality())
@@ -198,7 +199,7 @@ void Management::readNetworkFile(const string &filename) {
             error++;
     }
     cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
-    cout << "Foram lidos " << counter << " segmentos e ocorreram " << error << " erros (estações de origem/destino não encontradas)." << endl;
+    cout << "Foram lidos " << counter << " segmentos e ocorreram " << error << " erros (estações de origem/destino não encontradas ou ligações duplicadas)." << endl;
 }
 
 void Management::lerFicheirosDados() {
@@ -306,6 +307,8 @@ void Management::fluxoMaximoChegada() {
 }
 
 void Management::custoMinimo() {
+    // 1 - Calcular o caminho mais barato (mais curto).
+    // 2 - Calcular o fluxo máximo por esse caminho.
     // TODO
 }
 
