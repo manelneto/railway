@@ -78,8 +78,8 @@ unsigned int Vertex::getIndegree() const {
     return this->indegree;
 }
 
-unsigned Vertex::getDist() const {
-    return this->dist;
+unsigned Vertex::getCost() const {
+    return this->cost;
 }
 
 Edge * Vertex::getPath() const {
@@ -106,8 +106,8 @@ void Vertex::setIndegree(unsigned indegree) {
     this->indegree = indegree;
 }
 
-void Vertex::setDist(unsigned dist) {
-    this->dist = dist;
+void Vertex::setCost(unsigned cost) {
+    this->cost = cost;
 }
 
 void Vertex::setPath(Edge *path) {
@@ -160,4 +160,7 @@ void Vertex::deleteEdge(Edge *edge) const {
             it++;
     }
     delete edge;
+}
+bool Vertex::operator<(Vertex &v1) const{
+    return this->getCost() < v1.getCost();
 }

@@ -49,19 +49,20 @@ public:
     bool isVisited() const;
     bool isProcessing() const;
     unsigned getIndegree() const;
-    unsigned getDist() const;
+    unsigned getCost() const;
     Edge * getPath() const;
     std::vector<Edge *> getIncoming() const;
     void setId(int id);
     void setVisited(bool visited);
     void setProcesssing(bool processing);
     void setIndegree(unsigned indegree);
-    void setDist(unsigned dist);
+    void setCost(unsigned cost);
     void setPath(Edge *path);
     Edge * addEdge(Vertex *dest, unsigned capacity, Edge::Service service);
     bool removeEdge(int destID);
     void removeOutgoingEdges();
-
+    bool operator<(Vertex &v1) const;
+    int queueIndex;
 private:
     int id;
     std::string label;
@@ -69,10 +70,10 @@ private:
     bool visited = false;
     bool processing = false;
     unsigned indegree = 0;
-    unsigned dist = 0;
     Edge * path = nullptr;
     std::vector<Edge *> incoming;
     void deleteEdge(Edge *edge) const;
+    unsigned cost = 0;
 };
 
 #endif //RAILWAY_VERTEX_EDGE_H

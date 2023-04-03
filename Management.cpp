@@ -319,26 +319,46 @@ void Management::fluxoMaximoChegada() {
     network.removeSuperSource();
 }
 
+
 void Management::custoMinimo() {
-    // 1 - Calcular o caminho mais barato (mais curto) com Dijkstra.
+    // 1 - Calcular o caminho mais barato (mais curto).
     // 2 - Calcular o fluxo máximo por esse caminho.
     // TODO
     verificarFicheirosDados();
+    cout << "Estação A" << endl;
+    Station source = readStation();
+    cout << "Estação B" << endl;
+    Station target = readStation();
+    pair<int,int> flow = network.dijsktra(source.getId(), target.getId());
+    const auto sink= network.findVertex(target.getId());
+    if (flow.second == 0)
+        cout << "Não é possível viajar entre " << source.getName() << " e " << target.getName() << endl;
+    else
+        cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow.first << "." << endl;
+    cout << "O custo mínimo desta viagem seria aproximadamente " << flow.second << "€";
+
 }
 
 void Management::conetividadeReduzida() {
     // TODO
+    int i =1;
     verificarFicheirosDados();
     Graph reducedConnectivityNetwork = network;
     cout << "Introduza o número de segmentos a remover para reduzir a conetividade do grafo original: ";
     unsigned n = readInt();
-    for (unsigned i = 1; i <= n; i++) {
+    while (i<=n) {
+
         cout << "Segmento " << i << "." << endl;
         cout << "Estação A" << endl;
         Station source = readStation();
         cout << "Estação B" << endl;
         Station target = readStation();
-        reducedConnectivityNetwork.removeEdge(source.getId(), target.getId());
+        if(!(reducedConnectivityNetwork.removeEdge(source.getId(), target.getId()))){
+
+            cout<< "As estações que selecionou não têm nenhuma ligação entre si. Por favor, tente novamente." << endl;
+            continue;
+        };
+        i++;
         cout << endl;
     }
     cout << "Estações para calcular o número máximo de comboio que podem viajar entre elas (com conetividade reduzida)" << endl;

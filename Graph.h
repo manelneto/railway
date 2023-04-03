@@ -8,7 +8,7 @@
 #include <list>
 #include <queue>
 #include "EdgeVertex.h"
-
+#include "MutablePriorityQueue.h"
 class Graph {
 public:
     ~Graph();
@@ -32,8 +32,8 @@ public:
     unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs) const;
     void addSuperSource(const int &id);
     void removeSuperSource() const;
-    void removeEdge(const int &source, const int &target);
-    void dijsktra(int source, int target) const;
+    bool removeEdge(const int &source, const int &target);
+    std::pair<int,int> dijsktra(int source, int target) const;
 
 private:
     std::vector<Vertex *> vertexSet;

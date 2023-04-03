@@ -4,7 +4,7 @@
 
 #include <stdexcept>
 #include "Graph.h"
-
+#include <climits>
 using namespace std;
 
 Graph::~Graph() {
@@ -139,11 +139,13 @@ void Graph::removeSuperSource() const {
     // delete superSource;
 }
 
-void Graph::removeEdge(const int &source, const int &target) {
+bool Graph::removeEdge(const int &source, const int &target) {
+    bool removed=false;
     Vertex *s = findVertex(source);
     Vertex *d = findVertex(target);
-    s->removeEdge(target);
-    d->removeEdge(source);
+    if(s->removeEdge(target)){removed= true;}
+    if(d->removeEdge(source)){removed= true;}
+    return removed;
 }
 
 int Graph::findVertexIdx(const int &id) const {
@@ -225,4 +227,61 @@ void Graph::testAndVisit(queue< Vertex*> &q, Edge *e, Vertex *w, double residual
         w->setPath(e);
         q.push(w);
     }
+}
+pair<int,int> Graph::dijsktra(int source, int target) const {
+    const auto src= findVertex(source);
+    unsigned max_capacity=UINT_MAX;
+    unsigned max_cost=0;
+    src->setCost(0);
+    src->setPath(nullptr);
+    pair<int,int > res;
+    MutablePriorityQueue<Vertex> vertex_priorities;
+    for (auto u : vertexSet){
+        if (u!=src){
+            u->setCost(INT_MAX);
+            u->setPath(nullptr);
+        }
+        vertex_priorities.insert(u);
+
+    }
+    while(!vertex_priorities.empty()){
+        Vertex* u = vertex_priorities.extractMin();
+
+        for (Edge* e: u->getAdj()){
+            int alt=0;
+            Vertex* v = e->getDest();
+            if (e->getService()==0) {
+                alt= u->getCost()+ 2;
+            }
+            if (e->getService()==1) {
+                alt= u->getCost()+ 4;
+            }
+            if (alt < v->getCost()){
+                v->setCost(alt);
+                v->setPath(e);
+                vertex_priorities.decreaseKey(v);
+            }
+        }
+    }
+    const auto sink= findVertex(target);
+    for(Edge* e= sink->getPath(); e!= nullptr; e= e->getOrig()->getPath()){
+        if (e->getCapacity()< max_capacity){
+            max_capacity=e->getCapacity();
+        }
+        for(Edge* paralell : e->getDest()->getIncoming()){
+            if (paralell->getOrig()== e->getOrig() && paralell->getDest()== e->getDest() && e!=paralell){
+                if(paralell->getService()==0){
+                    max_cost+=2;
+                }
+                if(paralell->getService()==1){
+                    max_cost+=4;
+                }
+            }
+        }
+        max_cost+=e->getDest()->getCost();
+    }
+    res.first=max_capacity;
+    res.second=max_cost;
+    return res;
+
 }
