@@ -12,46 +12,177 @@
 
 class Graph {
 public:
-    ~Graph();
-    /*
-    * Auxiliary function to find a vertex with a given ID.
-    */
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param id
+     * @return
+     */
     Vertex *findVertex(const int &id) const;
-    /*
-     *  Adds a vertex with a given content or info (in) to a graph (this).
-     *  Returns true if successful, and false if a vertex with that content already exists.
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param id
+     * @param label
+     * @return
      */
     bool addVertex(const int &id, const std::string &label);
-    bool addEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const;
-    bool addBidirectionalEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const;;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param source
+     * @param dest
+     * @param capacity
+     * @param service
+     * @return
+     */
+    bool addEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param source
+     * @param dest
+     * @param capacity
+     * @param service
+     * @return
+     */
+    bool addBidirectionalEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @return
+     */
     int getNumVertex() const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @return
+     */
     std::vector<Vertex *> getVertexSet() const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param source
+     * @param target
+     */
     void edmondsKarp(int source, int target) const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     */
     void clear();
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param id
+     * @return
+     */
     unsigned getFlow(const int &id) const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @return
+     */
     unsigned maxFlow() const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param pairs
+     * @return
+     */
     unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs) const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param id
+     */
     void addSuperSource(const int &id);
+
+    /**
+     * <br>Complexidade Temporal: O()
+     */
     void removeSuperSource() const;
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param source
+     * @param target
+     * @return
+     */
     bool removeEdge(const int &source, const int &target);
+
+    /**
+     * <br>Complexidade Temporal: O()
+     * @param source
+     */
     void dijkstra(int source) const;
-    unsigned getPathFlow(int source, int target) const;
-    unsigned getPathCost(int source, int target, unsigned flow) const;
+
+    /**
+     *
+     * @param target
+     * @return
+     */
+    unsigned getPathFlow(int target) const;
+
+    /**
+     *
+     * @param target
+     * @param flow
+     * @return
+     */
+    unsigned getPathCost(int target, unsigned flow) const;
 
 private:
     std::vector<Vertex *> vertexSet;
-    double **distMatrix = nullptr;
-    int **pathMatrix = nullptr;
+
+    /**
+     *
+     * @param id
+     * @return
+     */
     int findVertexIdx(const int &id) const;
+
+    /**
+     *
+     * @param q
+     * @param e
+     * @param w
+     * @param residual
+     */
     static void testAndVisit(std::queue< Vertex*> &q, Edge *e, Vertex *w, double residual);
+
+    /**
+     *
+     * @param s
+     * @param t
+     * @return
+     */
     bool findAugmentingPath(Vertex *s, Vertex *t) const;
+
+    /**
+     *
+     * @param s
+     * @param t
+     * @return
+     */
     static unsigned findMinResidualAlongPath(Vertex *s, Vertex *t);
+
+    /**
+     *
+     * @param s
+     * @param t
+     * @param f
+     */
     static void augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f);
+
+    /**
+     *
+     * @param u
+     * @param v
+     * @param e
+     * @return
+     */
     static bool relax(Vertex *u, Vertex *v, Edge *e);
 };
-
-void deleteMatrix(int **m, int n);
-void deleteMatrix(double **m, int n);
 
 
 #endif //RAILWAY_GRAPH_H

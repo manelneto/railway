@@ -9,11 +9,6 @@
 
 using namespace std;
 
-Graph::~Graph() {
-    deleteMatrix(distMatrix, (int) vertexSet.size());
-    deleteMatrix(pathMatrix, (int) vertexSet.size());
-}
-
 Vertex * Graph::findVertex(const int &id) const {
     for (auto v : vertexSet)
         if (v->getId() == id)
@@ -28,8 +23,8 @@ bool Graph::addVertex(const int &id, const string &label) {
     return true;
 }
 
-bool Graph::addEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const {
-    auto v1 = findVertex(sourc);
+bool Graph::addEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const {
+    auto v1 = findVertex(source);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
@@ -37,8 +32,8 @@ bool Graph::addEdge(const int &sourc, const int &dest, unsigned capacity, Edge::
     return true;
 }
 
-bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, unsigned capacity, Edge::Service service) const {
-    auto v1 = findVertex(sourc);
+bool Graph::addBidirectionalEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const {
+    auto v1 = findVertex(source);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
@@ -61,8 +56,8 @@ vector<Vertex *> Graph::getVertexSet() const {
 }
 
 void Graph::edmondsKarp(int source, int target) const {
-    Vertex* s = findVertex(source);
-    Vertex* t = findVertex(target);
+    Vertex *s = findVertex(source);
+    Vertex *t = findVertex(target);
     if (s == nullptr || t == nullptr || s == t)
         throw logic_error("Invalid source and/or target vertex");
 
@@ -100,7 +95,6 @@ unsigned Graph::maxFlow() const {
                 continue;
             edmondsKarp(u->getId(), v->getId());
             unsigned flow = getFlow(v->getId());
-            // #include <iostream> std::cout << "O fluxo máximo entre " << u->getLabel() << " e " << v->getLabel() << " é " << flow << endl; // DEBUG ONLY
             if (flow >= max)
                 max = flow;
         }
@@ -115,7 +109,6 @@ unsigned Graph::maxFlow(list<pair<string, string>> &pairs) const {
                 continue;
             edmondsKarp(u->getId(), v->getId());
             unsigned flow = getFlow(v->getId());
-            // #include <iostream> std::cout << "O fluxo máximo entre " << u->getLabel() << " e " << v->getLabel() << " é " << flow << endl; // DEBUG ONLY
             if (flow > max) {
                 max = flow;
                 pairs.clear();
@@ -138,7 +131,6 @@ void Graph::removeSuperSource() const {
     for (const auto it : superSource->getAdj())
         it->getDest()->setIndegree(it->getDest()->getIndegree() - 1);
     superSource->removeOutgoingEdges();
-    // delete superSource;
 }
 
 bool Graph::removeEdge(const int &source, const int &target) {
@@ -150,11 +142,57 @@ bool Graph::removeEdge(const int &source, const int &target) {
     return removed;
 }
 
+void Graph::dijkstra(int source) const {
+    MutablePriorityQueue<Vertex> queue;
+    for (const auto vertex : vertexSet) {
+        vertex->setCost(INT_MAX);
+        vertex->setPath(nullptr);
+        queue.insert(vertex);
+    }
+    Vertex *s = findVertex(source);
+    s->setCost(0);
+    s->setPath(nullptr);
+    queue.decreaseKey(s);
+    while (!queue.empty()) {
+        Vertex *u = queue.extractMin();
+        for (Edge *e: u->getAdj()) {
+            Vertex *v = e->getDest();
+            if (relax(u, v, e))
+                queue.decreaseKey(v);
+        }
+    }
+}
+
+unsigned Graph::getPathFlow(int target) const {
+    Vertex *t = findVertex(target);
+    unsigned minCut = UINT_MAX;
+    for (Edge *e = t->getPath(); e != nullptr; e = e->getOrig()->getPath())
+        if (e->getCapacity() < minCut)
+            minCut = e->getCapacity();
+    return minCut;
+}
+
+unsigned Graph::getPathCost(int target, unsigned flow) const {
+    Vertex *t = findVertex(target);
+    unsigned cost = 0;
+    for (Edge *e = t->getPath(); e != nullptr; e = e->getOrig()->getPath())
+        cost += flow * e->getCost();
+    return cost;
+}
+
 int Graph::findVertexIdx(const int &id) const {
     for (unsigned i = 0; i < vertexSet.size(); i++)
         if (vertexSet[i]->getId() == id)
             return (int) i;
     return -1;
+}
+
+void Graph::testAndVisit(queue< Vertex*> &q, Edge *e, Vertex *w, double residual) {
+    if (!w->isVisited() && residual > 0) {
+        w->setVisited(true);
+        w->setPath(e);
+        q.push(w);
+    }
 }
 
 bool Graph::findAugmentingPath(Vertex *s, Vertex *t) const {
@@ -205,32 +243,6 @@ void Graph::augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f) {
     }
 }
 
-void deleteMatrix(int **m, int n) {
-    if (m != nullptr) {
-        for (int i = 0; i < n; i++)
-            if (m[i] != nullptr)
-                delete [] m[i];
-        delete [] m;
-    }
-}
-
-void deleteMatrix(double **m, int n) {
-    if (m != nullptr) {
-        for (int i = 0; i < n; i++)
-            if (m[i] != nullptr)
-                delete [] m[i];
-        delete [] m;
-    }
-}
-
-void Graph::testAndVisit(queue< Vertex*> &q, Edge *e, Vertex *w, double residual) {
-    if (!w->isVisited() && residual > 0) {
-        w->setVisited(true);
-        w->setPath(e);
-        q.push(w);
-    }
-}
-
 bool Graph::relax(Vertex *u, Vertex *v, Edge *e) {
     if (v->getCost() > u->getCost() + e->getCost()) {
         v->setCost(u->getCost() + e->getCost());
@@ -238,44 +250,4 @@ bool Graph::relax(Vertex *u, Vertex *v, Edge *e) {
         return true;
     }
     return false;
-}
-
-void Graph::dijkstra(int source) const {
-    MutablePriorityQueue<Vertex> queue;
-    for (const auto vertex : vertexSet) {
-        vertex->setCost(INT_MAX);
-        vertex->setPath(nullptr);
-        queue.insert(vertex);
-    }
-    Vertex *s = findVertex(source);
-    s->setCost(0);
-    s->setPath(nullptr);
-    queue.decreaseKey(s);
-    while (!queue.empty()) {
-        Vertex *u = queue.extractMin();
-        for (Edge *e: u->getAdj()) {
-            Vertex *v = e->getDest();
-            if (relax(u, v, e))
-                queue.decreaseKey(v);
-        }
-    }
-}
-
-unsigned Graph::getPathFlow(int source, int target) const {
-    Vertex *s = findVertex(source);
-    Vertex *t = findVertex(target);
-    unsigned minCut = UINT_MAX;
-    for (Edge *e = t->getPath(); e != nullptr; e = e->getOrig()->getPath())
-        if (e->getCapacity() < minCut)
-            minCut = e->getCapacity();
-    return minCut;
-}
-
-unsigned Graph::getPathCost(int source, int target, unsigned flow) const {
-    Vertex *s = findVertex(source);
-    Vertex *t = findVertex(target);
-    unsigned cost = 0;
-    for (Edge *e = t->getPath(); e != nullptr; e = e->getOrig()->getPath())
-        cost += flow * e->getCost();
-    return cost;
 }
