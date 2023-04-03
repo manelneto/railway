@@ -271,14 +271,14 @@ pair<int,int> Graph::dijsktra(int source, int target) const {
         for(Edge* paralell : e->getDest()->getIncoming()){
             if (paralell->getOrig()== e->getOrig() && paralell->getDest()== e->getDest() && e!=paralell){
                 if(paralell->getService()==0){
-                    max_cost+=2;
+                    max_cost+=2*paralell->getCapacity();
                 }
                 if(paralell->getService()==1){
-                    max_cost+=4;
+                    max_cost+=4*paralell->getCapacity();
                 }
             }
         }
-        max_cost+=e->getDest()->getCost();
+        max_cost+=e->getDest()->getCost()*e->getCapacity();
     }
     res.first=max_capacity;
     res.second=max_cost;
