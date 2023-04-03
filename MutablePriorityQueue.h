@@ -11,16 +11,55 @@
 template <class T>
 class MutablePriorityQueue {
 public:
+    /**
+     *
+     */
     MutablePriorityQueue();
+
+    /**
+     *
+     * @param x
+     */
     void insert(T * x);
+
+    /**
+     *
+     * @return
+     */
     T * extractMin();
+
+    /**
+     *
+     * @param x
+     */
     void decreaseKey(T * x);
+
+    /**
+     *
+     * @return
+     */
     bool empty();
 
 private:
     std::vector<T *> H;
+
+    /**
+     *
+     * @param i
+     */
     void heapifyUp(unsigned i);
+
+    /**
+     *
+     * @param i
+     */
     void heapifyDown(unsigned i);
+
+    /**
+     *
+     * @param i
+     * @param x
+     */
     inline void set(unsigned i, T * x);
 };
 
@@ -28,32 +67,18 @@ private:
 #define parent(i) ((i) / 2)
 #define leftChild(i) ((i) * 2)
 
-/**
- *
- * @tparam T
- */
 template <class T>
 MutablePriorityQueue<T>::MutablePriorityQueue() {
     H.push_back(nullptr);
     // indices will be used starting in 1 to facilitate parent/child calculations
 }
 
-/**
- *
- * @tparam T
- * @param x
- */
 template <class T>
 void MutablePriorityQueue<T>::insert(T *x) {
     H.push_back(x);
     heapifyUp(H.size() - 1);
 }
 
-/**
- *
- * @tparam T
- * @return
- */
 template <class T>
 T* MutablePriorityQueue<T>::extractMin() {
     auto x = H[1];
@@ -65,31 +90,16 @@ T* MutablePriorityQueue<T>::extractMin() {
     return x;
 }
 
-/**
- *
- * @tparam T
- * @param x
- */
 template <class T>
 void MutablePriorityQueue<T>::decreaseKey(T *x) {
     heapifyUp(x->queueIndex);
 }
 
-/**
- *
- * @tparam T
- * @return
- */
 template <class T>
 bool MutablePriorityQueue<T>::empty() {
     return H.size() == 1;
 }
 
-/**
- *
- * @tparam T
- * @param i
- */
 template <class T>
 void MutablePriorityQueue<T>::heapifyUp(unsigned i) {
     auto x = H[i];
@@ -100,11 +110,6 @@ void MutablePriorityQueue<T>::heapifyUp(unsigned i) {
     set(i, x);
 }
 
-/**
- *
- * @tparam T
- * @param i
- */
 template <class T>
 void MutablePriorityQueue<T>::heapifyDown(unsigned i) {
     auto x = H[i];
@@ -122,12 +127,6 @@ void MutablePriorityQueue<T>::heapifyDown(unsigned i) {
     set(i, x);
 }
 
-/**
- *
- * @tparam T
- * @param i
- * @param x
- */
 template <class T>
 void MutablePriorityQueue<T>::set(unsigned i, T * x) {
     H[i] = x;
