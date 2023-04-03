@@ -9,11 +9,6 @@
 
 using namespace std;
 
-/**Verifica se str é um número inteiro não negativo.
- * <br>Complexidade Temporal: O(n), sendo n o comprimento de str
- * @param str string a verificar
- * @return true se str é um número inteiro não negativo, false caso contrário
- */
 bool Management::isInt(const string &str) {
     for (const char &ch : str)
         if (!isdigit(ch))
@@ -21,10 +16,6 @@ bool Management::isInt(const string &str) {
     return true;
 }
 
-/**Lê o input do utilizador.
- * <br>Complexidade Temporal: O(n), sendo n o comprimento do input do utilizador
- * @return input do utilizador
- */
 string Management::readInput() {
     string s;
     getline(cin, s);
@@ -32,10 +23,6 @@ string Management::readInput() {
     return s;
 }
 
-/**Lê o input do utilizador, forçando a que seja um número inteiro não negativo.
- * <br>Complexidade Temporal: O(n), sendo n a posição do primeiro input válido introduzido pelo utilizador
- * @return número inteiro não negativo introduzido pelo utilizador
- */
 int Management::readInt() {
     string s = readInput();
     while (!isInt(s)) {
@@ -46,13 +33,6 @@ int Management::readInt() {
     return n;
 }
 
-/**Valida um número inteiro, isto é, verifica se n pertence ao intervalo [min, max]. Enquanto o número for inválido, tenta ler um número válido.
- * <br>Complexidade Temporal: O(n), sendo n a posição do primeiro input válido introduzido pelo utilizador
- * @param n número a validar
- * @param min limite inferior do intervalo de números válidos
- * @param max limite superior do intervalo de números válidos
- * @return número inteiro válido introduzido pelo utilizador
- */
 int Management::validateInt(int n, int min, int max) {
     while (n < min || n > max) {
         cout << "O número inserido não é válido (deve pertencer ao intervalo [" << min << ", " << max << "]). Tente novamente: ";
@@ -217,11 +197,7 @@ void Management::lerFicheirosDados(bool silent) {
     if (!silent)
         cout << endl;
     readNetworkFile("network.csv", silent);
-    if (!silent) {
-        cout << endl;
-        cout << "O grafo da rede tem " << network.getNumVertex() << " nós/vértices (estações)." << endl; // DEBUG ONLY
-        cout << endl;
-    }
+    cout << endl;
 }
 
 void Management::verificarFicheirosDados() {
@@ -242,7 +218,6 @@ void Management::calcularFluxoMaximo(Graph &graph) {
         cout << "Não é possível viajar entre " << source.getName() << " e " << target.getName() << endl;
     else
         cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow << endl;
-
 }
 
 void Management::fluxoMaximoEspecifico() {
@@ -251,10 +226,10 @@ void Management::fluxoMaximoEspecifico() {
 }
 
 void Management::fluxoMaximoGeral() {
-    // ESTE CÓDIDO PODE NÃO SER O MAIS EFICIENTE, TALVEMOS DEVAMOS PENSAR NUM MAIS INTELIGENTE
     verificarFicheirosDados();
     cout << "A calcular..." << endl;
     list<pair<string, string>> pares;
+    cout << endl;
     unsigned max = network.maxFlow(pares);
     cout << "Os pares de estações que requerem o maior número de comboios (" << max << ") são:" << endl;
     for (const auto &par : pares) {
@@ -319,7 +294,6 @@ void Management::fluxoMaximoChegada() {
     network.removeSuperSource();
 }
 
-
 void Management::custoMinimo() {
     verificarFicheirosDados();
     cout << "Estação A" << endl;
@@ -327,40 +301,35 @@ void Management::custoMinimo() {
     cout << "Estação B" << endl;
     Station target = readStation();
     network.dijkstra(source.getId());
-    unsigned flow = network.getPathFlow(source.getId(), target.getId());
+    unsigned flow = network.getPathFlow(target.getId());
     if (flow == 0)
         cout << "Não é possível viajar entre " << source.getName() << " e " << target.getName() << endl;
     else {
-        unsigned cost = network.getPathCost(source.getId(), target.getId(), flow);
+        unsigned cost = network.getPathCost(target.getId(), flow);
         cout << "O custo mínimo da viagem entre " << source.getName() << " e " << target.getName() << " é " << cost << "€" << ", para um máximo de " << flow << " comboios em simultâneo." << endl;
     }
 }
 
 void Management::conetividadeReduzida() {
-    // TODO
-    int i =1;
     verificarFicheirosDados();
-    Graph reducedConnectivityNetwork = network;
     cout << "Introduza o número de segmentos a remover para reduzir a conetividade do grafo original: ";
     unsigned n = readInt();
-    while (i<=n) {
-
+    for (int i = 1; i <= n; ) {
         cout << "Segmento " << i << "." << endl;
         cout << "Estação A" << endl;
         Station source = readStation();
         cout << "Estação B" << endl;
         Station target = readStation();
-        if(!(reducedConnectivityNetwork.removeEdge(source.getId(), target.getId()))){
-
-            cout<< "As estações que selecionou não têm nenhuma ligação entre si. Por favor, tente novamente." << endl;
+        if (!network.removeEdge(source.getId(), target.getId())) {
+            cout << "Não existe nenhum segmento que ligue diretamente " << source.getName() << " e " << target.getName() << ". Tente novamente." << endl;
             continue;
-        };
+        }
         i++;
         cout << endl;
     }
     cout << "Estações para calcular o número máximo de comboio que podem viajar entre elas (com conetividade reduzida)" << endl;
-    calcularFluxoMaximo(reducedConnectivityNetwork);
-    lerFicheirosDados(true); // PARA REPOR O GRAFO, ALTERNATIVA (MELHOR) SERIA COPIAR POR VALOR E NÃO POR REFERÊNCIA
+    calcularFluxoMaximo(network);
+    lerFicheirosDados(true);
 }
 
 void Management::topAfetadas() {

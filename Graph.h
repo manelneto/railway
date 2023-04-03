@@ -108,7 +108,7 @@ public:
      * @param target
      * @return
      */
-    bool removeEdge(const int &source, const int &target);
+    bool removeEdge(const int &source, const int &target) const;
 
     /**
      * <br>Complexidade Temporal: O()
@@ -148,7 +148,7 @@ private:
      * @param w
      * @param residual
      */
-    static void testAndVisit(std::queue< Vertex*> &q, Edge *e, Vertex *w, double residual);
+    static void testAndVisit(std::queue< Vertex*> &q, Edge *e, Vertex *w, unsigned residual);
 
     /**
      * <br>Complexidade Temporal: O()

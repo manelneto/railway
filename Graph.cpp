@@ -133,13 +133,10 @@ void Graph::removeSuperSource() const {
     superSource->removeOutgoingEdges();
 }
 
-bool Graph::removeEdge(const int &source, const int &target) {
-    bool removed=false;
+bool Graph::removeEdge(const int &source, const int &target) const {
     Vertex *s = findVertex(source);
-    Vertex *d = findVertex(target);
-    if(s->removeEdge(target)){removed= true;}
-    if(d->removeEdge(source)){removed= true;}
-    return removed;
+    Vertex *t = findVertex(target);
+    return (s->removeEdge(target) && t->removeEdge(source));
 }
 
 void Graph::dijkstra(int source) const {
@@ -187,7 +184,7 @@ int Graph::findVertexIdx(const int &id) const {
     return -1;
 }
 
-void Graph::testAndVisit(queue< Vertex*> &q, Edge *e, Vertex *w, double residual) {
+void Graph::testAndVisit(queue<Vertex*> &q, Edge *e, Vertex *w, unsigned residual) {
     if (!w->isVisited() && residual > 0) {
         w->setVisited(true);
         w->setPath(e);
