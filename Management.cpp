@@ -87,7 +87,7 @@ bool Management::menu() {
     int option = readInt();
     option = validateInt(option, 0, 8);
     if (option == 1)
-        lerFicheirosDados();
+        lerFicheirosDados(false);
     else if (option == 2)
         fluxoMaximoEspecifico();
     else if (option == 3)
@@ -107,14 +107,15 @@ bool Management::menu() {
     return true;
 }
 
-void Management::readStationsFile(const string &filename) {
+void Management::readStationsFile(const string &filename, bool silent) {
     ifstream in("../files/" + filename);
-    if (!in.is_open()) {
+    if (!in.is_open() && !silent) {
         cout << "Erro ao abrir o ficheiro " << filename << "." << endl;
         cout << "Verifique se o ficheiro se encontra dentro do diretório files." << endl;
         return;
     }
-    cout << "A ler ficheiro " << filename << "..." << endl;
+    if (!silent)
+        cout << "A ler ficheiro " << filename << "..." << endl;
     string fileLine;
     getline(in, fileLine);
     int id = 1;
@@ -160,18 +161,21 @@ void Management::readStationsFile(const string &filename) {
         else
             ignored++;
     }
-    cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
-    cout << "Foram lidas " << stations.size() << " estações e foram ignoradas " << ignored << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
+    if (!silent) {
+        cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
+        cout << "Foram lidas " << stations.size() << " estações e foram ignoradas " << ignored << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
+    }
 }
 
-void Management::readNetworkFile(const string &filename) {
+void Management::readNetworkFile(const string &filename, bool silent) {
     ifstream in("../files/" + filename);
-    if (!in.is_open()) {
+    if (!in.is_open() && !silent) {
         cout << "Erro ao abrir o ficheiro " << filename << "." << endl;
         cout << "Verifique se o ficheiro se encontra dentro do diretório files." << endl;
         return;
     }
-    cout << "A ler ficheiro " << filename << "..." << endl;
+    if (!silent)
+        cout << "A ler ficheiro " << filename << "..." << endl;
     string line;
     getline(in, line);
     unsigned counter = 0;
@@ -185,7 +189,7 @@ void Management::readNetworkFile(const string &filename) {
             fields[f++] = field;
         auto stationA = stations.find(Station(fields[0]));
         auto stationB = stations.find(Station(fields[1]));
-        unsigned capacity = stoi(fields[2]); // <--! SERÁ QUE AS CAPACIDADES DEVEM SER METADE EM CADA SENTIDO?
+        unsigned capacity = stoi(fields[2]);
         Edge::Service service = fields[3] == "STANDARD" ? Edge::STANDARD : Edge::ALFA;
         if (stationA != stations.end() && stationB != stations.end()) {
             if (!network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service))
@@ -198,31 +202,36 @@ void Management::readNetworkFile(const string &filename) {
         } else
             error++;
     }
-    cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
-    cout << "Foram lidos " << counter << " segmentos e ocorreram " << error << " erros (estações de origem/destino não encontradas ou ligações duplicadas)." << endl;
+    if (!silent) {
+        cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
+        cout << "Foram lidos " << counter << " segmentos e ocorreram " << error << " erros (estações de origem/destino não encontradas ou ligações duplicadas)." << endl;
+    }
 }
 
-void Management::lerFicheirosDados() {
+void Management::lerFicheirosDados(bool silent) {
     stations.clear();
     network.clear();
-    cout << endl;
-    readStationsFile("stations.csv");
-    cout << endl;
-    readNetworkFile("network.csv");
-    cout << endl;
-    cout << "O grafo da rede tem " << network.getNumVertex() << " nós/vértices (estações)." << endl; // DEBUG ONLY
-    cout << endl;
+    if (!silent)
+        cout << endl;
+    readStationsFile("stations.csv", silent);
+    if (!silent)
+        cout << endl;
+    readNetworkFile("network.csv", silent);
+    if (!silent) {
+        cout << endl;
+        cout << "O grafo da rede tem " << network.getNumVertex() << " nós/vértices (estações)." << endl; // DEBUG ONLY
+        cout << endl;
+    }
 }
 
 void Management::verificarFicheirosDados() {
     if (network.getNumVertex() == 0) {
         cout << "Ainda não leu os ficheiros de dados, pelo que não existe nenhum grafo para analisar." << endl;
-        lerFicheirosDados();
+        lerFicheirosDados(false);
     }
 }
 
-void Management::fluxoMaximoEspecifico() {
-    verificarFicheirosDados();
+void Management::calcularFluxoMaximo(Graph &graph) {
     cout << "Estação A" << endl;
     Station source = readStation();
     cout << "Estação B" << endl;
@@ -233,6 +242,12 @@ void Management::fluxoMaximoEspecifico() {
         cout << "Não é possível viajar entre " << source.getName() << " e " << target.getName() << endl;
     else
         cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow << endl;
+
+}
+
+void Management::fluxoMaximoEspecifico() {
+    verificarFicheirosDados();
+    calcularFluxoMaximo(network);
 }
 
 void Management::fluxoMaximoGeral() {
@@ -307,15 +322,33 @@ void Management::fluxoMaximoChegada() {
 }
 
 void Management::custoMinimo() {
-    // 1 - Calcular o caminho mais barato (mais curto).
+    // 1 - Calcular o caminho mais barato (mais curto) com Dijkstra.
     // 2 - Calcular o fluxo máximo por esse caminho.
     // TODO
+    verificarFicheirosDados();
 }
 
 void Management::conetividadeReduzida() {
     // TODO
+    verificarFicheirosDados();
+    Graph reducedConnectivityNetwork = network;
+    cout << "Introduza o número de segmentos a remover para reduzir a conetividade do grafo original: ";
+    unsigned n = readInt();
+    for (unsigned i = 1; i <= n; i++) {
+        cout << "Segmento " << i << "." << endl;
+        cout << "Estação A" << endl;
+        Station source = readStation();
+        cout << "Estação B" << endl;
+        Station target = readStation();
+        reducedConnectivityNetwork.removeEdge(source.getId(), target.getId());
+        cout << endl;
+    }
+    cout << "Estações para calcular o número máximo de comboio que podem viajar entre elas (com conetividade reduzida)" << endl;
+    calcularFluxoMaximo(reducedConnectivityNetwork);
+    lerFicheirosDados(true); // PARA REPOR O GRAFO, ALTERNATIVA (MELHOR) SERIA COPIAR POR VALOR E NÃO POR REFERÊNCIA
 }
 
 void Management::topAfetadas() {
     // TODO
+    verificarFicheirosDados();
 }

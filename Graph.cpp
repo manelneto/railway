@@ -124,6 +124,13 @@ void Graph::removeSuperSource() const {
     // delete superSource;
 }
 
+void Graph::removeEdge(const int &source, const int &target) {
+    Vertex *s = findVertex(source);
+    Vertex *d = findVertex(target);
+    s->removeEdge(target);
+    d->removeEdge(source);
+}
+
 int Graph::findVertexIdx(const int &id) const {
     for (unsigned i = 0; i < vertexSet.size(); i++)
         if (vertexSet[i]->getId() == id)
