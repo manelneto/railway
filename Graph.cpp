@@ -2,13 +2,11 @@
 // Created by manue on 22/03/2023.
 //
 
-#include <stdexcept>
 #include "Graph.h"
-#include <climits>
-<<<<<<< HEAD
-=======
 #include "MutablePriorityQueue.h"
->>>>>>> dijkstra
+#include <stdexcept>
+#include <climits>
+
 using namespace std;
 
 Graph::~Graph() {
