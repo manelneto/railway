@@ -82,6 +82,12 @@ private:
     std::string township;
     std::string line;
     int id;
+
+    /**Sanitiza str, i. e., remove os caracteres especiais (diacríticos) de str.
+     * <br>Complexidade Temporal: O(n), sendo n o comprimento de str
+     * @param str string a sanitizar
+     * @return str sanitizada
+     */
     static std::string sanitize(const std::string &str);
 };
 
