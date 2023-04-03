@@ -306,7 +306,6 @@ void Management::topNecessidades() {
             topDistritos.pop();
         }
     }
-    cout << endl;
 }
 
 void Management::fluxoMaximoChegada() {
