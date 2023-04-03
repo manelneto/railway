@@ -33,7 +33,9 @@ public:
     void addSuperSource(const int &id);
     void removeSuperSource() const;
     bool removeEdge(const int &source, const int &target);
-    std::pair<int,int> dijsktra(int source, int target) const;
+    void dijkstra(int source) const;
+    unsigned getPathFlow(int source, int target) const;
+    unsigned getPathCost(int source, int target, unsigned flow) const;
 
 private:
     std::vector<Vertex *> vertexSet;
@@ -44,6 +46,7 @@ private:
     bool findAugmentingPath(Vertex *s, Vertex *t) const;
     static unsigned findMinResidualAlongPath(Vertex *s, Vertex *t);
     static void augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f);
+    static bool relax(Vertex *u, Vertex *v, Edge *e);
 };
 
 void deleteMatrix(int **m, int n);

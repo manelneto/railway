@@ -8,7 +8,14 @@ using namespace std;
 
 /********************** Edge  ****************************/
 
-Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : orig(orig), dest(dest), capacity(capacity), service(service) {}
+Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : orig(orig), dest(dest), capacity(capacity), service(service) {
+    if (service == STANDARD)
+        cost = 2;
+    else if (service == ALFA)
+        cost = 4;
+    else
+        cost = -1;
+}
 
 Vertex * Edge::getOrig() const {
     return this->orig;
@@ -23,7 +30,11 @@ unsigned Edge::getCapacity() const {
 }
 
 Edge::Service Edge::getService() const {
-    return Edge::service;
+    return this->service;
+}
+
+unsigned int Edge::getCost() const {
+    return this->cost;
 }
 
 unsigned Edge::getFlow() const {

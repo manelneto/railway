@@ -21,6 +21,7 @@ public:
     Vertex * getDest() const;
     unsigned getCapacity() const;
     Service getService() const;
+    unsigned getCost() const;
     unsigned getFlow() const;
     bool isSelected() const;
     Edge * getReverse() const;
@@ -33,6 +34,7 @@ private:
     Vertex * dest;
     unsigned capacity;
     Service service;
+    unsigned cost;
     unsigned flow = 0;
     bool selected = false;
     Edge * reverse = nullptr;
@@ -70,10 +72,10 @@ private:
     bool visited = false;
     bool processing = false;
     unsigned indegree = 0;
+    unsigned cost = 0;
     Edge * path = nullptr;
     std::vector<Edge *> incoming;
     void deleteEdge(Edge *edge) const;
-    unsigned cost = 0;
 };
 
 #endif //RAILWAY_VERTEX_EDGE_H
