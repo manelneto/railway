@@ -5,10 +5,11 @@
 #ifndef RAILWAY_GRAPH_H
 #define RAILWAY_GRAPH_H
 
+
 #include <list>
 #include <queue>
-#include "EdgeVertex.h"
-#include "MutablePriorityQueue.h"
+#include "Vertex.h"
+
 class Graph {
 public:
     ~Graph();
@@ -51,5 +52,6 @@ private:
 
 void deleteMatrix(int **m, int n);
 void deleteMatrix(double **m, int n);
+
 
 #endif //RAILWAY_GRAPH_H

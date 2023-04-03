@@ -11,8 +11,6 @@
 #include "Station.h"
 #include "Graph.h"
 
-
-
 class Management {
 public:
     bool menu();
