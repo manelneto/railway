@@ -8,6 +8,10 @@ using namespace std;
 
 Vertex::Vertex(int id, const string &label): id(id), label(label) {}
 
+bool Vertex::operator<(Vertex & vertex) const {
+    return this->cost < vertex.cost;
+}
+
 int Vertex::getId() const {
     return this->id;
 }
@@ -85,11 +89,10 @@ bool Vertex::removeEdge(int destID) {
         if (dest->getId() == destID) {
             it = adj.erase(it);
             deleteEdge(edge);
-            removedEdge = true; // allows for multiple edges to connect the same pair of vertices (multigraph)
+            removedEdge = true;
         }
-        else {
+        else
             it++;
-        }
     }
     return removedEdge;
 }
@@ -105,16 +108,11 @@ void Vertex::removeOutgoingEdges() {
 
 void Vertex::deleteEdge(Edge *edge) const {
     Vertex *dest = edge->getDest();
-    // Remove the corresponding edge from the incoming list
     auto it = dest->incoming.begin();
-    while (it != dest->incoming.end()) {
+    while (it != dest->incoming.end())
         if ((*it)->getOrig()->getId() == id)
             it = dest->incoming.erase(it);
         else
             it++;
-    }
     delete edge;
-}
-bool Vertex::operator<(Vertex &v1) const{
-    return this->getCost() < v1.getCost();
 }
