@@ -31,8 +31,9 @@ public:
     unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs) const;
     void addSuperSource(const int &id);
     void removeSuperSource() const;
-    int dijsktra(int source, int target) const;
-
+    void dijkstra(int source) const;
+    unsigned getPathFlow(int source, int target) const;
+    unsigned getPathCost(int source, int target, unsigned flow) const;
 private:
     std::vector<Vertex *> vertexSet;
     double **distMatrix = nullptr;
@@ -42,6 +43,7 @@ private:
     bool findAugmentingPath(Vertex *s, Vertex *t) const;
     static unsigned findMinResidualAlongPath(Vertex *s, Vertex *t);
     static void augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f);
+    static bool relax(Vertex *u, Vertex *v, Edge *e);
 };
 
 void deleteMatrix(int **m, int n);

@@ -8,7 +8,14 @@ using namespace std;
 
 /********************** Edge  ****************************/
 
-Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : orig(orig), dest(dest), capacity(capacity), service(service) {}
+Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : orig(orig), dest(dest), capacity(capacity), service(service) {
+    if (service == STANDARD)
+        cost = 2;
+    else if (service == ALFA)
+        cost = 4;
+    else
+        cost = -1;
+}
 
 Vertex * Edge::getOrig() const {
     return this->orig;
@@ -23,7 +30,11 @@ unsigned Edge::getCapacity() const {
 }
 
 Edge::Service Edge::getService() const {
-    return Edge::service;
+    return this->service;
+}
+
+unsigned int Edge::getCost() const {
+    return this->cost;
 }
 
 unsigned Edge::getFlow() const {
@@ -78,8 +89,8 @@ unsigned int Vertex::getIndegree() const {
     return this->indegree;
 }
 
-unsigned Vertex::getDist() const {
-    return this->dist;
+unsigned Vertex::getCost() const {
+    return this->cost;
 }
 
 Edge * Vertex::getPath() const {
@@ -106,8 +117,8 @@ void Vertex::setIndegree(unsigned indegree) {
     this->indegree = indegree;
 }
 
-void Vertex::setDist(unsigned dist) {
-    this->dist = dist;
+void Vertex::setCost(unsigned cost) {
+    this->cost = cost;
 }
 
 void Vertex::setPath(Edge *path) {
@@ -162,5 +173,5 @@ void Vertex::deleteEdge(Edge *edge) const {
     delete edge;
 }
 bool Vertex::operator<(Vertex &v1) const{
-    return this->getDist() < v1.getDist();
+    return this->getCost() < v1.getCost();
 }

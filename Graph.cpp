@@ -205,45 +205,52 @@ void Graph::testAndVisit(queue< Vertex*> &q, Edge *e, Vertex *w, double residual
         q.push(w);
     }
 }
-int Graph::dijsktra(int source, int target) const {
-    const auto src= findVertex(source);
-    unsigned max_capacity=UINT_MAX;
-    src->setDist(0);
-    src->setPath(nullptr);
-    MutablePriorityQueue<Vertex> vertex_priorities;
-    for (auto u : vertexSet){
-        if (u!=src){
-            u->setDist(INT_MAX);
-            u->setPath(nullptr);
-        }
-        vertex_priorities.insert(u);
 
+bool Graph::relax(Vertex *u, Vertex *v, Edge *e) {
+    if (v->getCost() > u->getCost() + e->getCost()) {
+        v->setCost(u->getCost() + e->getCost());
+        v->setPath(e);
+        return true;
     }
-    while(!vertex_priorities.empty()){
-        Vertex* u = vertex_priorities.extractMin();
+    return false;
+}
 
-        for (Edge* e: u->getAdj()){
-            int alt=0;
-            Vertex* v = e->getDest();
-            if (e->getService()==0) {
-                alt= u->getDist()+ 2;
-            }
-            if (e->getService()==1) {
-                alt= u->getDist()+ 4;
-            }
-            if (alt < v->getDist()){
-                v->setDist(alt);
-                v->setPath(e);
-                vertex_priorities.decreaseKey(v);
-            }
+void Graph::dijkstra(int source) const {
+    MutablePriorityQueue<Vertex> queue;
+    for (const auto vertex : vertexSet) {
+        vertex->setCost(INT_MAX);
+        vertex->setPath(nullptr);
+        queue.insert(vertex);
+    }
+    Vertex *s = findVertex(source);
+    s->setCost(0);
+    s->setPath(nullptr);
+    queue.decreaseKey(s);
+    while (!queue.empty()) {
+        Vertex *u = queue.extractMin();
+        for (Edge *e: u->getAdj()) {
+            Vertex *v = e->getDest();
+            if (relax(u, v, e))
+                queue.decreaseKey(v);
         }
     }
-    const auto sink= findVertex(target);
-    for(Edge* e= sink->getPath(); e!= nullptr; e= e->getOrig()->getPath()){
-        if (e->getCapacity()< max_capacity){
-            max_capacity=e->getCapacity();
-        }
-    }
-    return max_capacity;
+}
 
+unsigned Graph::getPathFlow(int source, int target) const {
+    Vertex *s = findVertex(source);
+    Vertex *t = findVertex(target);
+    unsigned minCut = UINT_MAX;
+    for (Edge *e = t->getPath(); e != nullptr; e = e->getOrig()->getPath())
+        if (e->getCapacity() < minCut)
+            minCut = e->getCapacity();
+    return minCut;
+}
+
+unsigned Graph::getPathCost(int source, int target, unsigned flow) const {
+    Vertex *s = findVertex(source);
+    Vertex *t = findVertex(target);
+    unsigned cost = 0;
+    for (Edge *e = t->getPath(); e != nullptr; e = e->getOrig()->getPath())
+        cost += flow * e->getCost();
+    return cost;
 }
