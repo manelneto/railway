@@ -61,7 +61,8 @@ public:
     Edge * addEdge(Vertex *dest, unsigned capacity, Edge::Service service);
     bool removeEdge(int destID);
     void removeOutgoingEdges();
-
+    bool operator<(Vertex &v1) const;
+    int queueIndex;
 private:
     int id;
     std::string label;
@@ -73,6 +74,8 @@ private:
     Edge * path = nullptr;
     std::vector<Edge *> incoming;
     void deleteEdge(Edge *edge) const;
+    unsigned cost=0;
+
 };
 
 #endif //RAILWAY_VERTEX_EDGE_H

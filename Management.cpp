@@ -309,6 +309,19 @@ void Management::custoMinimo() {
     // 1 - Calcular o caminho mais barato (mais curto).
     // 2 - Calcular o fluxo máximo por esse caminho.
     // TODO
+    verificarFicheirosDados();
+    cout << "Estação A" << endl;
+    Station source = readStation();
+    cout << "Estação B" << endl;
+    Station target = readStation();
+    unsigned flow = network.dijsktra(source.getId(), target.getId());
+    const auto sink= network.findVertex(target.getId());
+    if (flow == 0)
+        cout << "Não é possível viajar entre " << source.getName() << " e " << target.getName() << endl;
+    else
+        cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow << "." << endl;
+        cout << "O custo mínimo desta viagem seria aproximadamente " << sink->getDist() << "€";
+
 }
 
 void Management::conetividadeReduzida() {

@@ -4,7 +4,8 @@
 
 #include <stdexcept>
 #include "Graph.h"
-
+#include <climits>
+#include "MutablePriorityQueue.h"
 using namespace std;
 
 Graph::~Graph() {
@@ -203,4 +204,46 @@ void Graph::testAndVisit(queue< Vertex*> &q, Edge *e, Vertex *w, double residual
         w->setPath(e);
         q.push(w);
     }
+}
+int Graph::dijsktra(int source, int target) const {
+    const auto src= findVertex(source);
+    unsigned max_capacity=UINT_MAX;
+    src->setDist(0);
+    src->setPath(nullptr);
+    MutablePriorityQueue<Vertex> vertex_priorities;
+    for (auto u : vertexSet){
+        if (u!=src){
+            u->setDist(INT_MAX);
+            u->setPath(nullptr);
+        }
+        vertex_priorities.insert(u);
+
+    }
+    while(!vertex_priorities.empty()){
+        Vertex* u = vertex_priorities.extractMin();
+
+        for (Edge* e: u->getAdj()){
+            int alt=0;
+            Vertex* v = e->getDest();
+            if (e->getService()==0) {
+                alt= u->getDist()+ 2;
+            }
+            if (e->getService()==1) {
+                alt= u->getDist()+ 4;
+            }
+            if (alt < v->getDist()){
+                v->setDist(alt);
+                v->setPath(e);
+                vertex_priorities.decreaseKey(v);
+            }
+        }
+    }
+    const auto sink= findVertex(target);
+    for(Edge* e= sink->getPath(); e!= nullptr; e= e->getOrig()->getPath()){
+        if (e->getCapacity()< max_capacity){
+            max_capacity=e->getCapacity();
+        }
+    }
+    return max_capacity;
+
 }

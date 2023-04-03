@@ -161,3 +161,6 @@ void Vertex::deleteEdge(Edge *edge) const {
     }
     delete edge;
 }
+bool Vertex::operator<(Vertex &v1) const{
+    return this->getDist() < v1.getDist();
+}
