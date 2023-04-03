@@ -9,7 +9,6 @@
 #include <string>
 
 class Station {
-
 public:
     /**Construtor sem parâmetros. Constrói uma estação com todos os atributos vazios.
      * <br>Complexidade Temporal: O(1)
