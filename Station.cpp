@@ -37,14 +37,6 @@ const std::string &Station::getMunicipality() const {
     return municipality;
 }
 
-const std::string &Station::getTownship() const {
-    return township;
-}
-
-const std::string &Station::getLine() const {
-    return line;
-}
-
 int Station::getId() const {
     return id;
 }

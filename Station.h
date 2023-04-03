@@ -56,18 +56,6 @@ public:
      */
     const std::string &getMunicipality() const;
 
-    /**Retorna a freguesia da estação.
-     * <br>Complexidade Temporal: O(1)
-     * @return freguesia da estação
-     */
-    const std::string &getTownship() const;
-
-    /**Retorna a linha da estação.
-     * <br>Complexidade Temporal: O(1)
-     * @return linha da estação
-     */
-    const std::string &getLine() const;
-
     /**Retorna o id da estação.
      * <br>Complexidade Temporal: O(1)
      * @return id da estação
