@@ -11,6 +11,8 @@
 #include "Station.h"
 #include "Graph.h"
 
+
+
 class Management {
 public:
     bool menu();
@@ -32,7 +34,7 @@ private:
     void calcularFluxoMaximo(Graph &graph);
     void fluxoMaximoEspecifico();
     void fluxoMaximoGeral();
-    void topNecessidades();
+    void topNecessidades(std::list<std::pair<std::string,std::string>> pairs = {});
     void fluxoMaximoChegada();
     void custoMinimo();
     void conetividadeReduzida();
