@@ -117,14 +117,14 @@ public:
     void dijkstra(int source) const;
 
     /**
-     *
+     * <br>Complexidade Temporal: O()
      * @param target
      * @return
      */
     unsigned getPathFlow(int target) const;
 
     /**
-     *
+     * <br>Complexidade Temporal: O()
      * @param target
      * @param flow
      * @return
@@ -135,14 +135,14 @@ private:
     std::vector<Vertex *> vertexSet;
 
     /**
-     *
+     * <br>Complexidade Temporal: O()
      * @param id
      * @return
      */
     int findVertexIdx(const int &id) const;
 
     /**
-     *
+     * <br>Complexidade Temporal: O()
      * @param q
      * @param e
      * @param w
@@ -151,7 +151,7 @@ private:
     static void testAndVisit(std::queue< Vertex*> &q, Edge *e, Vertex *w, double residual);
 
     /**
-     *
+     * <br>Complexidade Temporal: O()
      * @param s
      * @param t
      * @return
@@ -159,7 +159,7 @@ private:
     bool findAugmentingPath(Vertex *s, Vertex *t) const;
 
     /**
-     *
+     * <br>Complexidade Temporal: O()
      * @param s
      * @param t
      * @return
@@ -167,7 +167,7 @@ private:
     static unsigned findMinResidualAlongPath(Vertex *s, Vertex *t);
 
     /**
-     *
+     * <br>Complexidade Temporal: O()
      * @param s
      * @param t
      * @param f
@@ -175,7 +175,7 @@ private:
     static void augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f);
 
     /**
-     *
+     * <br>Complexidade Temporal: O()
      * @param u
      * @param v
      * @param e
