@@ -166,6 +166,8 @@ unsigned Graph::getPathFlow(int target) const {
     for (Edge *e = t->getPath(); e != nullptr; e = e->getOrig()->getPath())
         if (e->getCapacity() < minCut)
             minCut = e->getCapacity();
+    if (minCut == UINT_MAX)
+        minCut = 0;
     return minCut;
 }
 

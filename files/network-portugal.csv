@@ -1,4 +1,4 @@
-Station_A,Station_B,Capacity,Service
+Source,Target,Weight,Service
 Casa Branca,Monte das Flores,8,STANDARD
 Monte das Flores,Évora,8,STANDARD
 Évora,Portalegre,10,STANDARD

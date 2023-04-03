@@ -1,4 +1,4 @@
-Station_A,Station_B,Capacity,Service
+Source,Target,Weight,Service
 Lisboa Oriente,Lisboa Santa Apolónia,8,ALFA PENDULAR
 Chelas,Marvila,2,STANDARD
 Marvila,Braço de Prata,10,STANDARD

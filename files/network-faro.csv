@@ -1,4 +1,4 @@
-Station_A,Station_B,Capacity,Service
+Source,Target,Weight,Service
 Albufeira - Ferreiras,Faro,8,STANDARD
 Loulé,Faro,10,ALFA PENDULAR
 Tunes,Albufeira - Ferreiras,6,ALFA PENDULAR
