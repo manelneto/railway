@@ -28,6 +28,7 @@ public:
     void edmondsKarp(int source, int target) const;
     void clear();
     unsigned getFlow(const int &id) const;
+    unsigned maxFlow() const;
     unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs) const;
     void addSuperSource(const int &id);
     void removeSuperSource() const;

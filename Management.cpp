@@ -93,7 +93,7 @@ bool Management::menu() {
     else if (option == 3)
         fluxoMaximoGeral();
     else if (option == 4)
-        topNecessidades({});
+        topNecessidades();
     else if (option == 5)
         fluxoMaximoChegada();
     else if (option == 6)
@@ -269,16 +269,16 @@ void Management::fluxoMaximoGeral() {
     }
 }
 
-void Management::topNecessidades(std::list<std::pair<std::string, std::string>> pairs) {
+void Management::topNecessidades() {
     verificarFicheirosDados();
     cout << "Introduza o valor de K (0 para um top completo, com todos os municípios e distritos): ";
     unsigned k = readInt();
     priority_queue<pair<unsigned, string>> topDistritos;
     priority_queue<pair<unsigned, string>> topMunicipios;
     for (const auto &district : districts)
-        topDistritos.push(make_pair(district.second.maxFlow(pairs), district.first));
+        topDistritos.push(make_pair(district.second.maxFlow(), district.first));
     for (const auto &municipality : municipalities)
-        topMunicipios.push(make_pair(municipality.second.maxFlow(pairs), municipality.first));
+        topMunicipios.push(make_pair(municipality.second.maxFlow(), municipality.first));
     unsigned i = 1;
     unsigned j = 1;
     if (k == 0) {

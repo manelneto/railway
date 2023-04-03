@@ -34,7 +34,7 @@ private:
     void calcularFluxoMaximo(Graph &graph);
     void fluxoMaximoEspecifico();
     void fluxoMaximoGeral();
-    void topNecessidades(std::list<std::pair<std::string,std::string>> pairs = {});
+    void topNecessidades();
     void fluxoMaximoChegada();
     void custoMinimo();
     void conetividadeReduzida();
