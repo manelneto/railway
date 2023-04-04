@@ -16,11 +16,11 @@ int Vertex::getId() const {
     return this->id;
 }
 
-const std::string &Vertex::getLabel() const {
+const string &Vertex::getLabel() const {
     return this->label;
 }
 
-std::vector<Edge *> Vertex::getAdj() const {
+vector<Edge *> Vertex::getAdj() const {
     return this->adj;
 }
 
@@ -40,7 +40,7 @@ Edge * Vertex::getPath() const {
     return this->path;
 }
 
-std::vector<Edge *> Vertex::getIncoming() const {
+vector<Edge *> Vertex::getIncoming() const {
     return this->incoming;
 }
 
