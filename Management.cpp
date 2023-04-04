@@ -266,20 +266,20 @@ void Management::topNecessidades() {
     priority_queue<pair<unsigned, string>> topDistritos;
     priority_queue<pair<unsigned, string>> topMunicipios;
     for (const auto &district : districts)
-        topDistritos.push(make_pair(district.second.maxFlow(), district.first));
+        topDistritos.push(make_pair(district.second.sumFlow(), district.first));
     for (const auto &municipality : municipalities)
-        topMunicipios.push(make_pair(municipality.second.maxFlow(), municipality.first));
+        topMunicipios.push(make_pair(municipality.second.sumFlow(), municipality.first));
     unsigned m = k == 0 ? topMunicipios.size() : k;
     unsigned d = k == 0 ? topDistritos.size() : k;
     cout << "Top de municípios tendo em conta as suas necessidades de transportes:" << endl;
     for (unsigned i = 1; i <= m; i++) {
-        cout << i << ". " << topMunicipios.top().second << " (" << topMunicipios.top().first << " comboios em simultâneo)" << endl;
+        cout << i << ". " << topMunicipios.top().second << " (total de " << topMunicipios.top().first << " comboios )" << endl;
         topMunicipios.pop();
     }
     cout << endl;
     cout << "Top de distritos tendo em conta as suas necessidades de transportes:" << endl;
     for (unsigned j = 1; j <= d; j++) {
-        cout << j << ". " << topDistritos.top().second << " (" << topDistritos.top().first << " comboios em simultâneo)" << endl;
+        cout << j << ". " << topDistritos.top().second << " (total de " << topDistritos.top().first << " comboios em circulação)" << endl;
         topDistritos.pop();
     }
 }

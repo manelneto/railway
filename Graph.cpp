@@ -87,18 +87,17 @@ unsigned Graph::getFlow(const int &id) const {
     return flow;
 }
 
-unsigned Graph::maxFlow() const {
-    unsigned max = 0;
+unsigned Graph::sumFlow() const {
+    unsigned sum = 0;
     for (const auto &u : vertexSet)
         for (const auto &v : vertexSet) {
             if (v->getId() <= u->getId())
                 continue;
             edmondsKarp(u->getId(), v->getId());
             unsigned flow = getFlow(v->getId());
-            if (flow >= max)
-                max = flow;
+            sum += flow;
         }
-    return max;
+    return sum;
 }
 
 unsigned Graph::maxFlow(list<pair<string, string>> &pairs) const {

@@ -82,7 +82,7 @@ public:
      * <br>Complexidade Temporal: O()
      * @return
      */
-    unsigned maxFlow() const;
+    unsigned sumFlow() const;
 
     /**
      * <br>Complexidade Temporal: O()
