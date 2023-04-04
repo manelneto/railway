@@ -98,15 +98,15 @@ bool Management::menu() {
     return true;
 }
 
-void Management::readStationsFile(const string &filename, bool silent) {
-    ifstream in("../files/" + filename);
+void Management::readStationsFile(bool silent) {
+    ifstream in("../files/" + stationsFile);
     if (!in.is_open() && !silent) {
-        cout << "Erro ao abrir o ficheiro " << filename << "." << endl;
+        cout << "Erro ao abrir o ficheiro " << stationsFile << "." << endl;
         cout << "Verifique se o ficheiro se encontra dentro do diretório files." << endl;
         return;
     }
     if (!silent)
-        cout << "A ler ficheiro " << filename << "..." << endl;
+        cout << "A ler ficheiro " << stationsFile << "..." << endl;
     string fileLine;
     getline(in, fileLine);
     int id = 1;
@@ -152,20 +152,20 @@ void Management::readStationsFile(const string &filename, bool silent) {
             ignored++;
     }
     if (!silent) {
-        cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
+        cout << "Leitura do ficheiro " << stationsFile << " bem-sucedida!" << endl;
         cout << "Foram lidas " << stations.size() << " estações e foram ignoradas " << ignored << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
     }
 }
 
-void Management::readNetworkFile(const string &filename, bool silent) {
-    ifstream in("../files/" + filename);
+void Management::readNetworkFile(bool silent) {
+    ifstream in("../files/" + networkFile);
     if (!in.is_open() && !silent) {
-        cout << "Erro ao abrir o ficheiro " << filename << "." << endl;
+        cout << "Erro ao abrir o ficheiro " << networkFile << "." << endl;
         cout << "Verifique se o ficheiro se encontra dentro do diretório files." << endl;
         return;
     }
     if (!silent)
-        cout << "A ler ficheiro " << filename << "..." << endl;
+        cout << "A ler ficheiro " << networkFile << "..." << endl;
     string line;
     getline(in, line);
     unsigned counter = 0;
@@ -193,7 +193,7 @@ void Management::readNetworkFile(const string &filename, bool silent) {
             error++;
     }
     if (!silent) {
-        cout << "Leitura do ficheiro " << filename << " bem-sucedida!" << endl;
+        cout << "Leitura do ficheiro " << networkFile << " bem-sucedida!" << endl;
         cout << "Foram lidos " << counter << " segmentos e ocorreram " << error << " erros (estações de origem/destino não encontradas ou ligações duplicadas)." << endl;
     }
 }
@@ -201,13 +201,18 @@ void Management::readNetworkFile(const string &filename, bool silent) {
 void Management::lerFicheirosDados(bool silent) {
     stations.clear();
     network.clear();
+    if (!silent) {
+        cout << "Nome do ficheiro de estações (stations*.csv): ";
+        stationsFile = readInput();
+        cout << "Nome do ficheiro de rede (network*.csv): ";
+        networkFile = readInput();
+    }
+    readStationsFile(silent);
     if (!silent)
         cout << endl;
-    readStationsFile("stations.csv", silent);
+    readNetworkFile(silent);
     if (!silent)
         cout << endl;
-    readNetworkFile("network.csv", silent);
-    cout << endl;
 }
 
 void Management::verificarFicheirosDados() {
@@ -328,6 +333,7 @@ void Management::topAfetadas() {
         flows.emplace_back(network.getFlow(station.getId()), station);
         network.removeSuperSource();
     }
+    cout << "Segmento a remover" << endl;
     removeSegment();
     cout << "Remoção de segmento bem-sucedida!" << endl;
     priority_queue<pair<double, string>> topDiferenca;

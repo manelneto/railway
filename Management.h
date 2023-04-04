@@ -20,6 +20,8 @@ public:
     bool menu();
 
 private:
+    std::string stationsFile;
+    std::string networkFile;
     std::unordered_set<Station, stationHash, stationHash> stations;
     Graph network;
     std::unordered_map<std::string, Graph> districts;
@@ -65,18 +67,16 @@ private:
     void removeSegment() const;
 
     /**
-     * <br>Complexidade Temporal: O()
-     * @param filename
+     *
      * @param silent
      */
-    void readStationsFile(const std::string &filename, bool silent);
+    void readStationsFile(bool silent);
 
     /**
-     * <br>Complexidade Temporal: O()
-     * @param filename
+     *
      * @param silent
      */
-    void readNetworkFile(const std::string &filename, bool silent);
+    void readNetworkFile(bool silent);
 
     /**
      * <br>Complexidade Temporal: O()
