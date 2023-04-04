@@ -60,6 +60,11 @@ private:
     Station readStation() const;
 
     /**
+     *
+     */
+    void removeSegment() const;
+
+    /**
      * <br>Complexidade Temporal: O()
      * @param filename
      * @param silent

@@ -3,9 +3,9 @@
 //
 
 #include "Management.h"
-#include <sstream>
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -50,6 +50,17 @@ Station Management::readStation() const {
         station = readStation();
     }
     return  *stations.find(station);
+}
+
+void Management::removeSegment() const {
+    cout << "Estação A" << endl;
+    Station source = readStation();
+    cout << "Estação B" << endl;
+    Station target = readStation();
+    if (!network.removeEdge(source.getId(), target.getId())) {
+        cout << "Não existe nenhum segmento que ligue diretamente " << source.getName() << " e " << target.getName() << ". Tente novamente." << endl;
+        removeSegment();
+    }
 }
 
 bool Management::menu() {
@@ -130,7 +141,6 @@ void Management::readStationsFile(const string &filename, bool silent) {
         string line = fields[4];
         Station station = Station(name, district, municipality, township, line, id);
         if (stations.insert(station).second) {
-            // station.print(); // DEBUG ONLY
             network.addVertex(id, name);
             if (!district.empty())
                 districts[district].addVertex(id, name);
@@ -254,32 +264,18 @@ void Management::topNecessidades() {
         topDistritos.push(make_pair(district.second.maxFlow(), district.first));
     for (const auto &municipality : municipalities)
         topMunicipios.push(make_pair(municipality.second.maxFlow(), municipality.first));
-    unsigned i = 1;
-    unsigned j = 1;
-    if (k == 0) {
-        cout << "Top de municípios tendo em conta as suas necessidades de transportes:" << endl;
-        while (!topMunicipios.empty()) {
-            cout << i++ << ". " << topMunicipios.top().second << " (" << topMunicipios.top().first << " comboios em simultâneo)" << endl;
-            topMunicipios.pop();
-        }
-        cout << endl;
-        cout << "Top de distritos tendo em conta as suas necessidades de transportes:" << endl;
-        while (!topDistritos.empty()) {
-            cout << j++ << ". " << topDistritos.top().second << " (" << topDistritos.top().first << " comboios em simultâneo)" << endl;
-            topDistritos.pop();
-        }
-    } else {
-        cout << "Top " << k << " de municípios tendo em conta as suas necessidades de transportes:" << endl;
-        for (unsigned m = 0; m < k; m++) {
-            cout << i++ << ". " << topMunicipios.top().second << " (" << topMunicipios.top().first << " comboios em simultâneo)" << endl;
-            topMunicipios.pop();
-        }
-        cout << endl;
-        cout << "Top " << k << " de distritos tendo em conta as suas necessidades de transportes:" << endl;
-        for (unsigned m = 0; m < k; m++) {
-            cout << j++ << ". " << topDistritos.top().second << " (" << topDistritos.top().first << " comboios em simultâneo)" << endl;
-            topDistritos.pop();
-        }
+    unsigned m = k == 0 ? topMunicipios.size() : k;
+    unsigned d = k == 0 ? topDistritos.size() : k;
+    cout << "Top de municípios tendo em conta as suas necessidades de transportes:" << endl;
+    for (unsigned i = 1; i <= m; i++) {
+        cout << i << ". " << topMunicipios.top().second << " (" << topMunicipios.top().first << " comboios em simultâneo)" << endl;
+        topMunicipios.pop();
+    }
+    cout << endl;
+    cout << "Top de distritos tendo em conta as suas necessidades de transportes:" << endl;
+    for (unsigned j = 1; j <= d; j++) {
+        cout << j << ". " << topDistritos.top().second << " (" << topDistritos.top().first << " comboios em simultâneo)" << endl;
+        topDistritos.pop();
     }
 }
 
@@ -314,25 +310,48 @@ void Management::conetividadeReduzida() {
     verificarFicheirosDados();
     cout << "Introduza o número de segmentos a remover para reduzir a conetividade do grafo original: ";
     unsigned n = readInt();
-    for (int i = 1; i <= n; ) {
+    for (int i = 1; i <= n; i++) {
         cout << "Segmento " << i << "." << endl;
-        cout << "Estação A" << endl;
-        Station source = readStation();
-        cout << "Estação B" << endl;
-        Station target = readStation();
-        if (!network.removeEdge(source.getId(), target.getId())) {
-            cout << "Não existe nenhum segmento que ligue diretamente " << source.getName() << " e " << target.getName() << ". Tente novamente." << endl;
-            continue;
-        }
-        i++;
-        cout << endl;
+        removeSegment();
     }
-    cout << "Estações para calcular o número máximo de comboio que podem viajar entre elas (com conetividade reduzida)" << endl;
+    cout << "Estações para calcular o número máximo de comboios que podem viajar entre elas (com conetividade reduzida)" << endl;
     calcularFluxoMaximo(network);
     lerFicheirosDados(true);
 }
 
 void Management::topAfetadas() {
-    // TODO
     verificarFicheirosDados();
+    vector<pair<unsigned, Station>> flows;
+    for (const auto &station : stations) {
+        network.addSuperSource(station.getId());
+        network.edmondsKarp(0, station.getId());
+        flows.emplace_back(network.getFlow(station.getId()), station);
+        network.removeSuperSource();
+    }
+    removeSegment();
+    cout << "Remoção de segmento bem-sucedida!" << endl;
+    priority_queue<pair<double, string>> topDiferenca;
+    for (const auto &pair : flows) {
+        int stationId = pair.second.getId();
+        network.addSuperSource(stationId);
+        network.edmondsKarp(0, stationId);
+        unsigned flow = network.getFlow(stationId);
+        double diferenca = pair.first != 0 ? (double) (100 * (pair.first - flow)/pair.first) : 0.0;
+        topDiferenca.push(make_pair(diferenca, pair.second.getName()));
+        network.removeSuperSource();
+    }
+    cout << "Introduza o valor de K (0 para um top completo, com todas as estações afetadas): ";
+    unsigned k = readInt();
+    if (k == 0)
+        k = topDiferenca.size();
+    cout << "Top de estações mais afetadas:" << endl;
+    for (unsigned i = 1; i <= k; i++) {
+        cout << i << ". " << topDiferenca.top().second << " (redução de " << setprecision(3) << topDiferenca.top().first << "% no número de comboios)" << endl;
+        if (topDiferenca.top().first == 0.0) {
+            cout << "..." << endl << "Todas as estações restantes não são afetadas" << endl;
+            break;
+        }
+        topDiferenca.pop();
+    }
+    lerFicheirosDados(true);
 }
