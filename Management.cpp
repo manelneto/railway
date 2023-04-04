@@ -273,13 +273,13 @@ void Management::topNecessidades() {
     unsigned d = k == 0 ? topDistritos.size() : k;
     cout << "Top de municípios tendo em conta as suas necessidades de transportes:" << endl;
     for (unsigned i = 1; i <= m; i++) {
-        cout << i << ". " << topMunicipios.top().second << " (total de " << topMunicipios.top().first << " comboios )" << endl;
+        cout << i << ". " << topMunicipios.top().second << " (soma do fluxo entre todos os pares de estações: " << topMunicipios.top().first << ")" << endl;
         topMunicipios.pop();
     }
     cout << endl;
     cout << "Top de distritos tendo em conta as suas necessidades de transportes:" << endl;
     for (unsigned j = 1; j <= d; j++) {
-        cout << j << ". " << topDistritos.top().second << " (total de " << topDistritos.top().first << " comboios em circulação)" << endl;
+        cout << j << ". " << topDistritos.top().second << " (soma do fluxo entre todos os pares de estações: " << topDistritos.top().first << ")" << endl;
         topDistritos.pop();
     }
 }
