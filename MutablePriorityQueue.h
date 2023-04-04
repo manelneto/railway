@@ -11,54 +11,54 @@
 template <class T>
 class MutablePriorityQueue {
 public:
-    /**
-     *
+    /**Construtor sem parâmetros. Constrói uma fila de prioridade mutável (minHeap) com índices a começar em 1 para facilitar cálculos de pais/filhos.
+     * <br>Complexidade Temporal: O(1)
      */
     MutablePriorityQueue();
 
-    /**
-     *
-     * @param x
+    /**Insere o elemento x na fila de prioridade mutável e reajusta a fila.
+     * <br>Complexidade Temporal: O(log n), sendo n o número de elementos na fila de prioridade mutável
+     * @param x elemento a inserir na fila de prioridade mutável
      */
     void insert(T * x);
 
-    /**
-     *
-     * @return
+    /**Retorna o elemento mais prioritário (menor índice) da fila de prioridade mutável, retira-o da fila e reajusta-a.
+     * <br>Complexidade Temporal: O(log n), sendo n o número de elementos na fila de prioridade mutável
+     * @return apontador para o elemento mais prioritário da fila de prioridade mutável
      */
     T * extractMin();
 
-    /**
-     *
-     * @param x
+    /**Atualiza a prioridade do elemento x (aumentando-a, diminuindo o índice) e reajusta a fila de prioridade mutável.
+     * <br>Complexidade Temporal: O(log n), sendo n o número de elementos na fila de prioridade mutável
+     * @param x elemento a atualizar prioridade
      */
     void decreaseKey(T * x);
 
-    /**
-     *
-     * @return
+    /**Verifica se a fila de prioridade mutável não contém elementos, i. e., se o seu tamanho é 1.
+     * <br>Complexidade Temporal: O(1)
+     * @return true se a fila de prioridade mutável está vazia, false caso contrário
      */
     bool empty();
 
 private:
     std::vector<T *> H;
 
-    /**
-     *
-     * @param i
+    /**Sobe o elemento de índice i na fila de prioridade mutável (minHeap), i. e., troca-o sucessivamente com o seu pai até se encontrar na posição correta.
+     * <br>Complexidade Temporal: O(log n), sendo n o número de elementos na fila de prioridade mutável
+     * @param i índice do elemento a subir na fila de prioridade mutável
      */
     void heapifyUp(unsigned i);
 
-    /**
-     *
-     * @param i
+    /**Desce o elemento de índice i na fila de prioridade mutável (minHeap), i. e, troca-o sucessivamente com um dos seus filhos até se encontrar na posição correta.
+     * <br>Complexidade Temporal: O(log n), sendo n o número de elementos na fila de prioridade mutável
+     * @param i índice do elemento a descer na fila de prioridade mutável
      */
     void heapifyDown(unsigned i);
 
-    /**
-     *
-     * @param i
-     * @param x
+    /**Coloca o elemento x na posição índice i da fila de prioridade mutável, atualizando o seu índice.
+     * <br>Comlexidade Temporal: O(1)
+     * @param i índice da nova posição do elemento x
+     * @param x elemento a colocar na posição índice i da fila de prioridade mutável
      */
     inline void set(unsigned i, T * x);
 };
@@ -70,7 +70,6 @@ private:
 template <class T>
 MutablePriorityQueue<T>::MutablePriorityQueue() {
     H.push_back(nullptr);
-    // indices will be used starting in 1 to facilitate parent/child calculations
 }
 
 template <class T>
