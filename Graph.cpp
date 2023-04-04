@@ -40,19 +40,13 @@ bool Graph::addBidirectionalEdge(const int &source, const int &dest, unsigned ca
     for (const auto edge : v1->getAdj())
         if (edge->getDest()->getId() == dest && edge->getCapacity() == capacity && edge->getService() == service)
             return false;
-    auto e1 = v1->addEdge(v2, capacity, service);
-    auto e2 = v2->addEdge(v1, capacity, service);
-    e1->setReverse(e2);
-    e2->setReverse(e1);
+    v1->addEdge(v2, capacity, service);
+    v2->addEdge(v1, capacity, service);
     return true;
 }
 
-int Graph::getNumVertex() const {
-    return (int) vertexSet.size();
-}
-
-vector<Vertex *> Graph::getVertexSet() const {
-    return vertexSet;
+unsigned Graph::getNumVertex() const {
+    return vertexSet.size();
 }
 
 void Graph::edmondsKarp(int source, int target) const {
@@ -61,12 +55,10 @@ void Graph::edmondsKarp(int source, int target) const {
     if (s == nullptr || t == nullptr || s == t)
         throw logic_error("Invalid source and/or target vertex");
 
-    // Reset the flows
     for (auto v : vertexSet)
         for (auto e: v->getAdj())
             e->setFlow(0);
 
-    // Loop to find augmentation paths
     while (findAugmentingPath(s, t)) {
         unsigned f = findMinResidualAlongPath(s, t);
         augmentFlowAlongPath(s, t, f);
@@ -178,14 +170,7 @@ unsigned Graph::getPathCost(int target, unsigned flow) const {
     return cost;
 }
 
-int Graph::findVertexIdx(const int &id) const {
-    for (unsigned i = 0; i < vertexSet.size(); i++)
-        if (vertexSet[i]->getId() == id)
-            return (int) i;
-    return -1;
-}
-
-void Graph::testAndVisit(queue<Vertex*> &q, Edge *e, Vertex *w, unsigned residual) {
+void Graph::testAndVisit(queue<Vertex *> &q, Edge *e, Vertex *w, unsigned residual) {
     if (!w->isVisited() && residual > 0) {
         w->setVisited(true);
         w->setPath(e);
