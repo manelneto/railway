@@ -59,7 +59,7 @@ public:
 
     /**Define o fluxo que passa pela aresta como flow.
      * <br>Complexidade Temporal: O(1)
-     * @param flow fluxo a passar pela aresta
+     * @param flow novo fluxo a passar pela aresta
      */
     void setFlow(unsigned flow);
 
