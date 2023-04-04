@@ -38,7 +38,7 @@ public:
     bool addEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const;
 
     /**Adiciona ao grafo uma aresta bidirecional (sob a forma de duas arestas simétricas) entre os vértices com id source e id dest, com capacidade capacity e serviço service.
-     * <br>Complexidade Temporal: O()
+     * <br>Complexidade Temporal: O(V), sendo V o número de vértices do grafo
      * @param source id de um dos vértices da aresta a adicionar
      * @param dest id do outro vértice da aresta a adicionar
      * @param capacity capacidade da aresta a adicionar
@@ -73,13 +73,13 @@ public:
     unsigned getFlow(const int &id) const;
 
     /**Retorna a soma dos fluxos máximos entre todos os pares de vértices do grafo.
-     * <br>Complexidade Temporal: O(V<SUP>3</SUP>E<SUP>2</SUP>)
+     * <br>Complexidade Temporal: O(V<SUP>3</SUP>E<SUP>2</SUP>), sendo V o número de vértices do grafo e E o número de arestas do grafo
      * @return soma dos fluxos máximos entre todos os pares de vértices do grafo
      */
     unsigned sumFlow() const;
 
     /**Retorna o maior fluxo máximo entre todos os pares de vértices do grafo e coloca em pairs as etiquetas dos pares de vértices entre os quais circula esse fluxo.
-     * <br>Complexidade Temporal: O(V<SUP>3</SUP>E<SUP>2</SUP>)
+     * <br>Complexidade Temporal: O(V<SUP>3</SUP>E<SUP>2</SUP>), sendo V o número de vértices do grafo e E o número de arestas do grafo
      * @param pairs lista a preencher com as etiquetas dos pares de vértices do grafo entre os quais circula o maior fluxo máximo entre todos os pares de vértices do grafo
      * @return maior fluxo máximo entre todos os pares de vértices do grafo
      */
@@ -105,7 +105,7 @@ public:
     bool removeEdge(const int &source, const int &target) const;
 
     /**Realiza o algoritmo de Dijkstra para encontrar o caminho mais barato/curto desde o vértice com id source até todos os outros vértices do grafo.
-     * <br>Complexidade Temporal: O((V + E) log V)
+     * <br>Complexidade Temporal: O((V + E) log V), sendo V o número de vértices do grafo e E o número de arestas do grafo
      * @param source id do vértice de partida/origem do algoritmo de Dijkstra
      */
     void dijkstra(int source) const;

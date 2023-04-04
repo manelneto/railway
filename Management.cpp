@@ -201,6 +201,8 @@ void Management::readNetworkFile(bool silent) {
 void Management::lerFicheirosDados(bool silent) {
     stations.clear();
     network.clear();
+    districts.clear();
+    municipalities.clear();
     if (!silent) {
         cout << "Nome do ficheiro de estações (stations*.csv): ";
         stationsFile = readInput();
@@ -350,6 +352,11 @@ void Management::topAfetadas() {
     unsigned k = readInt();
     if (k == 0)
         k = topDiferenca.size();
+    if (topDiferenca.top().first == 0.0) {
+        cout << "Nenhum estação é afetada" << endl;
+        lerFicheirosDados(true);
+        return;
+    }
     cout << "Top de estações mais afetadas:" << endl;
     for (unsigned i = 1; i <= k; i++) {
         cout << i << ". " << topDiferenca.top().second << " (redução de " << setprecision(3) << topDiferenca.top().first << "% no número de comboios)" << endl;
