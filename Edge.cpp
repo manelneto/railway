@@ -37,22 +37,6 @@ unsigned Edge::getFlow() const {
     return flow;
 }
 
-bool Edge::isSelected() const {
-    return this->selected;
-}
-
-Edge * Edge::getReverse() const {
-    return this->reverse;
-}
-
 void Edge::setFlow(unsigned flow) {
     this->flow = flow;
-}
-
-void Edge::setSelected(bool selected) {
-    this->selected = selected;
-}
-
-void Edge::setReverse(Edge *reverse) {
-    this->reverse = reverse;
 }

@@ -12,80 +12,56 @@ class Edge {
 public:
     enum Service {STANDARD, ALFA, OTHER};
 
-    /**
-     * <br>Complexidade Temporal: O()
-     * @param orig
-     * @param dest
-     * @param capacity
-     * @param service
+    /**Construtor com parâmetros. Constrói uma aresta com origem orig, destino dest, capacidade capacity, serviço service e custo de acordo com o serviço (2€ para STANDARD, 4€ para ALFA e -1€ para OTHER).
+     * <br>Complexidade Temporal: O(1)
+     * @param orig origem
+     * @param dest destino
+     * @param capacity capacidade
+     * @param service serviço
      */
     Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service);
 
-    /**
-     * <br>Complexidade Temporal: O()
-     * @return
+    /**Retorna a origem da aresta.
+     * <br>Complexidade Temporal: O(1)
+     * @return origem da aresta
      */
     Vertex * getOrig() const;
 
-    /**
-     * <br>Complexidade Temporal: O()
-     * @return
+    /**Retorna o destino da aresta.
+     * <br>Complexidade Temporal: O(1)
+     * @return destino da aresta
      */
     Vertex * getDest() const;
 
-    /**
-     * <br>Complexidade Temporal: O()
-     * @return
+    /**Retorna a capacidade da aresta.
+     * <br>Complexidade Temporal: O(1)
+     * @return capacidade da aresta
      */
     unsigned getCapacity() const;
 
-    /**
-     * <br>Complexidade Temporal: O()
-     * @return
+    /**Retorna o serviço da aresta.
+     * <br>Complexidade Temporal: O(1)
+     * @return serviço da aresta
      */
     Service getService() const;
 
-    /**
-     * <br>Complexidade Temporal: O()
-     * @return
+    /**Retorna o custo da aresta.
+     * <br>Complexidade Temporal: O(1)
+     * @return custo da aresta
      */
     unsigned getCost() const;
 
-    /**
-     * <br>Complexidade Temporal: O()
-     * @return
+    /**Retorna o fluxo que passa pela aresta.
+     * <br>Complexidade Temporal: O(1)
+     * @return fluxo que passa pela aresta
      */
     unsigned getFlow() const;
 
-    /**
-     * <br>Complexidade Temporal: O()
-     * @return
-     */
-    bool isSelected() const;
-
-    /**
-     * <br>Complexidade Temporal: O()
-     * @return
-     */
-    Edge * getReverse() const;
-
-    /**
-     * <br>Complexidade Temporal: O()
-     * @param flow
+    /**Define o fluxo que passa pela aresta como flow.
+     * <br>Complexidade Temporal: O(1)
+     * @param flow fluxo a passar pela aresta
      */
     void setFlow(unsigned flow);
-
-    /**
-     * <br>Complexidade Temporal: O()
-     * @param selected
-     */
-    void setSelected(bool selected);
-
-    /**
-     * <br>Complexidade Temporal: O()
-     * @param reverse
-     */
-    void setReverse(Edge * reverse);
 
 private:
     Vertex * orig;
@@ -94,8 +70,6 @@ private:
     Service service;
     unsigned cost;
     unsigned flow = 0;
-    bool selected = false;
-    Edge * reverse = nullptr;
 };
 
 
