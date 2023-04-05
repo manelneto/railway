@@ -113,14 +113,12 @@ unsigned Graph::maxFlow(list<pair<string, string>> &pairs) const {
 void Graph::addSuperSource(const int &id) {
     addVertex(0, "Super Source");
     for (const auto &v : vertexSet)
-        if (v->getIndegree() <= 1 && v->getId() != id)
+        if (v->getIncoming().size() == 1 && v->getId() != id)
             addEdge(0, v->getId(), UINT_MAX, Edge::OTHER);
 }
 
 void Graph::removeSuperSource() const {
     Vertex *superSource = findVertex(0);
-    for (const auto it : superSource->getAdj())
-        it->getDest()->setIndegree(it->getDest()->getIndegree() - 1);
     superSource->removeOutgoingEdges();
 }
 

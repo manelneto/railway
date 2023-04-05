@@ -69,6 +69,13 @@ public:
      */
     bool operator==(const Station &rhs) const;
 
+    /**Compara a estação e rhs quanto ao nome sanitizado, por ordem lexicográfica.
+     * <br>Complexidade Temporal: O(n), sendo n o maior comprimento entre os nomes sanitizados
+     * @param rhs estação com a qual comparar
+     * @return true se a estação tem nome sanitizado lexicograficamente anterior a rhs, false caso contrário
+     */
+    bool operator<(const Station &rhs) const;
+
     /**Imprime o nome, o distrito, o concelho, a freguesia e a linha da estação.
      * <br>Complexidade Temporal: O(1)
      */

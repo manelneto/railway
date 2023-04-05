@@ -51,12 +51,6 @@ public:
      */
     bool isVisited() const;
 
-    /**Retorna o grau de entrada do vértice.
-     * <br>Complexidade Temporal: O(1)
-     * @return grau de entrada do vértice
-     */
-    unsigned getIndegree() const;
-
     /**Retorna o custo do vértice
      * <br>Complexidade Temporal: O(1)
      * @return custo do vértice
@@ -80,12 +74,6 @@ public:
      * @param visited novo estado visitado do vértice
      */
     void setVisited(bool visited);
-
-    /**Define o grau de entrada do vértice como indegree.
-     * <br>Complexidade Temporal: O(1)
-     * @param indegree novo grau de entrada do vértice
-     */
-    void setIndegree(unsigned indegree);
 
     /**Define o custo do vértice como cost.
      * <br>Complexidade Temporal: O(1)
@@ -127,7 +115,6 @@ private:
     std::string label;
     std::vector<Edge *> adj;
     bool visited = false;
-    unsigned indegree = 0;
     unsigned cost = 0;
     Edge * path = nullptr;
     std::vector<Edge *> incoming;

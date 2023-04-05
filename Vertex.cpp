@@ -28,10 +28,6 @@ bool Vertex::isVisited() const {
     return this->visited;
 }
 
-unsigned int Vertex::getIndegree() const {
-    return this->indegree;
-}
-
 unsigned Vertex::getCost() const {
     return this->cost;
 }
@@ -48,10 +44,6 @@ void Vertex::setVisited(bool visited) {
     this->visited = visited;
 }
 
-void Vertex::setIndegree(unsigned indegree) {
-    this->indegree = indegree;
-}
-
 void Vertex::setCost(unsigned cost) {
     this->cost = cost;
 }
@@ -64,7 +56,6 @@ Edge * Vertex::addEdge(Vertex *d, unsigned capacity, Edge::Service service) {
     auto newEdge = new Edge(this, d, capacity, service);
     adj.push_back(newEdge);
     d->incoming.push_back(newEdge);
-    d->setIndegree(d->getIndegree() + 1);
     return newEdge;
 }
 

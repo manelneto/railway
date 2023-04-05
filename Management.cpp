@@ -29,7 +29,13 @@ int Management::readInt() {
         cout << "Deve inserir um número inteiro não negativo. Tente novamente: ";
         s = readInput();
     }
-    int n = stoi(s);
+    int n;
+    try {
+        n = stoi(s);
+    } catch (invalid_argument&) {
+        cout << "Não introduziu nenhum número. Tente novamente: ";
+        n = readInt();
+    }
     return n;
 }
 
@@ -58,7 +64,11 @@ void Management::removeSegment() const {
     cout << "Estação B" << endl;
     Station target = readStation();
     if (!network.removeEdge(source.getId(), target.getId())) {
-        cout << "Não existe nenhum segmento que ligue diretamente " << source.getName() << " e " << target.getName() << ". Tente novamente." << endl;
+        cout << "Não existe nenhum segmento que ligue diretamente a ";
+        source.print();
+        cout << " e a ";
+        target.print();
+        cout << ". Tente novamente." << endl;
         removeSegment();
     }
 }
@@ -220,6 +230,7 @@ void Management::lerFicheirosDados(bool silent) {
 void Management::verificarFicheirosDados() {
     if (network.getNumVertex() == 0) {
         cout << "Ainda não leu os ficheiros de dados, pelo que não existe nenhum grafo para analisar." << endl;
+        cout << endl;
         lerFicheirosDados(false);
     }
 }
@@ -229,12 +240,33 @@ void Management::calcularFluxoMaximo(Graph &graph) {
     Station source = readStation();
     cout << "Estação B" << endl;
     Station target = readStation();
-    network.edmondsKarp(source.getId(), target.getId());
+    while (source == target) {
+        cout << "As estações de origem e destino não podem coincidir. Tente novamente." << endl;
+        cout << "Estação A" << endl;
+        source = readStation();
+        cout << "Estação B" << endl;
+        target = readStation();
+    }
+    try {
+        network.edmondsKarp(source.getId(), target.getId());
+    } catch (logic_error&) {
+        cout << "Ocorreu um erro inesperado..." << endl;
+        return;
+    }
     unsigned flow = network.getFlow(target.getId());
-    if (flow == 0)
-        cout << "Não é possível viajar entre " << source.getName() << " e " << target.getName() << endl;
-    else
-        cout << "O número máximo de comboios que podem viajar simultaneamente entre " << source.getName() << " e " << target.getName() << " é " << flow << endl;
+    if (flow == 0) {
+        cout << "Não é possível viajar entre a ";
+        source.print();
+        cout << " e a ";
+        target.print();
+        cout << endl;
+    } else {
+        cout << "O número máximo de comboios que podem viajar simultaneamente entre a ";
+        source.print();
+        cout << " e a ";
+        target.print();
+        cout << " é " << flow << endl;
+    }
 }
 
 void Management::fluxoMaximoEspecifico() {
@@ -293,7 +325,9 @@ void Management::fluxoMaximoChegada() {
     network.addSuperSource(station.getId());
     network.edmondsKarp(0, station.getId());
     unsigned flow = network.getFlow(station.getId());
-    cout << "O número máximo de comboios que podem chegar simultaneamente a " << station.getName() << " é " << flow << endl;
+    cout << "O número máximo de comboios que podem chegar simultaneamente à ";
+    station.print();
+    cout << " é " << flow << endl;
     network.removeSuperSource();
 }
 
@@ -305,11 +339,20 @@ void Management::custoMinimo() {
     Station target = readStation();
     network.dijkstra(source.getId());
     unsigned flow = network.getPathFlow(target.getId());
-    if (flow == 0)
-        cout << "Não é possível viajar entre " << source.getName() << " e " << target.getName() << endl;
+    if (flow == 0) {
+        cout << "Não é possível viajar entre a ";
+        source.print();
+        cout << " e a ";
+        target.print();
+        cout << endl;
+    }
     else {
         unsigned cost = network.getPathCost(target.getId(), flow);
-        cout << "O custo mínimo da viagem entre " << source.getName() << " e " << target.getName() << " é " << cost << "€" << ", para um máximo de " << flow << " comboios em simultâneo." << endl;
+        cout << "O custo mínimo da viagem entre a ";
+        source.print();
+        cout << " e a ";
+        target.print();
+        cout << " é " << cost << "€, para um máximo de " << flow << " comboios em simultâneo." << endl;
     }
 }
 
@@ -338,14 +381,14 @@ void Management::topAfetadas() {
     cout << "Segmento a remover" << endl;
     removeSegment();
     cout << "Remoção de segmento bem-sucedida!" << endl;
-    priority_queue<pair<double, string>> topDiferenca;
+    priority_queue<pair<double, Station>> topDiferenca;
     for (const auto &pair : flows) {
         int stationId = pair.second.getId();
         network.addSuperSource(stationId);
         network.edmondsKarp(0, stationId);
         unsigned flow = network.getFlow(stationId);
-        double diferenca = pair.first != 0 ? (double) (100 * (pair.first - flow)/pair.first) : 0.0;
-        topDiferenca.push(make_pair(diferenca, pair.second.getName()));
+        double diferenca = pair.first != 0 ? (100.0 * ((double) pair.first - (double) flow)/pair.first) : 0.0;
+        topDiferenca.push(make_pair(diferenca, pair.second));
         network.removeSuperSource();
     }
     cout << "Introduza o valor de K (0 para um top completo, com todas as estações afetadas): ";
@@ -353,17 +396,19 @@ void Management::topAfetadas() {
     if (k == 0)
         k = topDiferenca.size();
     if (topDiferenca.top().first == 0.0) {
-        cout << "Nenhum estação é afetada" << endl;
+        cout << "Nenhuma estação é afetada negativamente" << endl;
         lerFicheirosDados(true);
         return;
     }
     cout << "Top de estações mais afetadas:" << endl;
     for (unsigned i = 1; i <= k; i++) {
-        cout << i << ". " << topDiferenca.top().second << " (redução de " << setprecision(3) << topDiferenca.top().first << "% no número de comboios)" << endl;
         if (topDiferenca.top().first == 0.0) {
-            cout << "..." << endl << "Todas as estações restantes não são afetadas" << endl;
+            cout << "..." << endl << "Todas as outras estações não são afetadas negativamente" << endl;
             break;
         }
+        cout << i << ". ";
+        topDiferenca.top().second.print();
+        cout << " (redução de " << setprecision(3) << topDiferenca.top().first << "% no número de comboios)" << endl;
         topDiferenca.pop();
     }
     lerFicheirosDados(true);

@@ -45,6 +45,10 @@ bool Station::operator==(const Station &rhs) const {
     return sanitizedName == rhs.sanitizedName;
 }
 
+bool Station::operator<(const Station &rhs) const {
+    return sanitizedName < rhs.sanitizedName;
+}
+
 void Station::print() const {
     cout << "Estação " << name;
     if (!district.empty())
