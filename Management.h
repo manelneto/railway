@@ -22,6 +22,7 @@ public:
 private:
     std::string stationsFile;
     std::string networkFile;
+    bool filesRead = false;
     std::unordered_set<Station, stationHash, stationHash> stations;
     Graph network;
     std::unordered_map<std::string, Graph> districts;
@@ -69,14 +70,16 @@ private:
     /**Lê o ficheiro de estações e cria as tabelas de dispersão de estações, de distritos e de municípios e os nós do grafo da rede.
      * <br>Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro de estações e V o número de vértices do grafo da rede
      * @param silent indica se a função deve ser silenciosa (true) ou imprimir mensagens de sucesso/insucesso (false)
+     * @return true se a leitura do ficheiro de estações foi bem-sucedida, false caso contrário
      */
-    void readStationsFile(bool silent);
+    bool readStationsFile(bool silent);
 
     /**Lê o ficheiro da rede e preenche os grafos da rede, dos distritos e dos municípios com os segmentos.
      * <br>Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro de estações e V o número de vértices do grafo da rede
      * @param silent indica se a função deve ser silenciosa (true) ou imprimir mensagens de sucesso/insucesso (false)
+     * @return true se a leitura do ficheiro da rede foi bem-sucedida, false caso contrário
      */
-    void readNetworkFile(bool silent);
+    bool readNetworkFile(bool silent);
 
     /**Lê os ficheiros de dados, depois de limpar os dados anteriores.
      * <br>Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro de estações e V o número de vértices do grafo da rede

@@ -108,12 +108,12 @@ bool Management::menu() {
     return true;
 }
 
-void Management::readStationsFile(bool silent) {
+bool Management::readStationsFile(bool silent) {
     ifstream in("../files/" + stationsFile);
     if (!in.is_open() && !silent) {
         cout << "Erro ao abrir o ficheiro " << stationsFile << "." << endl;
         cout << "Verifique se o ficheiro se encontra dentro do diretório files." << endl;
-        return;
+        return false;
     }
     if (!silent)
         cout << "A ler ficheiro " << stationsFile << "..." << endl;
@@ -165,14 +165,15 @@ void Management::readStationsFile(bool silent) {
         cout << "Leitura do ficheiro " << stationsFile << " bem-sucedida!" << endl;
         cout << "Foram lidas " << stations.size() << " estações e foram ignoradas " << ignored << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
     }
+    return true;
 }
 
-void Management::readNetworkFile(bool silent) {
+bool Management::readNetworkFile(bool silent) {
     ifstream in("../files/" + networkFile);
     if (!in.is_open() && !silent) {
         cout << "Erro ao abrir o ficheiro " << networkFile << "." << endl;
         cout << "Verifique se o ficheiro se encontra dentro do diretório files." << endl;
-        return;
+        return false;
     }
     if (!silent)
         cout << "A ler ficheiro " << networkFile << "..." << endl;
@@ -206,6 +207,7 @@ void Management::readNetworkFile(bool silent) {
         cout << "Leitura do ficheiro " << networkFile << " bem-sucedida!" << endl;
         cout << "Foram lidos " << counter << " segmentos e ocorreram " << error << " erros (estações de origem/destino não encontradas ou ligações duplicadas)." << endl;
     }
+    return true;
 }
 
 void Management::lerFicheirosDados(bool silent) {
@@ -219,17 +221,18 @@ void Management::lerFicheirosDados(bool silent) {
         cout << "Nome do ficheiro de rede (network*.csv): ";
         networkFile = readInput();
     }
-    readStationsFile(silent);
+    bool stationsFileRead = readStationsFile(silent);
     if (!silent)
         cout << endl;
-    readNetworkFile(silent);
+    bool networkFileRead = readNetworkFile(silent);
     if (!silent)
         cout << endl;
+    filesRead = stationsFileRead && networkFileRead;
 }
 
 void Management::verificarFicheirosDados() {
-    if (network.getNumVertex() == 0) {
-        cout << "Ainda não leu os ficheiros de dados, pelo que não existe nenhum grafo para analisar." << endl;
+    while (!filesRead) {
+        cout << "Ainda não leu os ficheiros de dados (ou ocorreu um erro durante a leitura), pelo que não existem dados para analisar." << endl;
         cout << endl;
         lerFicheirosDados(false);
     }
