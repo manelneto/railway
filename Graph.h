@@ -12,7 +12,7 @@
 
 class Graph {
 public:
-    /**Procura o vértice do grafo com id id.
+    /**Procura o vértice do grafo pelo seu id.
      * <br>Complexidade Temporal: O(V), sendo V o número de vértices do grafo
      * @param id id do vértice a procurar
      * @return apontador para o vértice encontrado
@@ -47,12 +47,6 @@ public:
      */
     bool addBidirectionalEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const;
 
-    /**Retorna o número de vértices do grafo.
-     * <br>Complexidade Temporal: O(1)
-     * @return número de vértices do grafo.
-     */
-    unsigned getNumVertex() const;
-
     /**Realiza o algoritmo de Edmonds-Karp para encontrar o caminho de fluxo máximo desde o vértice com id source até ao vértice com id target.
      * <br>Complexidade Temporal: O(VE<SUP>2</SUP>), sendo V o número de vértices do grafo e E o número de arestas do grafo
      * @param source id do vértice de origem do caminho de fluxo máximo a encontrar
@@ -61,7 +55,7 @@ public:
     void edmondsKarp(int source, int target) const;
 
     /**Limpa o grafo, i. e., remove todas as suas arestas e todos os seus vértices.
-     * <br>Complexidade Temporal: O(V), sendo V o número de vértices do grafo
+     * <br>Complexidade Temporal: O(V + E), sendo V o número de vértices do grafo e E o número de arestas do grafo
      */
     void clear();
 
@@ -111,14 +105,14 @@ public:
     void dijkstra(int source) const;
 
     /**Determina o fluxo máximo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra e de acordo com o Teorema Maximum-Flow Minimum-Cut.
-     * <br>Complexidade Temporal: O(V), sendo V o número de vértices do grafo
+     * <br>Complexidade Temporal: O(V + E), sendo V o número de vértices do grafo e E o número de arestas do grafo
      * @param target id do vértice de destino do caminho
      * @return fluxo máximo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra
      */
     unsigned getPathFlow(int target) const;
 
     /**Determina o custo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra, passando por todas as arestas fluxo flow.
-     * <br>Complexidade Temporal: O(V), sendo V o número de vértices do grafo
+     * <br>Complexidade Temporal: O(V + E), sendo V o número de vértices do grafo e E o número de arestas do grafo
      * @param target id do vértice de destino do caminho
      * @param flow fluxo a passar pelo caminho
      * @return custo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra, passando por todas as arestas fluxo flow

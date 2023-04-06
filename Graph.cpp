@@ -45,10 +45,6 @@ bool Graph::addBidirectionalEdge(const int &source, const int &dest, unsigned ca
     return true;
 }
 
-unsigned Graph::getNumVertex() const {
-    return vertexSet.size();
-}
-
 void Graph::edmondsKarp(int source, int target) const {
     Vertex *s = findVertex(source);
     Vertex *t = findVertex(target);
@@ -114,7 +110,7 @@ void Graph::addSuperSource(const int &id) {
     addVertex(0, "Super Source");
     for (const auto &v : vertexSet)
         if (v->getIncoming().size() == 1 && v->getId() != id)
-            addEdge(0, v->getId(), UINT_MAX, Edge::OTHER);
+            v->addEdge(v, UINT_MAX, Edge::OTHER);
 }
 
 void Graph::removeSuperSource() const {
