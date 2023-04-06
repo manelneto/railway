@@ -13,82 +13,95 @@
 
 class Vertex {
 public:
-    /**Construtor com parâmetros. Constrói um vértice com id id e etiqueta label.
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Construtor com parâmetros. Constrói um vértice com id id e etiqueta label.
+     *
+     * Complexidade Temporal: O(1)
      * @param id id
      * @param label etiqueta
      */
     Vertex(int id, const std::string &label);
 
-    /**Compara o vértice e vertex quando ao seu custo.
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Compara o vértice e vertex quando ao seu custo.
+     * 
+     * Complexidade Temporal: O(1)
      * @param vertex vértice com o qual comparar
      * @return true se o custo do vértice é inferior ao de vertex, false caso contrário
      */
     bool operator<(Vertex & vertex) const;
 
-    /**Retorna o id do vértice
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Retorna o id do vértice
+     * 
+     * Complexidade Temporal: O(1)
      * @return id do vértice
      */
     int getId() const;
 
-    /**Retorna a etiqueta do vértice
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Retorna a etiqueta do vértice
+     * 
+     * Complexidade Temporal: O(1)
      * @return etiqueta do vértice
      */
     const std::string &getLabel() const;
 
-    /**Retorna a lista de adjacências (arestas a sair) do vértice
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Retorna a lista de adjacências (arestas a sair) do vértice
+     * 
+     * Complexidade Temporal: O(1)
      * @return lista de adjacências (arestas a sair) do vértice
      */
     std::vector<Edge *> getAdj() const;
 
-    /**Indica se o vértice foi visitado.
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Indica se o vértice foi visitado.
+     * 
+     * Complexidade Temporal: O(1)
      * @return true se o vértice foi visitado, false caso contrário
      */
     bool isVisited() const;
 
-    /**Retorna o custo do vértice
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Retorna o custo do vértice
+     * 
+     * Complexidade Temporal: O(1)
      * @return custo do vértice
      */
     unsigned getCost() const;
 
-    /**Retorna a aresta predecessora do vértice no caminho atual
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Retorna a aresta predecessora do vértice no caminho atual
+     * 
+     * Complexidade Temporal: O(1)
      * @return a aresta predecessora do vértice no caminho atual
      */
     Edge * getPath() const;
 
-    /**Retorna as arestas a entrar no vértice.
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Retorna as arestas a entrar no vértice.
+     * 
+     * Complexidade Temporal: O(1)
      * @return arestas a entrar no vértice
      */
     std::vector<Edge *> getIncoming() const;
 
-    /**Define estado visitado do vértice como visited.
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Define estado visitado do vértice como visited.
+     * 
+     * Complexidade Temporal: O(1)
      * @param visited novo estado visitado do vértice
      */
     void setVisited(bool visited);
 
-    /**Define o custo do vértice como cost.
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Define o custo do vértice como cost.
+     * 
+     * Complexidade Temporal: O(1)
      * @param cost novo custo do vértice
      */
     void setCost(unsigned cost);
 
-    /**Define a aresta predecessora do vértice como path.
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Define a aresta predecessora do vértice como path.
+     * 
+     * Complexidade Temporal: O(1)
      * @param path nova aresta predecessora do vértice
      */
     void setPath(Edge *path);
 
-    /**Adiciona um aresta desde o vértice até dest, com capacidade capacity e serviço service.
-     * <br>Complexidade Temporal: O(1)
+    /**@brief Adiciona um aresta desde o vértice até dest, com capacidade capacity e serviço service.
+     * 
+     * Complexidade Temporal: O(1)
      * @param dest destino da aresta
      * @param capacity capacidade da aresta
      * @param service serviço da aresta
@@ -96,15 +109,17 @@ public:
      */
     Edge * addEdge(Vertex *dest, unsigned capacity, Edge::Service service);
 
-    /**Remove do vértice a aresta com destino ao vértice cujo id é destID.
-     * <br>Complexidade Temporal: O(n), sendo n o tamanho da lista de adjacências (arestas a sair) do vértice
+    /**@brief Remove do vértice a aresta com destino ao vértice cujo id é destID.
+     * 
+     * Complexidade Temporal: O(n), sendo n o tamanho da lista de adjacências (arestas a sair) do vértice
      * @param destID id do vértice de destino da aresta a remover
      * @return true se a aresta foi encontrada e removida, false caso contrário
      */
     bool removeEdge(int destID);
 
-    /**Remove todas as arestas de saída do vértice.
-     * <br>Complexidade Temporal: O(n), sendo n o tamanho da lista de adjacências (arestas a sair) do vértice
+    /**@brief Remove todas as arestas de saída do vértice.
+     * 
+     * Complexidade Temporal: O(n), sendo n o tamanho da lista de adjacências (arestas a sair) do vértice
      */
     void removeOutgoingEdges();
 
@@ -120,8 +135,9 @@ private:
     std::vector<Edge *> incoming;
     int queueIndex;
 
-    /**Apaga a aresta edge.
-     * <br>Complexidade Temporal: O(n), sendo n o tamanho da lista de arestas de entrada no vértice de destino da aresta edge.
+    /**@brief Apaga a aresta edge.
+     * 
+     * Complexidade Temporal: O(n), sendo n o tamanho da lista de arestas de entrada no vértice de destino da aresta edge.
      * @param edge aresta a apagar
      */
     void deleteEdge(Edge *edge) const;

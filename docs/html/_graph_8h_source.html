@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>An Analysis Tool for Railway Network Management: Código-Fonte de Graph.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">An Analysis Tool for Railway Network Management<span id="projectnumber">&#160;DA</span>
+   </div>
+   <div id="projectbrief">Programming Project I</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Localizar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrada</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Graph.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_graph_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">//</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Created by manue on 22/03/2023.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef RAILWAY_GRAPH_H</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define RAILWAY_GRAPH_H</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;list&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="_vertex_8h.html">Vertex.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_graph.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="class_graph.html">Graph</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_class" href="class_vertex.html">Vertex</a> * <a class="code hl_function" href="class_graph.html#a089f7fc73ea9976295d387846ad36c69">findVertex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_graph.html#adf606a86926b2f2bb7e8236b396f2ba1">addVertex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<span class="keywordtype">id</span>, <span class="keyword">const</span> std::string &amp;label);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_graph.html#acc3e3665804015facd1b6de68d41f939">addEdge</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;source, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;dest, <span class="keywordtype">unsigned</span> capacity, <a class="code hl_enumeration" href="class_edge.html#a0da6c38d912e0e102b1d67d1f239dce3">Edge::Service</a> service) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_graph.html#ac4c89afc50c3de7145db4c140cf14dd2">addBidirectionalEdge</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;source, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;dest, <span class="keywordtype">unsigned</span> capacity, <a class="code hl_enumeration" href="class_edge.html#a0da6c38d912e0e102b1d67d1f239dce3">Edge::Service</a> service) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#a01e3b94dea33b02f7957af6e20d8337e">edmondsKarp</a>(<span class="keywordtype">int</span> source, <span class="keywordtype">int</span> target) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#ac6192a41101102ca8aa6acca607c84f3">clear</a>();</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">unsigned</span> <a class="code hl_function" href="class_graph.html#a6997c1a54249f91255b3ba029d59b407">getFlow</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<span class="keywordtype">id</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">unsigned</span> <a class="code hl_function" href="class_graph.html#a9a4a4d6c890435df6b1db7beef707c7c">sumFlow</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordtype">unsigned</span> <a class="code hl_function" href="class_graph.html#ad3fa232fd3d6ccd135f93f5489cb57a1">maxFlow</a>(std::list&lt;std::pair&lt;std::string, std::string&gt;&gt; &amp;pairs) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#a9b5c56abd26d423f71ba85d23ed72afc">addSuperSource</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#a74f8e1f5ca686ca72f7b5eba278bae4e">removeSuperSource</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_graph.html#ab054d78a89eaa63a3f00eb0668fd5f8e">removeEdge</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> &amp;source, <span class="keyword">const</span> <span class="keywordtype">int</span> &amp;target) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#a436b9c714604c699a9617e75bfb60a51">dijkstra</a>(<span class="keywordtype">int</span> source) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <span class="keywordtype">unsigned</span> <a class="code hl_function" href="class_graph.html#a3965b5ec5ef4c09e3ea7b3a4371096bc">getPathFlow</a>(<span class="keywordtype">int</span> target) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">unsigned</span> <a class="code hl_function" href="class_graph.html#a1946382b4c740d946622f3bed24ea271">getPathCost</a>(<span class="keywordtype">int</span> target, <span class="keywordtype">unsigned</span> flow) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="class_graph.html#aa9b0a6d8ad43c5eabaca5a7140bcc8b6">  138</a></span>    std::vector&lt;Vertex *&gt; <a class="code hl_variable" href="class_graph.html#aa9b0a6d8ad43c5eabaca5a7140bcc8b6">vertexSet</a>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#a880193804d1af5b663e1f79219ceae56">testAndVisit</a>(std::queue&lt;Vertex *&gt; &amp;q, <a class="code hl_class" href="class_edge.html">Edge</a> *e, <a class="code hl_class" href="class_vertex.html">Vertex</a> *w, <span class="keywordtype">unsigned</span> residual);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_graph.html#aa66955ce01d79e04f73c4642ba6ac5c7">findAugmentingPath</a>(<a class="code hl_class" href="class_vertex.html">Vertex</a> *s, <a class="code hl_class" href="class_vertex.html">Vertex</a> *t) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <a class="code hl_function" href="class_graph.html#ac8e55f8c2b13c77f208ad560036c8153">findMinResidualAlongPath</a>(<a class="code hl_class" href="class_vertex.html">Vertex</a> *s, <a class="code hl_class" href="class_vertex.html">Vertex</a> *t);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_graph.html#a09a9ff49c0c6087103481b4b7d6ce6cc">augmentFlowAlongPath</a>(<a class="code hl_class" href="class_vertex.html">Vertex</a> *s, <a class="code hl_class" href="class_vertex.html">Vertex</a> *t, <span class="keywordtype">unsigned</span> f);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="class_graph.html#a2fd4cb81b5061889f8be9f09dfc946db">relax</a>(<a class="code hl_class" href="class_vertex.html">Vertex</a> *u, <a class="code hl_class" href="class_vertex.html">Vertex</a> *v, <a class="code hl_class" href="class_edge.html">Edge</a> *e);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>};</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="preprocessor">#endif </span><span class="comment">//RAILWAY_GRAPH_H</span></div>
+<div class="ttc" id="a_vertex_8h_html"><div class="ttname"><a href="_vertex_8h.html">Vertex.h</a></div></div>
+<div class="ttc" id="aclass_edge_html"><div class="ttname"><a href="class_edge.html">Edge</a></div><div class="ttdef"><b>Definition:</b> Edge.h:11</div></div>
+<div class="ttc" id="aclass_edge_html_a0da6c38d912e0e102b1d67d1f239dce3"><div class="ttname"><a href="class_edge.html#a0da6c38d912e0e102b1d67d1f239dce3">Edge::Service</a></div><div class="ttdeci">Service</div><div class="ttdef"><b>Definition:</b> Edge.h:13</div></div>
+<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdef"><b>Definition:</b> Graph.h:13</div></div>
+<div class="ttc" id="aclass_graph_html_a01e3b94dea33b02f7957af6e20d8337e"><div class="ttname"><a href="class_graph.html#a01e3b94dea33b02f7957af6e20d8337e">Graph::edmondsKarp</a></div><div class="ttdeci">void edmondsKarp(int source, int target) const</div><div class="ttdoc">Realiza o algoritmo de Edmonds-Karp para encontrar o caminho de fluxo máximo desde o vértice com id s...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:48</div></div>
+<div class="ttc" id="aclass_graph_html_a089f7fc73ea9976295d387846ad36c69"><div class="ttname"><a href="class_graph.html#a089f7fc73ea9976295d387846ad36c69">Graph::findVertex</a></div><div class="ttdeci">Vertex * findVertex(const int &amp;id) const</div><div class="ttdoc">Procura o vértice do grafo pelo seu id.</div><div class="ttdef"><b>Definition:</b> Graph.cpp:12</div></div>
+<div class="ttc" id="aclass_graph_html_a09a9ff49c0c6087103481b4b7d6ce6cc"><div class="ttname"><a href="class_graph.html#a09a9ff49c0c6087103481b4b7d6ce6cc">Graph::augmentFlowAlongPath</a></div><div class="ttdeci">static void augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f)</div><div class="ttdoc">Aumenta o fluxo entre o vértice s e o vértice t em f unidades de fluxo, seguindo o caminho de aumenta...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:208</div></div>
+<div class="ttc" id="aclass_graph_html_a1946382b4c740d946622f3bed24ea271"><div class="ttname"><a href="class_graph.html#a1946382b4c740d946622f3bed24ea271">Graph::getPathCost</a></div><div class="ttdeci">unsigned getPathCost(int target, unsigned flow) const</div><div class="ttdoc">Determina o custo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijk...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:159</div></div>
+<div class="ttc" id="aclass_graph_html_a2fd4cb81b5061889f8be9f09dfc946db"><div class="ttname"><a href="class_graph.html#a2fd4cb81b5061889f8be9f09dfc946db">Graph::relax</a></div><div class="ttdeci">static bool relax(Vertex *u, Vertex *v, Edge *e)</div><div class="ttdoc">Relaxa a aresta e, desde o vértice u até ao vértice v, i. e., se o custo do vértice v for superior ao...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:223</div></div>
+<div class="ttc" id="aclass_graph_html_a3965b5ec5ef4c09e3ea7b3a4371096bc"><div class="ttname"><a href="class_graph.html#a3965b5ec5ef4c09e3ea7b3a4371096bc">Graph::getPathFlow</a></div><div class="ttdeci">unsigned getPathFlow(int target) const</div><div class="ttdoc">Determina o fluxo máximo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo ...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:148</div></div>
+<div class="ttc" id="aclass_graph_html_a436b9c714604c699a9617e75bfb60a51"><div class="ttname"><a href="class_graph.html#a436b9c714604c699a9617e75bfb60a51">Graph::dijkstra</a></div><div class="ttdeci">void dijkstra(int source) const</div><div class="ttdoc">Realiza o algoritmo de Dijkstra para encontrar o caminho mais barato/curto desde o vértice com id sou...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:127</div></div>
+<div class="ttc" id="aclass_graph_html_a6997c1a54249f91255b3ba029d59b407"><div class="ttname"><a href="class_graph.html#a6997c1a54249f91255b3ba029d59b407">Graph::getFlow</a></div><div class="ttdeci">unsigned getFlow(const int &amp;id) const</div><div class="ttdoc">Retorna o fluxo máximo que chega ao vértice com id id, depois de realizado o algoritmo de Edmonds-Kar...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:70</div></div>
+<div class="ttc" id="aclass_graph_html_a74f8e1f5ca686ca72f7b5eba278bae4e"><div class="ttname"><a href="class_graph.html#a74f8e1f5ca686ca72f7b5eba278bae4e">Graph::removeSuperSource</a></div><div class="ttdeci">void removeSuperSource() const</div><div class="ttdoc">Remove do grafo o vértice 'super source' (com id 0) e as arestas que dele partem.</div><div class="ttdef"><b>Definition:</b> Graph.cpp:116</div></div>
+<div class="ttc" id="aclass_graph_html_a880193804d1af5b663e1f79219ceae56"><div class="ttname"><a href="class_graph.html#a880193804d1af5b663e1f79219ceae56">Graph::testAndVisit</a></div><div class="ttdeci">static void testAndVisit(std::queue&lt; Vertex * &gt; &amp;q, Edge *e, Vertex *w, unsigned residual)</div><div class="ttdoc">Testa e visita o vértice w seguindo a aresta e, i. e., se o vértice w não estiver visitado e houver c...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:167</div></div>
+<div class="ttc" id="aclass_graph_html_a9a4a4d6c890435df6b1db7beef707c7c"><div class="ttname"><a href="class_graph.html#a9a4a4d6c890435df6b1db7beef707c7c">Graph::sumFlow</a></div><div class="ttdeci">unsigned sumFlow() const</div><div class="ttdoc">Retorna a soma dos fluxos máximos entre todos os pares de vértices do grafo.</div><div class="ttdef"><b>Definition:</b> Graph.cpp:78</div></div>
+<div class="ttc" id="aclass_graph_html_a9b5c56abd26d423f71ba85d23ed72afc"><div class="ttname"><a href="class_graph.html#a9b5c56abd26d423f71ba85d23ed72afc">Graph::addSuperSource</a></div><div class="ttdeci">void addSuperSource(const int &amp;id)</div><div class="ttdoc">Adiciona ao grafo um vértice 'super source' (com id 0) e adiciona arestas com capacidade infinita des...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:109</div></div>
+<div class="ttc" id="aclass_graph_html_aa66955ce01d79e04f73c4642ba6ac5c7"><div class="ttname"><a href="class_graph.html#aa66955ce01d79e04f73c4642ba6ac5c7">Graph::findAugmentingPath</a></div><div class="ttdeci">bool findAugmentingPath(Vertex *s, Vertex *t) const</div><div class="ttdoc">Procura um caminho de aumentação deste o vértice s até ao vértice t.</div><div class="ttdef"><b>Definition:</b> Graph.cpp:175</div></div>
+<div class="ttc" id="aclass_graph_html_aa9b0a6d8ad43c5eabaca5a7140bcc8b6"><div class="ttname"><a href="class_graph.html#aa9b0a6d8ad43c5eabaca5a7140bcc8b6">Graph::vertexSet</a></div><div class="ttdeci">std::vector&lt; Vertex * &gt; vertexSet</div><div class="ttdef"><b>Definition:</b> Graph.h:138</div></div>
+<div class="ttc" id="aclass_graph_html_ab054d78a89eaa63a3f00eb0668fd5f8e"><div class="ttname"><a href="class_graph.html#ab054d78a89eaa63a3f00eb0668fd5f8e">Graph::removeEdge</a></div><div class="ttdeci">bool removeEdge(const int &amp;source, const int &amp;target) const</div><div class="ttdoc">Remove do grafo a aresta entre os vértices com id source e id target.</div><div class="ttdef"><b>Definition:</b> Graph.cpp:121</div></div>
+<div class="ttc" id="aclass_graph_html_ac4c89afc50c3de7145db4c140cf14dd2"><div class="ttname"><a href="class_graph.html#ac4c89afc50c3de7145db4c140cf14dd2">Graph::addBidirectionalEdge</a></div><div class="ttdeci">bool addBidirectionalEdge(const int &amp;source, const int &amp;dest, unsigned capacity, Edge::Service service) const</div><div class="ttdoc">Adiciona ao grafo uma aresta bidirecional (sob a forma de duas arestas simétricas) entre os vértices ...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:35</div></div>
+<div class="ttc" id="aclass_graph_html_ac6192a41101102ca8aa6acca607c84f3"><div class="ttname"><a href="class_graph.html#ac6192a41101102ca8aa6acca607c84f3">Graph::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdoc">Limpa o grafo, i. e., remove todas as suas arestas e todos os seus vértices.</div><div class="ttdef"><b>Definition:</b> Graph.cpp:64</div></div>
+<div class="ttc" id="aclass_graph_html_ac8e55f8c2b13c77f208ad560036c8153"><div class="ttname"><a href="class_graph.html#ac8e55f8c2b13c77f208ad560036c8153">Graph::findMinResidualAlongPath</a></div><div class="ttdeci">static unsigned findMinResidualAlongPath(Vertex *s, Vertex *t)</div><div class="ttdoc">Determina a menor capacidade residual entre o vértice s e o vértice t, seguindo o caminho de aumentaç...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:192</div></div>
+<div class="ttc" id="aclass_graph_html_acc3e3665804015facd1b6de68d41f939"><div class="ttname"><a href="class_graph.html#acc3e3665804015facd1b6de68d41f939">Graph::addEdge</a></div><div class="ttdeci">bool addEdge(const int &amp;source, const int &amp;dest, unsigned capacity, Edge::Service service) const</div><div class="ttdoc">Adiciona ao grafo uma aresta com origem no vértice de id source, destino no vértice de id dest,...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:26</div></div>
+<div class="ttc" id="aclass_graph_html_ad3fa232fd3d6ccd135f93f5489cb57a1"><div class="ttname"><a href="class_graph.html#ad3fa232fd3d6ccd135f93f5489cb57a1">Graph::maxFlow</a></div><div class="ttdeci">unsigned maxFlow(std::list&lt; std::pair&lt; std::string, std::string &gt; &gt; &amp;pairs) const</div><div class="ttdoc">Retorna o maior fluxo máximo entre todos os pares de vértices do grafo e coloca em pairs as etiquetas...</div><div class="ttdef"><b>Definition:</b> Graph.cpp:91</div></div>
+<div class="ttc" id="aclass_graph_html_adf606a86926b2f2bb7e8236b396f2ba1"><div class="ttname"><a href="class_graph.html#adf606a86926b2f2bb7e8236b396f2ba1">Graph::addVertex</a></div><div class="ttdeci">bool addVertex(const int &amp;id, const std::string &amp;label)</div><div class="ttdoc">Adiciona ao grafo um vértice com id id e etiqueta label.</div><div class="ttdef"><b>Definition:</b> Graph.cpp:19</div></div>
+<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdef"><b>Definition:</b> Vertex.h:14</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
