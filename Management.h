@@ -84,7 +84,7 @@ private:
 
     /**@brief Lê o ficheiro da rede e preenche os grafos da rede, dos distritos e dos municípios com os segmentos.
      *
-     * Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro de estações e V o número de vértices do grafo da rede
+     * Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro da rede e V o número de vértices do grafo da rede
      * @param silent indica se a função deve ser silenciosa (true) ou imprimir mensagens de sucesso/insucesso (false)
      * @return true se a leitura do ficheiro da rede foi bem-sucedida, false caso contrário
      */
@@ -92,7 +92,7 @@ private:
 
     /**@brief Lê os ficheiros de dados, depois de limpar os dados anteriores.
      *
-     * Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro de estações e V o número de vértices do grafo da rede
+     * Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro de estações/da rede e V o número de vértices do grafo da rede
      * @param silent indica se a função deve ser silenciosa (true) ou imprimir mensagens de sucesso/insucesso (false)
      */
     void lerFicheirosDados(bool silent);
