@@ -1,0 +1,877 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.5"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>An Analysis Tool for Railway Network Management: Referência à classe Graph</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">An Analysis Tool for Railway Network Management<span id="projectnumber">&#160;DA</span>
+   </div>
+   <div id="projectbrief">Programming Project I</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.5 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Localizar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrada</div>
+</div>
+</div>
+</div>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Membros públicos</a> &#124;
+<a href="#pri-methods">Membros privados</a> &#124;
+<a href="#pri-static-methods">Membros privados estáticos</a> &#124;
+<a href="#pri-attribs">Atributos Privados</a> &#124;
+<a href="class_graph-members.html">Mostrar lista completa dos membros</a>  </div>
+  <div class="headertitle"><div class="title">Referência à classe Graph</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_graph_8h_source.html">Graph.h</a>&gt;</code></p>
+<div class="dynheader">
+Diagrama de colaboração para Graph:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_graph__coll__graph.png" border="0" usemap="#a_graph_coll__map" alt="Collaboration graph"/></div>
+<map name="a_graph_coll__map" id="a_graph_coll__map">
+<area shape="rect" title=" " alt="" coords="5,5,195,339"/>
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Membros públicos</h2></td></tr>
+<tr class="memitem:a089f7fc73ea9976295d387846ad36c69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a089f7fc73ea9976295d387846ad36c69">findVertex</a> (const int &amp;id) const</td></tr>
+<tr class="memdesc:a089f7fc73ea9976295d387846ad36c69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Procura o vértice do grafo pelo seu id.  <a href="class_graph.html#a089f7fc73ea9976295d387846ad36c69">Mais...</a><br /></td></tr>
+<tr class="separator:a089f7fc73ea9976295d387846ad36c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf606a86926b2f2bb7e8236b396f2ba1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#adf606a86926b2f2bb7e8236b396f2ba1">addVertex</a> (const int &amp;id, const std::string &amp;label)</td></tr>
+<tr class="memdesc:adf606a86926b2f2bb7e8236b396f2ba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adiciona ao grafo um vértice com id id e etiqueta label.  <a href="class_graph.html#adf606a86926b2f2bb7e8236b396f2ba1">Mais...</a><br /></td></tr>
+<tr class="separator:adf606a86926b2f2bb7e8236b396f2ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4c89afc50c3de7145db4c140cf14dd2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ac4c89afc50c3de7145db4c140cf14dd2">addBidirectionalEdge</a> (const int &amp;source, const int &amp;dest, unsigned capacity, <a class="el" href="class_edge.html#a0da6c38d912e0e102b1d67d1f239dce3">Edge::Service</a> service) const</td></tr>
+<tr class="memdesc:ac4c89afc50c3de7145db4c140cf14dd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adiciona ao grafo uma aresta bidirecional (sob a forma de duas arestas simétricas) entre os vértices com id source e id dest, com capacidade capacity e serviço service.  <a href="class_graph.html#ac4c89afc50c3de7145db4c140cf14dd2">Mais...</a><br /></td></tr>
+<tr class="separator:ac4c89afc50c3de7145db4c140cf14dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01e3b94dea33b02f7957af6e20d8337e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a01e3b94dea33b02f7957af6e20d8337e">edmondsKarp</a> (int source, int target) const</td></tr>
+<tr class="memdesc:a01e3b94dea33b02f7957af6e20d8337e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza o algoritmo de Edmonds-Karp para encontrar o caminho de fluxo máximo desde o vértice com id source até ao vértice com id target.  <a href="class_graph.html#a01e3b94dea33b02f7957af6e20d8337e">Mais...</a><br /></td></tr>
+<tr class="separator:a01e3b94dea33b02f7957af6e20d8337e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6192a41101102ca8aa6acca607c84f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ac6192a41101102ca8aa6acca607c84f3">clear</a> ()</td></tr>
+<tr class="memdesc:ac6192a41101102ca8aa6acca607c84f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Limpa o grafo, i. e., remove todas as suas arestas e todos os seus vértices.  <a href="class_graph.html#ac6192a41101102ca8aa6acca607c84f3">Mais...</a><br /></td></tr>
+<tr class="separator:ac6192a41101102ca8aa6acca607c84f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6997c1a54249f91255b3ba029d59b407"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a6997c1a54249f91255b3ba029d59b407">getFlow</a> (const int &amp;id) const</td></tr>
+<tr class="memdesc:a6997c1a54249f91255b3ba029d59b407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna o fluxo máximo que chega ao vértice com id id, depois de realizado o algoritmo de Edmonds-Karp.  <a href="class_graph.html#a6997c1a54249f91255b3ba029d59b407">Mais...</a><br /></td></tr>
+<tr class="separator:a6997c1a54249f91255b3ba029d59b407"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a4a4d6c890435df6b1db7beef707c7c"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a9a4a4d6c890435df6b1db7beef707c7c">sumFlow</a> () const</td></tr>
+<tr class="memdesc:a9a4a4d6c890435df6b1db7beef707c7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna a soma dos fluxos máximos entre todos os pares de vértices do grafo.  <a href="class_graph.html#a9a4a4d6c890435df6b1db7beef707c7c">Mais...</a><br /></td></tr>
+<tr class="separator:a9a4a4d6c890435df6b1db7beef707c7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3fa232fd3d6ccd135f93f5489cb57a1"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ad3fa232fd3d6ccd135f93f5489cb57a1">maxFlow</a> (std::list&lt; std::pair&lt; std::string, std::string &gt; &gt; &amp;pairs) const</td></tr>
+<tr class="memdesc:ad3fa232fd3d6ccd135f93f5489cb57a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retorna o maior fluxo máximo entre todos os pares de vértices do grafo e coloca em pairs as etiquetas dos pares de vértices entre os quais circula esse fluxo.  <a href="class_graph.html#ad3fa232fd3d6ccd135f93f5489cb57a1">Mais...</a><br /></td></tr>
+<tr class="separator:ad3fa232fd3d6ccd135f93f5489cb57a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b5c56abd26d423f71ba85d23ed72afc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a9b5c56abd26d423f71ba85d23ed72afc">addSuperSource</a> (const int &amp;id)</td></tr>
+<tr class="memdesc:a9b5c56abd26d423f71ba85d23ed72afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adiciona ao grafo um vértice 'super source' (com id 0) e adiciona arestas com capacidade infinita desde esse vértice até todos os vértices com id diferente de id e grau de entrada igual a 1.  <a href="class_graph.html#a9b5c56abd26d423f71ba85d23ed72afc">Mais...</a><br /></td></tr>
+<tr class="separator:a9b5c56abd26d423f71ba85d23ed72afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74f8e1f5ca686ca72f7b5eba278bae4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a74f8e1f5ca686ca72f7b5eba278bae4e">removeSuperSource</a> () const</td></tr>
+<tr class="memdesc:a74f8e1f5ca686ca72f7b5eba278bae4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove do grafo o vértice 'super source' (com id 0) e as arestas que dele partem.  <a href="class_graph.html#a74f8e1f5ca686ca72f7b5eba278bae4e">Mais...</a><br /></td></tr>
+<tr class="separator:a74f8e1f5ca686ca72f7b5eba278bae4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab054d78a89eaa63a3f00eb0668fd5f8e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ab054d78a89eaa63a3f00eb0668fd5f8e">removeEdge</a> (const int &amp;source, const int &amp;target) const</td></tr>
+<tr class="memdesc:ab054d78a89eaa63a3f00eb0668fd5f8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove do grafo a aresta entre os vértices com id source e id target.  <a href="class_graph.html#ab054d78a89eaa63a3f00eb0668fd5f8e">Mais...</a><br /></td></tr>
+<tr class="separator:ab054d78a89eaa63a3f00eb0668fd5f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a436b9c714604c699a9617e75bfb60a51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a436b9c714604c699a9617e75bfb60a51">dijkstra</a> (int source) const</td></tr>
+<tr class="memdesc:a436b9c714604c699a9617e75bfb60a51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza o algoritmo de Dijkstra para encontrar o caminho mais barato/curto desde o vértice com id source até todos os outros vértices do grafo.  <a href="class_graph.html#a436b9c714604c699a9617e75bfb60a51">Mais...</a><br /></td></tr>
+<tr class="separator:a436b9c714604c699a9617e75bfb60a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3965b5ec5ef4c09e3ea7b3a4371096bc"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a3965b5ec5ef4c09e3ea7b3a4371096bc">getPathFlow</a> (int target) const</td></tr>
+<tr class="memdesc:a3965b5ec5ef4c09e3ea7b3a4371096bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determina o fluxo máximo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra e de acordo com o Teorema Maximum-Flow Minimum-Cut.  <a href="class_graph.html#a3965b5ec5ef4c09e3ea7b3a4371096bc">Mais...</a><br /></td></tr>
+<tr class="separator:a3965b5ec5ef4c09e3ea7b3a4371096bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1946382b4c740d946622f3bed24ea271"><td class="memItemLeft" align="right" valign="top">unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a1946382b4c740d946622f3bed24ea271">getPathCost</a> (int target, unsigned flow) const</td></tr>
+<tr class="memdesc:a1946382b4c740d946622f3bed24ea271"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determina o custo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra, passando por todas as arestas fluxo flow.  <a href="class_graph.html#a1946382b4c740d946622f3bed24ea271">Mais...</a><br /></td></tr>
+<tr class="separator:a1946382b4c740d946622f3bed24ea271"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Membros privados</h2></td></tr>
+<tr class="memitem:aa66955ce01d79e04f73c4642ba6ac5c7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#aa66955ce01d79e04f73c4642ba6ac5c7">findAugmentingPath</a> (<a class="el" href="class_vertex.html">Vertex</a> *s, <a class="el" href="class_vertex.html">Vertex</a> *t) const</td></tr>
+<tr class="memdesc:aa66955ce01d79e04f73c4642ba6ac5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Procura um caminho de aumentação deste o vértice s até ao vértice t.  <a href="class_graph.html#aa66955ce01d79e04f73c4642ba6ac5c7">Mais...</a><br /></td></tr>
+<tr class="separator:aa66955ce01d79e04f73c4642ba6ac5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Membros privados estáticos</h2></td></tr>
+<tr class="memitem:a880193804d1af5b663e1f79219ceae56"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a880193804d1af5b663e1f79219ceae56">testAndVisit</a> (std::queue&lt; <a class="el" href="class_vertex.html">Vertex</a> * &gt; &amp;q, <a class="el" href="class_edge.html">Edge</a> *e, <a class="el" href="class_vertex.html">Vertex</a> *w, unsigned residual)</td></tr>
+<tr class="memdesc:a880193804d1af5b663e1f79219ceae56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Testa e visita o vértice w seguindo a aresta e, i. e., se o vértice w não estiver visitado e houver capacidade residual, visita o vértice w, define como seu predecessor a aresta e e coloca-o na fila q.  <a href="class_graph.html#a880193804d1af5b663e1f79219ceae56">Mais...</a><br /></td></tr>
+<tr class="separator:a880193804d1af5b663e1f79219ceae56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8e55f8c2b13c77f208ad560036c8153"><td class="memItemLeft" align="right" valign="top">static unsigned&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#ac8e55f8c2b13c77f208ad560036c8153">findMinResidualAlongPath</a> (<a class="el" href="class_vertex.html">Vertex</a> *s, <a class="el" href="class_vertex.html">Vertex</a> *t)</td></tr>
+<tr class="memdesc:ac8e55f8c2b13c77f208ad560036c8153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determina a menor capacidade residual entre o vértice s e o vértice t, seguindo o caminho de aumentação determinado anteriormente.  <a href="class_graph.html#ac8e55f8c2b13c77f208ad560036c8153">Mais...</a><br /></td></tr>
+<tr class="separator:ac8e55f8c2b13c77f208ad560036c8153"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09a9ff49c0c6087103481b4b7d6ce6cc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a09a9ff49c0c6087103481b4b7d6ce6cc">augmentFlowAlongPath</a> (<a class="el" href="class_vertex.html">Vertex</a> *s, <a class="el" href="class_vertex.html">Vertex</a> *t, unsigned f)</td></tr>
+<tr class="memdesc:a09a9ff49c0c6087103481b4b7d6ce6cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aumenta o fluxo entre o vértice s e o vértice t em f unidades de fluxo, seguindo o caminho de aumentação determinado anteriormente.  <a href="class_graph.html#a09a9ff49c0c6087103481b4b7d6ce6cc">Mais...</a><br /></td></tr>
+<tr class="separator:a09a9ff49c0c6087103481b4b7d6ce6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fd4cb81b5061889f8be9f09dfc946db"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#a2fd4cb81b5061889f8be9f09dfc946db">relax</a> (<a class="el" href="class_vertex.html">Vertex</a> *u, <a class="el" href="class_vertex.html">Vertex</a> *v, <a class="el" href="class_edge.html">Edge</a> *e)</td></tr>
+<tr class="memdesc:a2fd4cb81b5061889f8be9f09dfc946db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Relaxa a aresta e, desde o vértice u até ao vértice v, i. e., se o custo do vértice v for superior ao custo do vértice u somado com o custo da aresta e, atualiza o custo do vértice v para este segundo valor e atualiza o predecessor do vértice v para a aresta e.  <a href="class_graph.html#a2fd4cb81b5061889f8be9f09dfc946db">Mais...</a><br /></td></tr>
+<tr class="separator:a2fd4cb81b5061889f8be9f09dfc946db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Atributos Privados</h2></td></tr>
+<tr class="memitem:aa9b0a6d8ad43c5eabaca5a7140bcc8b6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_vertex.html">Vertex</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graph.html#aa9b0a6d8ad43c5eabaca5a7140bcc8b6">vertexSet</a></td></tr>
+<tr class="separator:aa9b0a6d8ad43c5eabaca5a7140bcc8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentação dos métodos</h2>
+<a id="ac4c89afc50c3de7145db4c140cf14dd2" name="ac4c89afc50c3de7145db4c140cf14dd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4c89afc50c3de7145db4c140cf14dd2">&#9670;&#160;</a></span>addBidirectionalEdge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Graph::addBidirectionalEdge </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>capacity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_edge.html#a0da6c38d912e0e102b1d67d1f239dce3">Edge::Service</a>&#160;</td>
+          <td class="paramname"><em>service</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adiciona ao grafo uma aresta bidirecional (sob a forma de duas arestas simétricas) entre os vértices com id source e id dest, com capacidade capacity e serviço service. </p>
+<p >Complexidade Temporal: O(V), sendo V o número de vértices do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>id de um dos vértices da aresta a adicionar </td></tr>
+    <tr><td class="paramname">dest</td><td>id do outro vértice da aresta a adicionar </td></tr>
+    <tr><td class="paramname">capacity</td><td>capacidade da aresta a adicionar </td></tr>
+    <tr><td class="paramname">service</td><td>serviço da aresta a adicionar </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>true se a operação foi bem-sucedida, false caso contrário (não existe no grafo nenhum vértice com id source ou com id dest) </dd></dl>
+
+</div>
+</div>
+<a id="a9b5c56abd26d423f71ba85d23ed72afc" name="a9b5c56abd26d423f71ba85d23ed72afc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b5c56abd26d423f71ba85d23ed72afc">&#9670;&#160;</a></span>addSuperSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::addSuperSource </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adiciona ao grafo um vértice 'super source' (com id 0) e adiciona arestas com capacidade infinita desde esse vértice até todos os vértices com id diferente de id e grau de entrada igual a 1. </p>
+<p >Complexidade Temporal: O(V), sendo V o número de vértices do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>id do vértice ao qual, independentemente do grau de entrada, não ligar a 'super source' </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adf606a86926b2f2bb7e8236b396f2ba1" name="adf606a86926b2f2bb7e8236b396f2ba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf606a86926b2f2bb7e8236b396f2ba1">&#9670;&#160;</a></span>addVertex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Graph::addVertex </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>label</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adiciona ao grafo um vértice com id id e etiqueta label. </p>
+<p >Complexidade Temporal: O(V), sendo V o número de vértices do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>id do vértice a adicionar </td></tr>
+    <tr><td class="paramname">label</td><td>etiqueta do vértice a adicionar </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>true se a operação foi bem-sucedida, false caso contrário (já existia no grafo um vértice com o mesmo id) </dd></dl>
+
+</div>
+</div>
+<a id="a09a9ff49c0c6087103481b4b7d6ce6cc" name="a09a9ff49c0c6087103481b4b7d6ce6cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09a9ff49c0c6087103481b4b7d6ce6cc">&#9670;&#160;</a></span>augmentFlowAlongPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::augmentFlowAlongPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>f</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Aumenta o fluxo entre o vértice s e o vértice t em f unidades de fluxo, seguindo o caminho de aumentação determinado anteriormente. </p>
+<p >Complexidade Temporal: O(E), sendo E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>vértice de origem </td></tr>
+    <tr><td class="paramname">t</td><td>vértice de destino </td></tr>
+    <tr><td class="paramname">f</td><td>unidades de fluxo a aumentar </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac6192a41101102ca8aa6acca607c84f3" name="ac6192a41101102ca8aa6acca607c84f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6192a41101102ca8aa6acca607c84f3">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Limpa o grafo, i. e., remove todas as suas arestas e todos os seus vértices. </p>
+<p >Complexidade Temporal: O(V + E), sendo V o número de vértices do grafo e E o número de arestas do grafo </p>
+
+</div>
+</div>
+<a id="a436b9c714604c699a9617e75bfb60a51" name="a436b9c714604c699a9617e75bfb60a51"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a436b9c714604c699a9617e75bfb60a51">&#9670;&#160;</a></span>dijkstra()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::dijkstra </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>source</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Realiza o algoritmo de Dijkstra para encontrar o caminho mais barato/curto desde o vértice com id source até todos os outros vértices do grafo. </p>
+<p >Complexidade Temporal: O((V + E) log V), sendo V o número de vértices do grafo e E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>id do vértice de partida/origem do algoritmo de Dijkstra </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a01e3b94dea33b02f7957af6e20d8337e" name="a01e3b94dea33b02f7957af6e20d8337e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01e3b94dea33b02f7957af6e20d8337e">&#9670;&#160;</a></span>edmondsKarp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::edmondsKarp </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Realiza o algoritmo de Edmonds-Karp para encontrar o caminho de fluxo máximo desde o vértice com id source até ao vértice com id target. </p>
+<p >Complexidade Temporal: O(VE<sup>2</sup>), sendo V o número de vértices do grafo e E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>id do vértice de origem do caminho de fluxo máximo a encontrar </td></tr>
+    <tr><td class="paramname">target</td><td>id do vértice de destino do caminho de fluxo máximo a encontrar </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa66955ce01d79e04f73c4642ba6ac5c7" name="aa66955ce01d79e04f73c4642ba6ac5c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa66955ce01d79e04f73c4642ba6ac5c7">&#9670;&#160;</a></span>findAugmentingPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Graph::findAugmentingPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Procura um caminho de aumentação deste o vértice s até ao vértice t. </p>
+<p >Complexidade Temporal: O(VE), sendo V o número de vértices do grafo e E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>vértice de origem </td></tr>
+    <tr><td class="paramname">t</td><td>vértice de destino </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>true se foi encontrado um caminho de aumentação desde o vértice s até ao vértice t, false caso contrário </dd></dl>
+
+</div>
+</div>
+<a id="ac8e55f8c2b13c77f208ad560036c8153" name="ac8e55f8c2b13c77f208ad560036c8153"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e55f8c2b13c77f208ad560036c8153">&#9670;&#160;</a></span>findMinResidualAlongPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Graph::findMinResidualAlongPath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determina a menor capacidade residual entre o vértice s e o vértice t, seguindo o caminho de aumentação determinado anteriormente. </p>
+<p >Complexidade Temporal: O(E), sendo E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>vértice de origem </td></tr>
+    <tr><td class="paramname">t</td><td>vértice de destino </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>menor capacidade residual entre o vértice s e o vértice t, seguindo o caminho de aumentação determinado anteriormente </dd></dl>
+
+</div>
+</div>
+<a id="a089f7fc73ea9976295d387846ad36c69" name="a089f7fc73ea9976295d387846ad36c69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a089f7fc73ea9976295d387846ad36c69">&#9670;&#160;</a></span>findVertex()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_vertex.html">Vertex</a> * Graph::findVertex </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Procura o vértice do grafo pelo seu id. </p>
+<p >Complexidade Temporal: O(V), sendo V o número de vértices do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>id do vértice a procurar </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>apontador para o vértice encontrado </dd></dl>
+
+</div>
+</div>
+<a id="a6997c1a54249f91255b3ba029d59b407" name="a6997c1a54249f91255b3ba029d59b407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6997c1a54249f91255b3ba029d59b407">&#9670;&#160;</a></span>getFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Graph::getFlow </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retorna o fluxo máximo que chega ao vértice com id id, depois de realizado o algoritmo de Edmonds-Karp. </p>
+<p >Complexidade Temporal: O(V + E), sendo V o número de vértices do grafo e E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>id do vértice a analisar </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>fluxo máximo que chega ao vértice com id id </dd></dl>
+
+</div>
+</div>
+<a id="a1946382b4c740d946622f3bed24ea271" name="a1946382b4c740d946622f3bed24ea271"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1946382b4c740d946622f3bed24ea271">&#9670;&#160;</a></span>getPathCost()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Graph::getPathCost </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>flow</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determina o custo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra, passando por todas as arestas fluxo flow. </p>
+<p >Complexidade Temporal: O(V + E), sendo V o número de vértices do grafo e E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>id do vértice de destino do caminho </td></tr>
+    <tr><td class="paramname">flow</td><td>fluxo a passar pelo caminho </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>custo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra, passando por todas as arestas fluxo flow </dd></dl>
+
+</div>
+</div>
+<a id="a3965b5ec5ef4c09e3ea7b3a4371096bc" name="a3965b5ec5ef4c09e3ea7b3a4371096bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3965b5ec5ef4c09e3ea7b3a4371096bc">&#9670;&#160;</a></span>getPathFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Graph::getPathFlow </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determina o fluxo máximo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra e de acordo com o Teorema Maximum-Flow Minimum-Cut. </p>
+<p >Complexidade Temporal: O(V + E), sendo V o número de vértices do grafo e E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target</td><td>id do vértice de destino do caminho </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>fluxo máximo até ao vértice com id target, seguindo o caminho determinado pelo algoritmo de Dijkstra </dd></dl>
+
+</div>
+</div>
+<a id="ad3fa232fd3d6ccd135f93f5489cb57a1" name="ad3fa232fd3d6ccd135f93f5489cb57a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3fa232fd3d6ccd135f93f5489cb57a1">&#9670;&#160;</a></span>maxFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Graph::maxFlow </td>
+          <td>(</td>
+          <td class="paramtype">std::list&lt; std::pair&lt; std::string, std::string &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pairs</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retorna o maior fluxo máximo entre todos os pares de vértices do grafo e coloca em pairs as etiquetas dos pares de vértices entre os quais circula esse fluxo. </p>
+<p >Complexidade Temporal: O(V<sup>3</sup>E<sup>2</sup>), sendo V o número de vértices do grafo e E o número de arestas do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pairs</td><td>lista a preencher com as etiquetas dos pares de vértices do grafo entre os quais circula o maior fluxo máximo entre todos os pares de vértices do grafo </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>maior fluxo máximo entre todos os pares de vértices do grafo </dd></dl>
+
+</div>
+</div>
+<a id="a2fd4cb81b5061889f8be9f09dfc946db" name="a2fd4cb81b5061889f8be9f09dfc946db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fd4cb81b5061889f8be9f09dfc946db">&#9670;&#160;</a></span>relax()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Graph::relax </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>u</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>v</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_edge.html">Edge</a> *&#160;</td>
+          <td class="paramname"><em>e</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Relaxa a aresta e, desde o vértice u até ao vértice v, i. e., se o custo do vértice v for superior ao custo do vértice u somado com o custo da aresta e, atualiza o custo do vértice v para este segundo valor e atualiza o predecessor do vértice v para a aresta e. </p>
+<p >Complexidade Temporal: O(1) </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">u</td><td>vértice de origem da aresta e </td></tr>
+    <tr><td class="paramname">v</td><td>vértice de destino da aresta e </td></tr>
+    <tr><td class="paramname">e</td><td>aresta a relaxar </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>true se o relaxamento da aresta resultou num menor custo para o vértice v, false caso contrário </dd></dl>
+
+</div>
+</div>
+<a id="ab054d78a89eaa63a3f00eb0668fd5f8e" name="ab054d78a89eaa63a3f00eb0668fd5f8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab054d78a89eaa63a3f00eb0668fd5f8e">&#9670;&#160;</a></span>removeEdge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Graph::removeEdge </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove do grafo a aresta entre os vértices com id source e id target. </p>
+<p >Complexidade Temporal: O(V), sendo V o número de vértices do grafo </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">source</td><td>id de um dos vértices da aresta a remover </td></tr>
+    <tr><td class="paramname">target</td><td>id do outro vértice da aresta a remover </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Retorna</dt><dd>true se a operação foi bem-sucedida, false caso contrário </dd></dl>
+
+</div>
+</div>
+<a id="a74f8e1f5ca686ca72f7b5eba278bae4e" name="a74f8e1f5ca686ca72f7b5eba278bae4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f8e1f5ca686ca72f7b5eba278bae4e">&#9670;&#160;</a></span>removeSuperSource()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::removeSuperSource </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove do grafo o vértice 'super source' (com id 0) e as arestas que dele partem. </p>
+<p >Complexidade Temporal: O(V), sendo V o número de vértices do grafo </p>
+
+</div>
+</div>
+<a id="a9a4a4d6c890435df6b1db7beef707c7c" name="a9a4a4d6c890435df6b1db7beef707c7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a4a4d6c890435df6b1db7beef707c7c">&#9670;&#160;</a></span>sumFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned Graph::sumFlow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retorna a soma dos fluxos máximos entre todos os pares de vértices do grafo. </p>
+<p >Complexidade Temporal: O(V<sup>3</sup>E<sup>2</sup>), sendo V o número de vértices do grafo e E o número de arestas do grafo </p><dl class="section return"><dt>Retorna</dt><dd>soma dos fluxos máximos entre todos os pares de vértices do grafo </dd></dl>
+
+</div>
+</div>
+<a id="a880193804d1af5b663e1f79219ceae56" name="a880193804d1af5b663e1f79219ceae56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a880193804d1af5b663e1f79219ceae56">&#9670;&#160;</a></span>testAndVisit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graph::testAndVisit </td>
+          <td>(</td>
+          <td class="paramtype">std::queue&lt; <a class="el" href="class_vertex.html">Vertex</a> * &gt; &amp;&#160;</td>
+          <td class="paramname"><em>q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_edge.html">Edge</a> *&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_vertex.html">Vertex</a> *&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned&#160;</td>
+          <td class="paramname"><em>residual</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Testa e visita o vértice w seguindo a aresta e, i. e., se o vértice w não estiver visitado e houver capacidade residual, visita o vértice w, define como seu predecessor a aresta e e coloca-o na fila q. </p>
+<p >Complexidade Temporal: O(1) </p><dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">q</td><td>fila de apontadores para vértices </td></tr>
+    <tr><td class="paramname">e</td><td>aresta segundo a qual testar e visitar o vértice w </td></tr>
+    <tr><td class="paramname">w</td><td>vértice a testar e visitar </td></tr>
+    <tr><td class="paramname">residual</td><td>capacidade residual da aresta e </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentação dos dados membro</h2>
+<a id="aa9b0a6d8ad43c5eabaca5a7140bcc8b6" name="aa9b0a6d8ad43c5eabaca5a7140bcc8b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9b0a6d8ad43c5eabaca5a7140bcc8b6">&#9670;&#160;</a></span>vertexSet</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_vertex.html">Vertex</a> *&gt; Graph::vertexSet</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>A documentação para esta classe foi gerada a partir dos seguintes ficheiros:<ul>
+<li><a class="el" href="_graph_8h_source.html">Graph.h</a></li>
+<li><a class="el" href="_graph_8cpp.html">Graph.cpp</a></li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.5
+</small></address>
+</body>
+</html>
