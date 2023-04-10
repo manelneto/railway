@@ -99,7 +99,7 @@ private:
 
     /**@brief Verifica se os ficheiros de dados foram lidos, i. e., se existem dados para analisar. Em caso negativo, lê os ficheiros de dados.
      *
-     * Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro de estações e V o número de vértices do grafo da rede
+     * Complexidade Temporal: O(nV), sendo n o número de linhas do ficheiro de estações/da rede e V o número de vértices do grafo da rede
      */
     void verificarFicheirosDados();
 
