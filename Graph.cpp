@@ -9,8 +9,8 @@
 
 using namespace std;
 
-Vertex * Graph::findVertex(const int &id) const {
-    for (auto v : vertexSet)
+Vertex *Graph::findVertex(const int &id) const {
+    for (auto v: vertexSet)
         if (v->getId() == id)
             return v;
     return nullptr;
@@ -23,21 +23,12 @@ bool Graph::addVertex(const int &id, const string &label) {
     return true;
 }
 
-bool Graph::addEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const {
-    auto v1 = findVertex(source);
-    auto v2 = findVertex(dest);
-    if (v1 == nullptr || v2 == nullptr)
-        return false;
-    v1->addEdge(v2, capacity, service);
-    return true;
-}
-
 bool Graph::addBidirectionalEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const {
     auto v1 = findVertex(source);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
-    for (const auto edge : v1->getAdj())
+    for (const auto edge: v1->getAdj())
         if (edge->getDest()->getId() == dest && edge->getCapacity() == capacity && edge->getService() == service)
             return false;
     v1->addEdge(v2, capacity, service);
@@ -51,7 +42,7 @@ void Graph::edmondsKarp(int source, int target) const {
     if (s == nullptr || t == nullptr || s == t)
         throw logic_error("Invalid source and/or target vertex");
 
-    for (auto v : vertexSet)
+    for (auto v: vertexSet)
         for (auto e: v->getAdj())
             e->setFlow(0);
 
@@ -62,7 +53,7 @@ void Graph::edmondsKarp(int source, int target) const {
 }
 
 void Graph::clear() {
-    for (auto v : vertexSet)
+    for (auto v: vertexSet)
         v->removeOutgoingEdges();
     vertexSet.clear();
 }
@@ -70,15 +61,15 @@ void Graph::clear() {
 unsigned Graph::getFlow(const int &id) const {
     unsigned flow = 0;
     const auto u = findVertex(id);
-    for (const auto e : u->getIncoming())
+    for (const auto e: u->getIncoming())
         flow += e->getFlow();
     return flow;
 }
 
 unsigned Graph::sumFlow() const {
     unsigned sum = 0;
-    for (const auto &u : vertexSet)
-        for (const auto &v : vertexSet) {
+    for (const auto &u: vertexSet)
+        for (const auto &v: vertexSet) {
             if (v->getId() <= u->getId())
                 continue;
             edmondsKarp(u->getId(), v->getId());
@@ -90,8 +81,8 @@ unsigned Graph::sumFlow() const {
 
 unsigned Graph::maxFlow(list<pair<string, string>> &pairs) const {
     unsigned max = 0;
-    for (const auto &u : vertexSet)
-        for (const auto &v : vertexSet) {
+    for (const auto &u: vertexSet)
+        for (const auto &v: vertexSet) {
             if (v->getId() <= u->getId())
                 continue;
             edmondsKarp(u->getId(), v->getId());
@@ -108,9 +99,10 @@ unsigned Graph::maxFlow(list<pair<string, string>> &pairs) const {
 
 void Graph::addSuperSource(const int &id) {
     addVertex(0, "Super Source");
-    for (const auto &v : vertexSet)
+    Vertex *superSource = findVertex(0);
+    for (const auto &v: vertexSet)
         if (v->getIncoming().size() == 1 && v->getId() != id)
-            v->addEdge(v, UINT_MAX, Edge::OTHER);
+            superSource->addEdge(v, UINT_MAX, Edge::OTHER);
 }
 
 void Graph::removeSuperSource() const {
@@ -126,7 +118,7 @@ bool Graph::removeEdge(const int &source, const int &target) const {
 
 void Graph::dijkstra(int source) const {
     MutablePriorityQueue<Vertex> queue;
-    for (const auto vertex : vertexSet) {
+    for (const auto vertex: vertexSet) {
         vertex->setCost(INT_MAX);
         vertex->setPath(nullptr);
         queue.insert(vertex);
@@ -173,7 +165,7 @@ void Graph::testAndVisit(queue<Vertex *> &q, Edge *e, Vertex *w, unsigned residu
 }
 
 bool Graph::findAugmentingPath(Vertex *s, Vertex *t) const {
-    for (auto v : vertexSet)
+    for (auto v: vertexSet)
         v->setVisited(false);
     s->setVisited(true);
     queue<Vertex *> q;
@@ -191,13 +183,12 @@ bool Graph::findAugmentingPath(Vertex *s, Vertex *t) const {
 
 unsigned Graph::findMinResidualAlongPath(Vertex *s, Vertex *t) {
     unsigned f = UINT_MAX;
-    for (auto v = t; v != s; ) {
+    for (auto v = t; v != s;) {
         auto e = v->getPath();
         if (e->getDest() == v) {
             f = min(f, e->getCapacity() - e->getFlow());
             v = e->getOrig();
-        }
-        else {
+        } else {
             f = min(f, e->getFlow());
             v = e->getDest();
         }
@@ -206,14 +197,13 @@ unsigned Graph::findMinResidualAlongPath(Vertex *s, Vertex *t) {
 }
 
 void Graph::augmentFlowAlongPath(Vertex *s, Vertex *t, unsigned f) {
-    for (auto v = t; v != s; ) {
+    for (auto v = t; v != s;) {
         auto e = v->getPath();
         unsigned flow = e->getFlow();
         if (e->getDest() == v) {
             e->setFlow(flow + f);
             v = e->getOrig();
-        }
-        else {
+        } else {
             e->setFlow(flow - f);
             v = e->getDest();
         }

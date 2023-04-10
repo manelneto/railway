@@ -8,7 +8,7 @@
 
 #include <vector>
 
-template <class T>
+template<class T>
 class MutablePriorityQueue {
 public:
     /**@brief Construtor sem parâmetros. Constrói uma fila de prioridade mutável (minHeap) com índices a começar em 1 para facilitar cálculos de pais/filhos.
@@ -22,21 +22,21 @@ public:
      * Complexidade Temporal: O(log n), sendo n o número de elementos na fila de prioridade mutável
      * @param x elemento a inserir na fila de prioridade mutável
      */
-    void insert(T * x);
+    void insert(T *x);
 
     /**@brief Retorna o elemento mais prioritário (menor índice) da fila de prioridade mutável, retira-o da fila e reajusta-a.
      * 
      * Complexidade Temporal: O(log n), sendo n o número de elementos na fila de prioridade mutável
      * @return apontador para o elemento mais prioritário da fila de prioridade mutável
      */
-    T * extractMin();
+    T *extractMin();
 
     /**@brief Atualiza a prioridade do elemento x (aumentando-a, diminuindo o índice) e reajusta a fila de prioridade mutável.
      * 
      * Complexidade Temporal: O(log n), sendo n o número de elementos na fila de prioridade mutável
      * @param x elemento a atualizar prioridade
      */
-    void decreaseKey(T * x);
+    void decreaseKey(T *x);
 
     /**@brief Verifica se a fila de prioridade mutável não contém elementos, i. e., se o seu tamanho é 1.
      * 
@@ -68,26 +68,26 @@ private:
      * @param i índice da nova posição do elemento x
      * @param x elemento a colocar na posição índice i da fila de prioridade mutável
      */
-    inline void set(unsigned i, T * x);
+    inline void set(unsigned i, T *x);
 };
 
 // Index calculations
 #define parent(i) ((i) / 2)
 #define leftChild(i) ((i) * 2)
 
-template <class T>
+template<class T>
 MutablePriorityQueue<T>::MutablePriorityQueue() {
     H.push_back(nullptr);
 }
 
-template <class T>
+template<class T>
 void MutablePriorityQueue<T>::insert(T *x) {
     H.push_back(x);
     heapifyUp(H.size() - 1);
 }
 
-template <class T>
-T* MutablePriorityQueue<T>::extractMin() {
+template<class T>
+T *MutablePriorityQueue<T>::extractMin() {
     auto x = H[1];
     H[1] = H.back();
     H.pop_back();
@@ -97,17 +97,17 @@ T* MutablePriorityQueue<T>::extractMin() {
     return x;
 }
 
-template <class T>
+template<class T>
 void MutablePriorityQueue<T>::decreaseKey(T *x) {
     heapifyUp(x->queueIndex);
 }
 
-template <class T>
+template<class T>
 bool MutablePriorityQueue<T>::empty() {
     return H.size() == 1;
 }
 
-template <class T>
+template<class T>
 void MutablePriorityQueue<T>::heapifyUp(unsigned i) {
     auto x = H[i];
     while (i > 1 && *x < *H[parent(i)]) {
@@ -117,7 +117,7 @@ void MutablePriorityQueue<T>::heapifyUp(unsigned i) {
     set(i, x);
 }
 
-template <class T>
+template<class T>
 void MutablePriorityQueue<T>::heapifyDown(unsigned i) {
     auto x = H[i];
     while (true) {
@@ -134,8 +134,8 @@ void MutablePriorityQueue<T>::heapifyDown(unsigned i) {
     set(i, x);
 }
 
-template <class T>
-void MutablePriorityQueue<T>::set(unsigned i, T * x) {
+template<class T>
+void MutablePriorityQueue<T>::set(unsigned i, T *x) {
     H[i] = x;
     x->queueIndex = i;
 }

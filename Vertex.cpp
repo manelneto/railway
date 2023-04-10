@@ -6,9 +6,9 @@
 
 using namespace std;
 
-Vertex::Vertex(int id, const string &label): id(id), label(label) {}
+Vertex::Vertex(int id, const string &label) : id(id), label(label) {}
 
-bool Vertex::operator<(Vertex & vertex) const {
+bool Vertex::operator<(Vertex &vertex) const {
     return this->cost < vertex.cost;
 }
 
@@ -32,7 +32,7 @@ unsigned Vertex::getCost() const {
     return this->cost;
 }
 
-Edge * Vertex::getPath() const {
+Edge *Vertex::getPath() const {
     return this->path;
 }
 
@@ -52,7 +52,7 @@ void Vertex::setPath(Edge *path) {
     this->path = path;
 }
 
-Edge * Vertex::addEdge(Vertex *d, unsigned capacity, Edge::Service service) {
+Edge *Vertex::addEdge(Vertex *d, unsigned capacity, Edge::Service service) {
     auto newEdge = new Edge(this, d, capacity, service);
     adj.push_back(newEdge);
     d->incoming.push_back(newEdge);
@@ -69,8 +69,7 @@ bool Vertex::removeEdge(int destID) {
             it = adj.erase(it);
             deleteEdge(edge);
             removedEdge = true;
-        }
-        else
+        } else
             it++;
     }
     return removedEdge;

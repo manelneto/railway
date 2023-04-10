@@ -4,7 +4,8 @@
 
 #include "Edge.h"
 
-Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : orig(orig), dest(dest), capacity(capacity), service(service) {
+Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : orig(orig), dest(dest), capacity(capacity),
+                                                                             service(service) {
     if (service == STANDARD)
         cost = 2;
     else if (service == ALFA)
@@ -13,11 +14,11 @@ Edge::Edge(Vertex *orig, Vertex *dest, unsigned capacity, Service service) : ori
         cost = -1;
 }
 
-Vertex * Edge::getOrig() const {
+Vertex *Edge::getOrig() const {
     return this->orig;
 }
 
-Vertex * Edge::getDest() const {
+Vertex *Edge::getDest() const {
     return this->dest;
 }
 

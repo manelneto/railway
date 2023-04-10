@@ -10,7 +10,7 @@
 using namespace std;
 
 bool Management::isInt(const string &str) {
-    for (const char &ch : str)
+    for (const char &ch: str)
         if (!isdigit(ch))
             return false;
     return true;
@@ -32,7 +32,7 @@ int Management::readInt() {
     int n;
     try {
         n = stoi(s);
-    } catch (invalid_argument&) {
+    } catch (invalid_argument &) {
         cout << "Não introduziu nenhum número. Tente novamente: ";
         n = readInt();
     }
@@ -41,7 +41,8 @@ int Management::readInt() {
 
 int Management::validateInt(int n, int min, int max) {
     while (n < min || n > max) {
-        cout << "O número inserido não é válido (deve pertencer ao intervalo [" << min << ", " << max << "]). Tente novamente: ";
+        cout << "O número inserido não é válido (deve pertencer ao intervalo [" << min << ", " << max
+             << "]). Tente novamente: ";
         n = readInt();
     }
     return n;
@@ -55,7 +56,7 @@ Station Management::readStation() const {
         cout << "Estação não encontrada. Tente novamente." << endl;
         station = readStation();
     }
-    return  *stations.find(station);
+    return *stations.find(station);
 }
 
 void Management::removeSegment() const {
@@ -140,8 +141,7 @@ bool Management::readStationsFile(bool silent) {
             if (escape) {
                 fields[f] += field;
                 fields[f] += ",";
-            }
-            else
+            } else
                 fields[f++] += field;
         }
         string name = fields[0];
@@ -157,13 +157,13 @@ bool Management::readStationsFile(bool silent) {
             if (!municipality.empty())
                 municipalities[municipality].addVertex(id, name);
             id++;
-        }
-        else
+        } else
             ignored++;
     }
     if (!silent) {
         cout << "Leitura do ficheiro " << stationsFile << " bem-sucedida!" << endl;
-        cout << "Foram lidas " << stations.size() << " estações e foram ignoradas " << ignored << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
+        cout << "Foram lidas " << stations.size() << " estações e foram ignoradas " << ignored
+             << " estações por serem duplicadas (estações com o mesmo nome)." << endl;
     }
     return true;
 }
@@ -196,16 +196,19 @@ bool Management::readNetworkFile(bool silent) {
             if (!network.addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service))
                 error++;
             if (stationA->getDistrict() == stationB->getDistrict())
-                districts[stationA->getDistrict()].addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
-            if (stationA->getMunicipality() == stationB -> getMunicipality())
-                municipalities[stationA->getMunicipality()].addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity, service);
+                districts[stationA->getDistrict()].addBidirectionalEdge(stationA->getId(), stationB->getId(), capacity,
+                                                                        service);
+            if (stationA->getMunicipality() == stationB->getMunicipality())
+                municipalities[stationA->getMunicipality()].addBidirectionalEdge(stationA->getId(), stationB->getId(),
+                                                                                 capacity, service);
             counter++;
         } else
             error++;
     }
     if (!silent) {
         cout << "Leitura do ficheiro " << networkFile << " bem-sucedida!" << endl;
-        cout << "Foram lidos " << counter << " segmentos e ocorreram " << error << " erros (estações de origem/destino não encontradas ou ligações duplicadas)." << endl;
+        cout << "Foram lidos " << counter << " segmentos e ocorreram " << error
+             << " erros (estações de origem/destino não encontradas ou ligações duplicadas)." << endl;
     }
     return true;
 }
@@ -232,7 +235,9 @@ void Management::lerFicheirosDados(bool silent) {
 
 void Management::verificarFicheirosDados() {
     while (!filesRead) {
-        cout << "Ainda não leu os ficheiros de dados (ou ocorreu um erro durante a leitura), pelo que não existem dados para analisar." << endl;
+        cout
+                << "Ainda não leu os ficheiros de dados (ou ocorreu um erro durante a leitura), pelo que não existem dados para analisar."
+                << endl;
         cout << endl;
         lerFicheirosDados(false);
     }
@@ -252,7 +257,7 @@ void Management::calcularFluxoMaximo(Graph &graph) {
     }
     try {
         network.edmondsKarp(source.getId(), target.getId());
-    } catch (logic_error&) {
+    } catch (logic_error &) {
         cout << "Ocorreu um erro inesperado..." << endl;
         return;
     }
@@ -284,7 +289,7 @@ void Management::fluxoMaximoGeral() {
     cout << endl;
     unsigned max = network.maxFlow(pares);
     cout << "Os pares de estações que requerem o maior número de comboios (" << max << ") são:" << endl;
-    for (const auto &par : pares) {
+    for (const auto &par: pares) {
         auto stationA = stations.find(Station(par.first));
         if (stationA != stations.end())
             stationA->print();
@@ -302,21 +307,23 @@ void Management::topNecessidades() {
     unsigned k = readInt();
     priority_queue<pair<unsigned, string>> topDistritos;
     priority_queue<pair<unsigned, string>> topMunicipios;
-    for (const auto &district : districts)
+    for (const auto &district: districts)
         topDistritos.push(make_pair(district.second.sumFlow(), district.first));
-    for (const auto &municipality : municipalities)
+    for (const auto &municipality: municipalities)
         topMunicipios.push(make_pair(municipality.second.sumFlow(), municipality.first));
     unsigned m = k == 0 ? topMunicipios.size() : k;
     unsigned d = k == 0 ? topDistritos.size() : k;
     cout << "Top de municípios tendo em conta as suas necessidades de transportes:" << endl;
     for (unsigned i = 1; i <= m; i++) {
-        cout << i << ". " << topMunicipios.top().second << " (soma do fluxo entre todos os pares de estações: " << topMunicipios.top().first << ")" << endl;
+        cout << i << ". " << topMunicipios.top().second << " (soma do fluxo entre todos os pares de estações: "
+             << topMunicipios.top().first << ")" << endl;
         topMunicipios.pop();
     }
     cout << endl;
     cout << "Top de distritos tendo em conta as suas necessidades de transportes:" << endl;
     for (unsigned j = 1; j <= d; j++) {
-        cout << j << ". " << topDistritos.top().second << " (soma do fluxo entre todos os pares de estações: " << topDistritos.top().first << ")" << endl;
+        cout << j << ". " << topDistritos.top().second << " (soma do fluxo entre todos os pares de estações: "
+             << topDistritos.top().first << ")" << endl;
         topDistritos.pop();
     }
 }
@@ -348,14 +355,13 @@ void Management::custoMinimo() {
         cout << " e a ";
         target.print();
         cout << endl;
-    }
-    else {
+    } else {
         unsigned cost = network.getPathCost(target.getId(), flow);
         cout << "O custo mínimo da viagem entre a ";
         source.print();
         cout << " e a ";
         target.print();
-        cout << " é " << cost << "€, para um máximo de " << flow << " comboios em simultâneo." << endl;
+        cout << " é " << cost << "€, para um máximo de " << flow << " comboios em simultâneo" << endl;
     }
 }
 
@@ -367,7 +373,8 @@ void Management::conetividadeReduzida() {
         cout << "Segmento " << i << "." << endl;
         removeSegment();
     }
-    cout << "Estações para calcular o número máximo de comboios que podem viajar entre elas (com conetividade reduzida)" << endl;
+    cout << "Estações para calcular o número máximo de comboios que podem viajar entre elas (com conetividade reduzida)"
+         << endl;
     calcularFluxoMaximo(network);
     lerFicheirosDados(true);
 }
@@ -375,7 +382,7 @@ void Management::conetividadeReduzida() {
 void Management::topAfetadas() {
     verificarFicheirosDados();
     vector<pair<unsigned, Station>> flows;
-    for (const auto &station : stations) {
+    for (const auto &station: stations) {
         network.addSuperSource(station.getId());
         network.edmondsKarp(0, station.getId());
         flows.emplace_back(network.getFlow(station.getId()), station);
@@ -385,12 +392,12 @@ void Management::topAfetadas() {
     removeSegment();
     cout << "Remoção de segmento bem-sucedida!" << endl;
     priority_queue<pair<double, Station>> topDiferenca;
-    for (const auto &pair : flows) {
+    for (const auto &pair: flows) {
         int stationId = pair.second.getId();
         network.addSuperSource(stationId);
         network.edmondsKarp(0, stationId);
         unsigned flow = network.getFlow(stationId);
-        double diferenca = pair.first != 0 ? (100.0 * ((double) pair.first - (double) flow)/pair.first) : 0.0;
+        double diferenca = pair.first != 0 ? (100.0 * ((double) pair.first - (double) flow) / pair.first) : 0.0;
         topDiferenca.push(make_pair(diferenca, pair.second));
         network.removeSuperSource();
     }

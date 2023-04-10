@@ -27,7 +27,7 @@ public:
      * @param vertex vértice com o qual comparar
      * @return true se o custo do vértice é inferior ao de vertex, false caso contrário
      */
-    bool operator<(Vertex & vertex) const;
+    bool operator<(Vertex &vertex) const;
 
     /**@brief Retorna o id do vértice
      * 
@@ -69,7 +69,7 @@ public:
      * Complexidade Temporal: O(1)
      * @return a aresta predecessora do vértice no caminho atual
      */
-    Edge * getPath() const;
+    Edge *getPath() const;
 
     /**@brief Retorna as arestas a entrar no vértice.
      * 
@@ -107,7 +107,7 @@ public:
      * @param service serviço da aresta
      * @return aresta adicionada ao vértice
      */
-    Edge * addEdge(Vertex *dest, unsigned capacity, Edge::Service service);
+    Edge *addEdge(Vertex *dest, unsigned capacity, Edge::Service service);
 
     /**@brief Remove do vértice a aresta com destino ao vértice cujo id é destID.
      * 
@@ -131,7 +131,7 @@ private:
     std::vector<Edge *> adj;
     bool visited = false;
     unsigned cost = 0;
-    Edge * path = nullptr;
+    Edge *path = nullptr;
     std::vector<Edge *> incoming;
     int queueIndex;
 

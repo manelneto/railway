@@ -33,7 +33,8 @@ public:
      * @param line linha
      * @param id id
      */
-    Station(const std::string &name, const std::string &district, const std::string &municipality, const std::string &township, const std::string &line, int id);
+    Station(const std::string &name, const std::string &district, const std::string &municipality,
+            const std::string &township, const std::string &line, int id);
 
     /**@brief Retorna o nome sanitizado da estação.
      * 
@@ -118,10 +119,10 @@ struct stationHash {
      * @return valor da hash para a estação a mapear
      */
     int operator()(const Station &station) const {
-        const std::string& str = station.getSanitizedName();
+        const std::string &str = station.getSanitizedName();
         int v = 0;
-        for (const char &ch : str)
-            v = 37*v + ch;
+        for (const char &ch: str)
+            v = 37 * v + ch;
         return v;
     }
 

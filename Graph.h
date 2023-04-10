@@ -18,7 +18,7 @@ public:
      * @param id id do vértice a procurar
      * @return apontador para o vértice encontrado
      */
-    Vertex * findVertex(const int &id) const;
+    Vertex *findVertex(const int &id) const;
 
     /**@brief Adiciona ao grafo um vértice com id id e etiqueta label.
      * 
@@ -28,17 +28,6 @@ public:
      * @return true se a operação foi bem-sucedida, false caso contrário (já existia no grafo um vértice com o mesmo id)
      */
     bool addVertex(const int &id, const std::string &label);
-
-    /**@brief Adiciona ao grafo uma aresta com origem no vértice de id source, destino no vértice de id dest, capacidade capacity e serviço service.
-     * 
-     * Complexidade Temporal: O(V), sendo V o número de vértices do grafo
-     * @param source id do vértice de origem da aresta a adicionar
-     * @param dest id do vértice de destino da aresta a adicionar
-     * @param capacity capacidade da aresta a adicionar
-     * @param service serviço da aresta a adicionar
-     * @return true se a operação foi bem-sucedida, false caso contrário (não existe no grafo nenhum vértice com id source ou com id dest)
-     */
-    bool addEdge(const int &source, const int &dest, unsigned capacity, Edge::Service service) const;
 
     /**@brief Adiciona ao grafo uma aresta bidirecional (sob a forma de duas arestas simétricas) entre os vértices com id source e id dest, com capacidade capacity e serviço service.
      * 
@@ -88,7 +77,7 @@ public:
      */
     unsigned maxFlow(std::list<std::pair<std::string, std::string>> &pairs) const;
 
-    /**@brief Adiciona ao grafo um vértice 'super source' (com id 0) e adiciona arestas com capacidade infinita desde esse vértice até todos os vértices com id diferente de id e grau de entrada menor ou igual a 1.
+    /**@brief Adiciona ao grafo um vértice 'super source' (com id 0) e adiciona arestas com capacidade infinita desde esse vértice até todos os vértices com id diferente de id e grau de entrada igual a 1.
      * 
      * Complexidade Temporal: O(V), sendo V o número de vértices do grafo
      * @param id id do vértice ao qual, independentemente do grau de entrada, não ligar a 'super source'

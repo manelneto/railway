@@ -10,7 +10,9 @@ class Vertex;
 
 class Edge {
 public:
-    enum Service {STANDARD, ALFA, OTHER};
+    enum Service {
+        STANDARD, ALFA, OTHER
+    };
 
     /**@brief Construtor com parâmetros. Constrói uma aresta com origem orig, destino dest, capacidade capacity, serviço service e custo de acordo com o serviço (2€ para STANDARD, 4€ para ALFA e -1€ para OTHER).
      * 
@@ -27,14 +29,14 @@ public:
      * Complexidade Temporal: O(1)
      * @return origem da aresta
      */
-    Vertex * getOrig() const;
+    Vertex *getOrig() const;
 
     /**@brief Retorna o destino da aresta.
      * 
      * Complexidade Temporal: O(1)
      * @return destino da aresta
      */
-    Vertex * getDest() const;
+    Vertex *getDest() const;
 
     /**@brief Retorna a capacidade da aresta.
      * 
@@ -72,8 +74,8 @@ public:
     void setFlow(unsigned flow);
 
 private:
-    Vertex * orig;
-    Vertex * dest;
+    Vertex *orig;
+    Vertex *dest;
     unsigned capacity;
     Service service;
     unsigned cost;
